@@ -1,0 +1,114 @@
+body {
+    background-color: #F7F7F7; /* Light grey background */
+}
+
+header {
+    background-color: #FFFFFF; /* White header */
+}
+
+.navbar-brand {
+    color: #FF5A5F; /* Airbnb Red */
+}
+
+.nav-link {
+    color: #FF5A5F; /* Airbnb Red */
+}
+
+.nav-link:hover {
+    color: #FF5A5F; /* Airbnb Red on hover */
+}
+
+.card {
+    background-color: #FFFFFF; /* White card background */
+}
+
+.card-title {
+    color: #FF5A5F; /* Airbnb Red for card titles */
+}
+
+.btn-primary {
+    background-color: #FF5A5F; /* Airbnb Red button */
+    border-color: #FF5A5F; /* Airbnb Red button border */
+}
+
+.btn-outline-primary {
+    color: #FF5A5F; /* Airbnb Red text */
+    border-color: #FF5A5F; /* Airbnb Red border */
+}
+
+.btn-outline-primary:hover {
+    background-color: #FF5A5F; /* Airbnb Red background on hover */
+    color: white; /* White text on hover */
+}
+
+.footer {
+    background-color: #FFFFFF; /* White footer */
+    border-top: 1px solid #E5E5E5; /* Light grey top border */
+}
+
+
+#childform {
+    background: #FF5A5F
+}
+
+
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: #343a40; /* Dark background */
+    height: 100vh; /* Full height */
+    color: #ffffff; /* White text */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.sidebar h5 {
+    font-weight: bold; /* Make heading bold */
+}
+
+.nav-link {
+    color: #ffffff; /* White text for links */
+    padding: 10px 15px; /* Add padding */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.nav-link:hover {
+    background-color: #495057; /* Darker background on hover */
+    border-radius: 5px; /* Rounded corners on hover */
+}
+
+.nav-link.active {
+    background-color: #007bff; /* Highlight active link */
+    color: #ffffff; /* White text for active link */
+}
+
+.nav-item {
+    margin: 0; /* Remove default margin */
+}
+
+/* Adjust icon size */
+.nav-link i {
+    font-size: 1.2rem; /* Larger icon */
+    margin-right: 8px; /* Space between icon and text */
+}
+
+
+
+.student-card {
+    width: 250px; /* Adjust width as needed */
+    margin: 20px; /* Add margin around the cards */
+}
+.photo {
+    width: 100%; /* Makes the photo container responsive */
+    height: 150px; /* Fixed height for the passport photo */
+    border: 1px solid #ccc; /* Border for the photo box */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f8f9fa; /* Light background color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.photo img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5px; /* Rounded corners for the photo */
+}

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <title>Academy - Boost Your Child's Math Skills</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/landing_page.css' %}">
+    <link rel='icon' href="{% static '/images/logo.jpeg'%}">
+    
+    <style>
+        
+        .navbar {
+            color: white;
+        }
+        
+
+        body, html {
+            font-family: "Lato", sans-serif;
+            color: #333;
+            background-color: #F7F9FB;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Montserrat", sans-serif;
+        }
+        
+        a {
+            color: #FF5A5F;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white; /* Ensure a background color to make the header visible */
+            z-index: 1000; /* Make sure the header stays above other content */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visibility */
+        }
+        
+        
+        a:hover {
+            color: #ff787e;
+            text-decoration: none;
+        }
+        
+        .navbar {
+            background-color: #FFFFFF;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FF5A5F;
+        }
+        
+        .btn-primary {
+            background-color: #FF5A5F;
+            border-color: #FF5A5F;
+        }
+        
+        .btn-primary:hover {
+            background-color: #ff787e;
+            border-color: #ff787e;
+        }
+        
+        .btn-outline-secondary {
+            color: #FF5A5F;
+            border-color: #FF5A5F;
+        }
+        
+        .btn-outline-secondary:hover {
+            background-color: #FF5A5F;
+            color: white;
+        }
+        
+        .landing-hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            text-align: center;
+        }
+        
+        
+        .landing-hero p {
+            font-size: 1.25rem;
+        }
+        
+        .features-section {
+            padding: 3rem 0;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .feature i {
+            color: #FF5A5F;
+        }
+        
+        .how-it-works {
+            padding: 3rem 0;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+        
+        .testimonials-section {
+            padding: 3rem 0;
+        }
+        
+        blockquote {
+            border-left: 5px solid #FF5A5F;
+            padding-left: 1rem;
+        }
+        
+        .benefits-section {
+            padding: 3rem 0;
+        }
+        
+        .cta-section {
+            padding: 2rem 0;
+            background-color: #FFFFFF;
+        }
+        
+        footer {
+            padding: 1.5rem 0;
+            background-color: #FFFFFF;
+        }
+        
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        
+        .text-center {
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <header class="animate__animated animate__fadeInDown sticky-header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-lg py-3">
+            <!-- Academy text always visible -->
+            <a class="navbar-brand text-md-center font-weight-bold d-none d-lg-block" href="#" style="font-size: 1.8rem; letter-spacing: 1px;">GLEENKAY ACADEMY</a>
+    
+            <!-- Only show signup buttons on larger screens -->
+            <div class="ml-auto d-none d-lg-flex align-items-center"> <!-- Flexbox alignment for larger screens -->
+                <!-- Parent Signup Option with Info -->
+                <a href="{% url 'Authentication:signup_parent' %}" class="btn btn-primary bg-light text-danger mx-2">
+                    Parent Signup
+                    <span class="d-block small text-black-50">Manage your child’s tutoring sessions and track progress</span>
+                </a>
+                
+                <!-- Tutor Signup Option with Info -->
+                <a href="{% url 'Authentication:signup_tutor' %}" class="btn btn-primary mx-2 bg-dark">
+                    Tutor Signup
+                    <span class="d-block small text-white-50 text-muted">Join our team of expert tutors and help students excel</span>
+                </a>
+            </div>
+    
+            <!-- Center the Academy text for small screens -->
+            <div class="d-lg-none d-flex justify-content-between w-100 mt-2">
+                <span class="font-weight-bold text-danger" style="font-size: 1.8rem;">Welcome To Academy</span>
+            </div>
+        </nav>
+    </header>
+    
+    
+
+    
+    
+
+    <section class="landing-hero">
+        <div class="container text-center">
+            <h1 class="animate__animated animate__fadeInUp">Boost Your Child's Math Skills</h1>
+            <p class="animate__animated animate__fadeInUp">Personalized online tutoring sessions for children who need a boost in their math abilities.</p>
+            
+
+
+                <!-- Primary Call to Action -->
+                <a href="#signupOptions" class="btn btn-primary btn-lg bg-light text-dark btn-lg animate__animated animate__zoomIn" data-toggle="collapse" aria-expanded="false" aria-controls="signupOptions" style="background: #ff5a5f;">
+                    Get Started Today
+                    
+                </a>
+            
+                <!-- Collapsible Section for Signup Options -->
+                <div id="signupOptions" class="collapse mt-4">
+                    <div class="d-flex justify-content-center">
+                        
+                        <!-- Parent Signup Option with Info -->
+                        <a href="{% url 'Authentication:signup_parent' %}" class="btn btn-primary mx-2 bg-dark">
+                            Parent Signup
+                            <span class="d-block small text-white-50">Manage your child’s tutoring sessions and track progress</span>
+                        </a>
+            
+                        <!-- Tutor Signup Option with Info -->
+                        <a href="{% url 'Authentication:signup_tutor' %}" class="btn btn-primary bg-dark mx-2">
+                            Tutor Signup
+                            <span class="d-block small text-muted">Join our team of expert tutors and help students excel</span>
+                        </a>
+                    </div>
+                </div>
+            <!-- Parent Call-to-Action Section
+            <div class="hero-action mt-4">
+                <a href="{% url 'Authentication:signup_parent' %}" class="btn btn-light btn-lg animate__animated animate__zoomIn">Get Started Today</a>
+            </div>
+        -->
+        </div>
+    </section>
+    
+    
+    
+    <section class="d-flex flex-column justify-content-center align-items-center border border-dark rounded mt-5 mx-2 p-4 animate__animated animate__fadeInUp">
+        <div class="container text-center d-flex flex-column">
+            <h2 class="animate__animated animate__fadeInUp text-danger">Learn More About Our App!</h2>
+            <p class="animate__animated animate__fadeInUp">Our app offers personalized online tutoring sessions designed to help children improve their math skills in a fun and engaging way.</p>
+            
+            <!-- App Features Section -->
+            <div class="app-benefits mt-5 row animate__animated animate__fadeInUp">
+                <div class="col-md-6 mb-4">
+                    <div class="card border-danger">
+                        <div class="card-body bg-dark rounded">
+                            <h5 class="card-title text-danger">Interactive Lessons</h5>
+                            <p class="card-text text-light">Tailored to individual learning styles.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4 animate__animated animate__fadeInUp">
+                    <div class="card border-danger">
+                        <div class="card-body bg-dark rounded">
+                            <h5 class="card-title text-danger">Progress Tracking</h5>
+                            <p class="card-text text-light">Monitor your child's improvement.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card border-danger">
+                        <div class="card-body bg-dark rounded">
+                            <h5 class="card-title text-danger">Flexible Scheduling</h5>
+                            <p class="card-text text-light">Fit your busy life.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card border-danger">
+                        <div class="card-body bg-dark rounded">
+                            <h5 class="card-title text-danger">Qualified Tutors</h5>
+                            <p class="card-text text-light">Passionate about teaching math.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+
+
+
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="col-md-4 col-12 feature" data-aos="fade-up">
+                    <i class="fas fa-chalkboard-teacher fa-3x"></i>
+                    <h4>Expert Tutors</h4>
+                    <p>Our certified tutors specialize in personalized math lessons for children in lower grades.</p>
+                </div>
+                <div class="col-md-4 col-12 feature" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-laptop-house fa-3x"></i>
+                    <h4>Online Learning</h4>
+                    <p>Flexible online lessons with Google Meet or Zoom, tailored to fit your child’s schedule.</p>
+                </div>
+                <div class="col-md-4 col-12 feature" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-calendar-alt fa-3x"></i>
+                    <h4>Flexible Booking</h4>
+                    <p>Easily schedule lessons at a time that suits your child’s needs. Enjoy a free trial lesson!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works bg-light">
+        <div class="container">
+            <h2 class="text-center" data-aos="fade-right">How It Works</h2>
+            <div class="row">
+                <div class="col-md-4 col-12 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-user-plus fa-3x"></i>
+                    <h5>1. Sign Up</h5>
+                    <p>Parents create an account and add their child’s profile for personalized learning.</p>
+                </div>
+                <div class="col-md-4 col-12 text-center" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-chalkboard fa-2x"></i>
+                    <h5>2. Choose a Tutor</h5>
+                    <p>Browse our list of expert tutors and select the perfect fit for your child.</p>
+                </div>
+                <div class="col-md-4 col-12 text-center" data-aos="fade-up" data-aos-delay="500">
+                    <i class="fas fa-video fa-2x"></i>
+                    <h5>3. Start Learning</h5>
+                    <p>Join a free trial lesson and continue with flexible bookings based on your child's needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="text-center" data-aos="fade-left">What Parents Are Saying</h2>
+            <div class="row">
+                <div class="col-md-4 col-12" data-aos="fade-up">
+                    <blockquote class="blockquote">
+                        <p>"Leecademy transformed my son’s attitude towards math! He now loves his lessons."</p>
+                        <footer class="blockquote-footer">Jane Doe</footer>
+                    </blockquote>
+                </div>
+                <div class="col-md-4 col-12" data-aos="fade-up" data-aos-delay="200">
+                    <blockquote class="blockquote">
+                        <p>"The tutors are amazing and really understand how to connect with children."</p>
+                        <footer class="blockquote-footer">John Smith</footer>
+                    </blockquote>
+                </div>
+                <div class="col-md-4 col-12" data-aos="fade-up" data-aos-delay="400">
+                    <blockquote class="blockquote">
+                        <p>"Flexible booking and easy access to tutors has made life so much easier for us."</p>
+                        <footer class="blockquote-footer">Emily Johnson</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section text-center">
+        <!-- Primary Call to Action -->
+        <a href="#signupOptions" class="btn btn-light btn-lg animate__animated animate__zoomIn" data-toggle="collapse" aria-expanded="false" aria-controls="signupOptions" style="background: #ff5a5f;">
+            Get Started Today
+            <span class="d-block small text-white-50">Choose the option that suits your role</span>
+        </a>
+    
+        <!-- Collapsible Section for Signup Options -->
+        <div id="signupOptions" class="collapse mt-4">
+            <div class="d-flex justify-content-center">
+                
+                <!-- Parent Signup Option with Info -->
+                <a href="{% url 'Authentication:signup_parent' %}" class="btn btn-primary mx-2 bg-dark">
+                    Parent Signup
+                    <span class="d-block small text-white-50">Manage your child’s tutoring sessions and track progress</span>
+                </a>
+    
+                <!-- Tutor Signup Option with Info -->
+                <a href="{% url 'Authentication:signup_tutor' %}" class="btn btn-outline-secondary mx-2">
+                    Tutor Signup
+                    <span class="d-block small text-muted">Join our team of expert tutors and help students excel</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="d-flex align-items-end justify-content-center">
+            <p class="text-center">&copy; 2024 Academy. All rights reserved.</p>
+        </div>
+    </footer>
+    
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+</body>
+</html>
+

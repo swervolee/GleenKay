@@ -1,0 +1,27 @@
+from django.urls import path
+from django.contrib.auth import views as auth_views
+# from .views import CustomPasswordResetView
+
+from . import views
+from .views import TutorSignUpView, ParentSignUpView
+from .views import CustomLoginView  # Import your custom view
+
+app_name = 'Authentication'
+
+urlpatterns = [
+        path('', views.index, name='index'),
+
+        path('tutor/', TutorSignUpView.as_view(), name='signup_tutor'),
+        path('parent/', ParentSignUpView.as_view(), name='signup_parent'),
+
+        # Built-in Django auth views
+        path('login/', CustomLoginView.as_view(template_name='login.html'), name='login_user'),
+        path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+
+        # Password reset views
+        path('account/password_reset/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset.html'), name='password_reset'),
+        path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(template_name='auth_app/password_reset_done.html'), name='password_reset_done'),
+        path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='auth_app/password_reset_confirm.html'), name='password_reset_confirm'),
+        path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='auth_app/password_reset_complete.html'), name='password_reset_complete'),
+
+        ]

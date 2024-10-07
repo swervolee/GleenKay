@@ -1,0 +1,48 @@
+.sticky-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+}
+
+.navbar {
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); /* Adding a gradient for a modern look */
+    color: white;
+}
+
+.navbar-brand {
+    color: #0072ff !important; /* Brand with a standout color */
+    font-family: 'Poppins', sans-serif; /* Modern font for better appearance */
+}
+
+.navbar-toggler {
+    border-color: #0072ff; /* Toggler button with matching theme color */
+}
+
+.custom-btn {
+    transition: all 0.3s ease; /* Smooth transitions on hover */
+}
+
+.custom-btn:hover {
+    transform: translateY(-2px); /* Slight hover effect */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Adding shadow on hover */
+}
+
+/* Styling the buttons to look more prominent */
+.btn-primary {
+    background-color: #0072ff;
+    border-color: #0072ff;
+    font-weight: bold;
+}
+
+.btn-outline-secondary {
+    border-color: #0072ff;
+    color: #0072ff;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #0072ff;
+    color: white;
+}
+
