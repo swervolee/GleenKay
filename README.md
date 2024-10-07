@@ -12,11 +12,8 @@
 6. [Project Structure](#project-structure)
 7. [Usage](#usage)
 8. [Screenshots](#screenshots)
-9. [API Endpoints](#api-endpoints) <!-- If applicable -->
-10. [Testing](#testing)
-11. [Future Improvements](#future-improvements)
-12. [Contributing](#contributing)
-13. [License](#license)
+9. [Future Improvements](#future-improvements)
+10. [Contributing](#contributing)
 
 ---
 
@@ -74,10 +71,68 @@ The Tutor App is built using the following technologies:
 - **Python 3.x** installed on your system.
 - **Virtual Environment** (optional but recommended).
 - **pip** for installing Python packages.
-
+* * *
 ### Installation Steps
 
 1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/<your_username>/<your_repo>.git
-   cd <your_repo>
+ ```
+	git clone https://github.com/swervolee/GleenKay.git
+	cd GleenKay
+```
+
+2. **Create a virtual Environment**
+```
+	python3 -m venv venv
+```
+3. **Activate the virtual Environment**
+```
+	source venv/bin/activate
+```
+4.**Install dependencies**
+```
+	pip install -r requirements.txt
+```
+5.**Setup the Database**
+```
+	python3 manage.py migrate
+```
+
+* * *
+
+### Running the app
+- To start eh develpment server, run the following command
+```
+	python3 manage.py runserver
+```
+- Visist http://127.0.0.0.1:8000 in your browser to access the application
+***
+### Usage
+Once the app is running
+- **parents**:
+	- Register and account
+	- Add your childrens profile
+	- Book lessons with available tutors
+- **Tutors**
+	- Signup as a tutor
+	- Manage you schedule and provide feedback after each lesson
+***
+### Screenshots
+* Parent dashboard
+* Tutor profile
+***
+### Future improvements
+* Integration with payment gateways to allow parents to pay for lessons
+* In-app messaging between parents and tutors
+* A recommendation engine to suggest tuttors based on a child's progress
+* Mobile app version using django rest framework and Flutter
+***
+### Contributing
+If anyone wish to contribute to the project, please follow these steps
+1. Fork the repository
+2. Create a feature branch: ``` git checkout -b feature/YourFeature ```
+3. Commit your changes: ``` git commit -m 'Add your Feature ```
+4. Push to the branch: ```g it push origin fearture/yourFeature ```
+5. Open a pull request
+
+### License
+This project is licensed under the MIT LICENSE-see the LICENSE file for details
