@@ -72,8 +72,9 @@ class CustomLoginView(View):
             login(request, user)
             return self._redirect_user(user)
         else:
-            message = messages.error(request, 'Invalid username or password.')
-            return render(request, self.template_name)
+            # message = messages.error(request, 'Invalid username or password.')
+            # return render(request, self.template_name)
+            return render(request, 'loginresult.html')
 
     def _redirect_user(self, user):
         if user.user_type == 'tutor':

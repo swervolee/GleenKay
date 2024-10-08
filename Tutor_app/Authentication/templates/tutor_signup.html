@@ -34,25 +34,25 @@
 							<form action="#" method="post" class="login-form">
 								{% csrf_token %}
 								<div class="form-group">
-									<!-- <input type="text" class="form-control rounded-left" placeholder="Firstname" required> -->
+									
 
 									{% render_field form.username class="form-control rounded-left" placeholder="Username" %}
 								</div>
 								<div class="form-group">
-									<!-- <input type="text" class="form-control rounded-left" placeholder="Lastname" required> -->
+									
 
 									{% render_field form.first_name class="form-control rounded-left" placeholder="First Name" %}
 								</div>
 								<div class="form-group">
-									<!-- <input type="email" class="form-control rounded-left" placeholder="Email" required> -->
+									
 									{% render_field form.last_name class="form-control rounded-left" placeholder="Last Name" %}
 								</div>
 								<div class="form-group">
-									<!-- <input type="text" class="form-control rounded-left" placeholder="Nationality" required> -->
+									
 									{% render_field form.email class="form-control rounded-left" placeholder="Email" %}
 								</div>
 								<div class="form-group">
-									<!-- <input type="text" class="form-control rounded-left" placeholder="Nationality" required> -->
+									
 									<select name="{{ form.gender.name }}" id="{{ form.gender.auto_id }}" class="form-control rounded-left">
 										<option value="" selected disabled hidden>Select Gender</option>
 										{% for value, label in form.gender.field.choices %}
@@ -63,15 +63,15 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<!-- <input type="password" class="form-control rounded-left" placeholder="Password" required> -->
+									
 									{% render_field form.nationality class="form-control rounded-left" placeholder="Nationality" %}
 								</div>
 								<div class="form-group">
-									<!-- <input type="password" class="form-control rounded-left" placeholder="Password" required> -->
+									
 									{% render_field form.password1 class="form-control rounded-left" placeholder="Password" %}
 								</div>
 								<div class="form-group">
-									<!-- <input type="password" class="form-control rounded-left" placeholder="Password" required> -->
+									
 									{% render_field form.password2 class="form-control rounded-left" placeholder="Confirm Password" %}
 								</div>
 								<div class="form-group">
@@ -92,7 +92,7 @@
 			</div>
 		</section>
 
-		<!-- Bootstrap JS and dependencies -->
+		
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 	</body>

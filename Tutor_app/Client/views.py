@@ -28,3 +28,7 @@ def tutor(request):
 # @login_required
 def landingPage(request):
     return render(request, 'landing_page.html')
+
+@login_required(login_url='Authentication:login_user')
+def child(request):
+    return render(request, 'child_home.html')
