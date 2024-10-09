@@ -1,4 +1,35 @@
 $(document).ready(function() {
+    $('.planning').hide();
+
+    $('#sidebar ul li').on('click', function(event) {
+        event.preventDefault();
+
+        $('#sidebar ul li a').removeClass('active text-danger');
+
+        $(this).find('a').addClass('active');
+
+        const clickedText = $(this).find('a').text().trim();
+
+        
+        if (clickedText === 'Planning') {
+            $('.dashboard').hide();
+            $('.planning').show();
+            
+        } else if (clickedText === 'Dashboard') {
+            $('.dashboard').fadeIn(300);
+            $('.payments').fadeOut(300);
+            $('.singular').fadeOut(300);
+        } else if (clickedText === 'Payment History') {
+            
+            $('.payments').fadeIn(300);
+            $('.singular').fadeOut(300);
+            $('.dashboard').fadeOut(300);
+        }
+
+        console.log(clickedText + ' clicked');
+    });
+
+
     window.showDetails = function(lessonName) {
         let details = '';
         switch (lessonName) {

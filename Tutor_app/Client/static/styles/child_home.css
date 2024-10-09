@@ -1,0 +1,64 @@
+/* Gleenkay and Airbnb color theme */
+:root {
+    --gleenkay-green: #00b894;
+    --airbnb-coral: #FF5A5F;
+    --airbnb-gray: #f8f9fa;
+    --airbnb-light-gray: #E5E5E5;
+}
+
+.day-box {
+    border: 1px solid var(--gleenkay-green);
+    border-radius: 8px;
+    padding: 10px;
+    min-height: 120px;
+    background-color: var(--airbnb-gray);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.day-box:hover {
+    background-color: var(--airbnb-light-gray);
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.day-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--gleenkay-green);
+}
+
+.lesson-info {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--gleenkay-green);
+}
+
+.lesson-title {
+    font-weight: bold;
+    color: var(--gleenkay-green);
+}
+
+.active-day {
+    background-color: var(--gleenkay-green);
+    color: white;
+}
+
+.active-day .day-title {
+    color: white;
+}
+
+.week-row {
+    margin-bottom: 15px;
+}
+
+.container {
+    max-width: 800px;
+}
+
+.header-title {
+    color: var(--airbnb-coral);
+}
