@@ -85,6 +85,53 @@
             width: 100%;
         }
 
+
+        .airbnb-modal {
+            background-color: #ffffff; /* White background */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .airbnb-modal-header {
+            background-color: #FF5A5F; /* Airbnb Red/Pink */
+            color: #ffffff;
+            padding: 20px;
+            border-bottom: none;
+        }
+        
+        .airbnb-modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .airbnb-modal-body {
+            padding: 20px;
+            background-color: #F7F7F7;
+        }
+    
+        .btn-airbnb {
+            background-color: #FF5A5F;
+            color: #fff;
+            border: none;
+        }
+        
+        .btn-airbnb:hover {
+            background-color: #E51C23;
+        }
+        
+        .airbnb-input {
+            border: 1px solid #FF5A5F;
+            border-radius: 5px;
+        }
+        
+        .airbnb-input:focus {
+            border-color: #FF5A5F;
+            box-shadow: 0 0 5px rgba(255, 90, 95, 0.5);
+        }
+
+
+
+
         /* Mobile Responsiveness */
         @media (max-width: 992px) {
             #sidebar {
@@ -160,7 +207,7 @@
             <!-- Header (taking up the remaining space beside the sidebar) -->
             <header class="col-md-9 col-lg-10 animate__animated animate__fadeInDown sticky-header rounded">
                 <nav class="navbar navbar-expand-lg navbar-light shadow-lg py-3 rounded">
-                    <a class="navbar-brand text-md-center font-weight-bold d-none d-lg-block text-light" href="#" style="font-size: 1.8rem; letter-spacing: 1px;">GLEENKAY ACADEMY</a>
+                    <a class="navbar-brand text-md-center font-weight-bold d-none d-lg-block text-light" href="#" style="font-size: 1.4rem; letter-spacing: 1px;">GLEENKAY ACADEMY</a>
                 </nav>
             </header>
 
@@ -195,6 +242,163 @@
                 </div>
             </nav>
             
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Welcome, Child!</h1>
+                    </div>
+            
+                    <!-- Detailed and Aesthetic Upcoming Lessons Container -->
+                    
+                    <!-- Math Lesson 1 -->
+                    <div class="card shadow-lg mb-5 bg-white rounded lesson-card">
+                        <div class="row no-gutters">
+                            <div class="col-12 d-md-none text-center mb-3">
+                                <img src="{% static 'images/maths.png' %}" alt="Math Lesson" class="img-fluid" style="width: 100%; height: auto; object-fit: cover;">
+                            </div>
+            
+                            <div class="col-md-3 d-none d-md-flex">
+                                <img src="{% static 'images/maths.png' %}" alt="Math Lesson" class="img-fluid h-100" style="object-fit: cover;">
+                            </div>
+            
+                            <div class="col-md-9 col-12">
+                                <div class="card-body">
+                                    <div class="lesson-details">
+                                        <h3 class="card-title text-info font-weight-bold">
+                                            <i class="bi bi-book-fill"></i> Math Lesson: Geometry Basics
+                                        </h3>
+                                        <p class="card-text text-muted">
+                                            <i class="bi bi-calendar-event"></i> <strong>October 10, 2024</strong><br>
+                                            <i class="bi bi-clock"></i> <strong>10:00 AM - 11:00 AM</strong><br>
+                                            <i class="bi bi-person"></i> Tutor: <strong>Mr. John Doe</strong>
+                                        </p>
+                                    </div>
+            
+                                    <div class="lesson-actions text-center mt-4">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <button class="btn btn-primary btn-lg lesson-button">
+                                                <i class="bi bi-camera-video"></i> Launch Class
+                                            </button>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Options
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                    <li><a class="dropdown-item" href="#" onclick="showDetails('Geometry Basics')">View Lesson Details</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Math Lesson 2 -->
+                    <div class="card shadow-lg mb-5 bg-white rounded lesson-card">
+                        <div class="row no-gutters">
+                            <div class="col-12 d-md-none text-center mb-3">
+                                <img src="{% static 'images/maths.png' %}" alt="Math Lesson" class="img-fluid" style="width: 100%; height: auto; object-fit: cover;">
+                            </div>
+            
+                            <div class="col-md-3 d-none d-md-flex">
+                                <img src="{% static 'images/maths.png' %}" alt="Math Lesson" class="img-fluid h-100" style="object-fit: cover;">
+                            </div>
+            
+                            <div class="col-md-9 col-12">
+                                <div class="card-body">
+                                    <div class="lesson-details">
+                                        <h3 class="card-title text-info font-weight-bold">
+                                            <i class="bi bi-book-fill"></i> Math Lesson: Fractions and Decimals
+                                        </h3>
+                                        <p class="card-text text-muted">
+                                            <i class="bi bi-calendar-event"></i> <strong>October 12, 2024</strong><br>
+                                            <i class="bi bi-clock"></i> <strong>1:00 PM - 2:00 PM</strong><br>
+                                            <i class="bi bi-person"></i> Tutor: <strong>Ms. Sarah Lee</strong>
+                                        </p>
+                                    </div>
+            
+                                    <div class="lesson-actions text-center mt-4">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <button class="btn btn-primary btn-lg lesson-button">
+                                                <i class="bi bi-camera-video"></i> Launch Class
+                                            </button>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Options
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                                    <li><a class="dropdown-item" href="#" onclick="showDetails('Fractions and Decimals')">View Lesson Details</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Math Lesson 3 -->
+                    <div class="card shadow-lg mb-5 bg-white rounded lesson-card">
+                        <div class="row no-gutters">
+                            <div class="col-12 d-md-none text-center mb-3">
+                                <img src="{% static 'images/maths.png' %}" alt="Math Lesson" class="img-fluid" style="width: 100%; height: auto; object-fit: cover;">
+                            </div>
+            
+                            <div class="col-md-3 d-none d-md-flex">
+                                <img src="{% static 'images/maths.png' %}" alt="Math Lesson" class="img-fluid h-100" style="object-fit: cover;">
+                            </div>
+            
+                            <div class="col-md-9 col-12">
+                                <div class="card-body">
+                                    <div class="lesson-details">
+                                        <h3 class="card-title text-info font-weight-bold">
+                                            <i class="bi bi-book-fill"></i> Math Lesson: Algebra Basics
+                                        </h3>
+                                        <p class="card-text text-muted">
+                                            <i class="bi bi-calendar-event"></i> <strong>October 15, 2024</strong><br>
+                                            <i class="bi bi-clock"></i> <strong>11:00 AM - 12:00 PM</strong><br>
+                                            <i class="bi bi-person"></i> Tutor: <strong>Mr. Alex Brown</strong>
+                                        </p>
+                                    </div>
+            
+                                    <div class="lesson-actions text-center mt-4">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <button class="btn btn-primary btn-lg lesson-button">
+                                                <i class="bi bi-camera-video"></i> Launch Class
+                                            </button>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Options
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                                                    <li><a class="dropdown-item" href="#" onclick="showDetails('Algebra Basics')">View Lesson Details</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            
+                <!-- Detailed View Modal -->
+                <!-- Custom Alert Modal -->
+                <div class="modal fade" id="lessonDetailsModal" tabindex="-1" aria-labelledby="lessonDetailsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content airbnb-modal">
+                            <div id="lessonDetailsContent"></div>
+                        </div>
+                    </div>
+                </div>
+                
+  
+                
+            
+                
+            </main>
             
             
             
