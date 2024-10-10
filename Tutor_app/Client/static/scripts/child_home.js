@@ -1,5 +1,27 @@
 $(document).ready(function() {
+    //nav for small devices handling
+    $('#closeDropdown').on('click', function () {
+        $('#mobileNavbar').collapse('hide');
+    });
+
+    // Close dropdown on click outside the navbar
+    $(document).on('click', function (event) {
+        const $navbar = $('#mobileNavbar');
+        if (!$navbar.is(event.target) && $navbar.has(event.target).length === 0 && $('.navbar-collapse').hasClass('show')) {
+            $navbar.collapse('hide');
+        }
+    });
+
+    // Close dropdown when user scrolls
+    $(window).on('scroll', function () {
+        $('#mobileNavbar').collapse('hide');
+    });
+
+
+
+    //sidebar code
     $('.planning').hide();
+    $('.assignments').hide();
 
     $('#sidebar ul li, #mobileNavbar ul li').on('click', function(event) {
         event.preventDefault();
@@ -171,12 +193,19 @@ $(document).ready(function() {
     }
 
     // Handle Assignment Submission
-    $('#submitAssignmentBtn').on('click', function () {
+    $('#submitAssignmentBtn').on('click', function (event) {
+	event.preventDefault();
 	$('#assignmentSubmissionModal').modal('show');
     });
 
     $('#assignmentSubmissionForm').on('submit', function (event) {
 	event.preventDefault();
+	const formData = new FormData();
+	formData.append('file', assignmentFile);
+	formData.append('assignmentTitle', 'Geometry Basics');
+	//Do an ajax to send the data
+
+
 	alert('Assignment submitted successfully!');
 	$('#assignmentSubmissionModal').modal('hide');
     });
