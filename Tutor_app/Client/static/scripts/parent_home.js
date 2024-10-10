@@ -1,4 +1,17 @@
 $(document).ready(function() {
+    $('#closeMenu').on('click', function () {
+        $('#mobileNavbar').collapse('hide');
+    });
+
+    // Close dropdown when clicking outside or scrolling
+    $(document).on('click touchstart scroll', function (e) {
+        if (!$(e.target).closest('.navbar-collapse, .navbar-toggler').length) {
+            $('#mobileNavbar').collapse('hide');
+        }
+    });
+
+
+
     // Initially hide all sections
     $('.singular').hide();
     $('.payments').hide();

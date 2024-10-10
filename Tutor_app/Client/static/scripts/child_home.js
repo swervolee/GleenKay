@@ -4,17 +4,11 @@ $(document).ready(function() {
         $('#mobileNavbar').collapse('hide');
     });
 
-    // Close dropdown on click outside the navbar
-    $(document).on('click', function (event) {
-        const $navbar = $('#mobileNavbar');
-        if (!$navbar.is(event.target) && $navbar.has(event.target).length === 0 && $('.navbar-collapse').hasClass('show')) {
-            $navbar.collapse('hide');
+    // Close dropdown when clicking outside or scrolling
+    $(document).on('click touchstart scroll', function (e) {
+        if (!$(e.target).closest('.navbar-collapse, .navbar-toggler').length) {
+            $('#mobileNavbar').collapse('hide');
         }
-    });
-
-    // Close dropdown when user scrolls
-    $(window).on('scroll', function () {
-        $('#mobileNavbar').collapse('hide');
     });
 
 

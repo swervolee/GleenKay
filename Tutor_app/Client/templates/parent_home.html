@@ -19,117 +19,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="{% static 'styles/parent_home.css'%}">
     <script src="{% static 'scripts/parent_home.js' %}"></script>
-    <style>
-        /* Custom Styles */
-        .sticky-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .sticky-header nav {
-            background: #FF5A5F;
-        }
-
-        /* Sidebar Styles */
-        #sidebar {
-            position: fixed;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            height: 100vh;
-            width: 250px;
-            background: #FF5A5F;
-            z-index: 1001;
-            padding-top: 3rem;
-            transition: all 0.3s ease;
-        }
-
-        #sidebar .nav-link {
-            font-size: 1rem;
-            padding: 0.75rem 1rem;
-        }
-        
-        #sidebar .nav-link .bi {
-            font-size: 1.5rem;
-            margin-right: 8px;
-        }
-
-        #sidebar .nav-item {
-            margin-bottom: 5px;
-        }
-
-        #sidebar .nav-link.active {
-            font-weight: bold;
-            background-color: rgba(0, 123, 255, 0.1);
-        }
-
-        #sidebar h5 {
-            font-size: 1rem;
-            padding: 0.5rem 0;
-        }
-
-        .card-container {
-            border: 1px solid #dee2e6;
-            border-radius: 0.25rem;
-            margin-bottom: 20px;
-        }
-        #footer {
-            position: fixed;
-            bottom: 0;
-            margin-top: auto;
-            background: #ff5a5f;
-            width: 100%;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 992px) {
-            #sidebar, #sidebar-toggle {
-                display: none;
-            }
-            #footer {
-                position: fixed;
-                bottom: 0;
-                margin-top: auto;
-                background: #ff5a5f;
-                width: 100%;
-            }
-            .navbar {
-                background-color: #FF5A5F; /* Airbnb red */
-            }
-            .navbar-brand {
-                font-weight: 600; /* Bold brand name */
-                font-size: 1.5rem; /* Larger font size */
-            }
-            .navbar-nav .nav-link {
-                color: white !important; /* White text */
-                font-weight: 500;
-                padding: 0.75rem 1rem; /* More padding for buttons */
-            }
-            .navbar-nav .nav-link:hover {
-                background-color: rgba(255, 255, 255, 0.2); /* Hover effect */
-                border-radius: 5px; /* Rounded corners on hover */
-            }
-            .navbar-toggler {
-                border: none; /* Remove default border */
-            }
-            .navbar-toggler-icon {
-                background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="white"%3E%3Cpath stroke="white" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E'); /* Custom icon */
-            }
-
-            .navbar {
-                transition: background-color 0.3s ease; /* Smooth transition */
-                position: fixed;
-                width: 100%;
-                z-index: 1000;
-            }
-            .navbar.scrolled {
-                background-color: #FF5A5F; /* Change this color */
-            }
-            
-        }
-        
-    </style>
 </head>
 <body>
     <div class="container-fluid">
@@ -155,14 +44,14 @@
                 </ul>
             </nav>
 
-            
+
 
 
             <!-- Header (taking up the remaining space beside the sidebar) -->
             <header class="col-md-9 col-lg-10 animate__animated animate__fadeInDown sticky-header rounded">
                 <nav class="navbar navbar-expand-lg navbar-light shadow-lg py-3 rounded">
                     <a class="navbar-brand text-md-center font-weight-bold d-none d-lg-block text-light" href="#" style="font-size: 1.8rem; letter-spacing: 1px;">GLEENKAY ACADEMY</a>
-                    <div class="ml-auto d-none d-lg-flex align-items-center"> 
+                    <div class="ml-auto d-none d-lg-flex align-items-center">
                         <a href="{% url 'Authentication:logout_user' %}"  class="btn btn-primary bg-light text-danger mx-2">
                             Logout
                             <span class="d-block small text-black-50">Log out from GLEENKAY</span>
@@ -172,41 +61,43 @@
             </header>
 
             <!-- nav for small devices -->
-            <nav class="navbar navbar-expand-lg navbar-dark d-lg-none d-sm-none rounded p-1" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
-                <div class="container-fluid">
-                    <a class="navbar-brand text-left" href="#">GLEENKAY</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavbar" aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="mobileNavbar">
-                        <div class="w-75 mx-auto"> <!-- Adjusted width to be 75% -->
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        <i class="bi bi-house-door"></i> Dashboard
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        <i class="bi bi-person-lines-fill"></i> Manage Child Accounts
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        <i class="bi bi-wallet2"></i> Payment History
-                                    </a>
-                                </li>
-                            </ul>
-                            
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            
-            
+	    <nav class="navbar navbar-expand-lg navbar-dark d-lg-none d-sm-none rounded p-1" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
+	      <div class="container-fluid">
+		<a class="navbar-brand text-left" href="#">GLEENKAY</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavbar" aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="mobileNavbar">
+		  <!-- X button for closing the menu -->
+		  <button class="btn btn-close text-white float-end mb-2" id="closeMenu" aria-label="Close" style="font-size: 1.2rem; background: black">&times;</button>
+		  <div class="w-75 mx-auto">
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+                          <i class="bi bi-house-door"></i> Dashboard
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+                          <i class="bi bi-person-lines-fill"></i> Manage Child Accounts
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+                          <i class="bi bi-wallet2"></i> Payment History
+                        </a>
+                      </li>
+                    </ul>
+		  </div>
+		</div>
+	      </div>
+	    </nav>
 
 
-            
+
+
+
+
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Welcome, Parent!</h1>
@@ -218,7 +109,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h3 class="card-title">Your Child Accounts</h3>
-                
+
                                 <ul class="list-group mb-3">
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         John Doe
@@ -233,7 +124,7 @@
                                         <button class="btn btn-primary btn-sm" onclick="window.location.href='/child/peter'">Open Account</button>
                                     </li>
                                 </ul>
-                
+
                                 <button class="btn btn-primary mb-3" data-bs-toggle="collapse" data-bs-target="#childAccountFormCollapse">Add New Child</button>
                                 <div class="collapse" id="childAccountFormCollapse">
                                     <div class="card" id='childform'>
@@ -303,7 +194,7 @@
                         </div>
                     </div>
                 </section>
-                
+
 
 
                 <!-- Student info-->
@@ -321,7 +212,7 @@
                                     <p class="card-text text-muted mb-1"><strong>Age:</strong> 10</p>
                                     <p class="card-text text-muted mb-1"><strong>Contact:</strong> 123-456-7890</p>
                                     <p class="card-text text-muted mb-3"><strong>Next Lesson:</strong> Math (Due: Oct 10, 2024)</p>
-                                    
+
                                     <!-- Open Account Button -->
                                     <a href='#' class="btn btn-primary mt-2">
                                         Open Account
@@ -329,7 +220,7 @@
                                 </div>
                             </div>
                         </div>
-                
+
                         <!-- Student Card 2 -->
                         <div class="col-md-4 col-sm-12 mb-4">
                             <div class="card student-card rounded shadow-lg border-0">
@@ -342,7 +233,7 @@
                                     <p class="card-text text-muted mb-1"><strong>Age:</strong> 9</p>
                                     <p class="card-text text-muted mb-1"><strong>Contact:</strong> 098-765-4321</p>
                                     <p class="card-text text-muted mb-3"><strong>Next Lesson:</strong> Science (Due: Oct 12, 2024)</p>
-                
+
                                     <!-- Open Account Button -->
                                     <a href='#' class="btn btn-primary mt-2">
                                         Open Account
@@ -352,7 +243,7 @@
                         </div>
                     </div>
                 </div>
-                
+
 
 
                 <!-- Payment History Section -->
@@ -367,23 +258,23 @@
                                     <div class="card-body">
                                         <ul class="list-group mb-3">
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span><i class="bi bi-calendar-check me-2 text-success"></i> Payment on 01 Jan 2024</span> 
+                                                <span><i class="bi bi-calendar-check me-2 text-success"></i> Payment on 01 Jan 2024</span>
                                                 <span class="badge bg-success">$50</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span><i class="bi bi-calendar-check me-2 text-warning"></i> Payment on 15 Feb 2024</span> 
+                                                <span><i class="bi bi-calendar-check me-2 text-warning"></i> Payment on 15 Feb 2024</span>
                                                 <span class="badge bg-warning">$75</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span><i class="bi bi-calendar-check me-2 text-danger"></i> Payment on 10 Mar 2024</span> 
+                                                <span><i class="bi bi-calendar-check me-2 text-danger"></i> Payment on 10 Mar 2024</span>
                                                 <span class="badge bg-danger">$100</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span><i class="bi bi-calendar-check me-2 text-info"></i> Payment on 20 Mar 2024</span> 
+                                                <span><i class="bi bi-calendar-check me-2 text-info"></i> Payment on 20 Mar 2024</span>
                                                 <span class="badge bg-info">$125</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span><i class="bi bi-calendar-check me-2 text-success"></i> Payment on 05 Apr 2024</span> 
+                                                <span><i class="bi bi-calendar-check me-2 text-success"></i> Payment on 05 Apr 2024</span>
                                                 <span class="badge bg-success">$150</span>
                                             </li>
                                         </ul>
@@ -396,18 +287,18 @@
                         </div>
                     </div>
                 </section>
-                
-                
-                
-                
+
+
+
+
 
             </main>
         </div>
-    </div> 
+    </div>
 
     <footer class="mb-0 text-center text-light p-2" id='footer' >
         <span class='text-center'>&copy; 2024 GLEENKAY All rights reserved.</span>
     </footer>
-    
+
 </body>
 </html>
