@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 
 from . import views
 from .views import TutorSignUpView, ParentSignUpView
-from .views import CustomLoginView  # Import your custom view
+# from .views import CustomLoginView  # Import your custom view
 
 app_name = 'Authentication'
 
@@ -15,8 +15,9 @@ urlpatterns = [
         path('parent/', ParentSignUpView.as_view(), name='signup_parent'),
 
         # Built-in Django auth views
-        path('login/', CustomLoginView.as_view(template_name='login.html'), name='login_user'),
-        path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+        path('login/', views.custom_login, name='login_user'),
+        path('logout/',views.logout_user, name='logout_user'),
+        # path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
         # Password reset views
         path('account/password_reset/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset.html'), name='password_reset'),

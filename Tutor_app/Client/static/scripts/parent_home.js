@@ -12,21 +12,21 @@ $(document).ready(function() {
 
         const clickedText = $(this).find('a').text().trim();
 
-        
+
         if (clickedText === 'Manage Child Accounts') {
-            $('.singular').fadeIn(300);
-            $('.payments').fadeOut(300);
-            $('.dashboard').fadeOut(300);
-            
+            $('.singular').fadeIn(500);
+            $('.payments').fadeOut(500);
+            $('.dashboard').fadeOut(500);
+
         } else if (clickedText === 'Dashboard') {
-            $('.dashboard').fadeIn(300);
-            $('.payments').fadeOut(300);
-            $('.singular').fadeOut(300);
+            $('.dashboard').fadeIn(500);
+            $('.payments').fadeOut(500);
+            $('.singular').fadeOut(500);
         } else if (clickedText === 'Payment History') {
-            
-            $('.payments').fadeIn(300);
-            $('.singular').fadeOut(300);
-            $('.dashboard').fadeOut(300);
+
+            $('.payments').fadeIn(500);
+            $('.singular').fadeOut(500);
+            $('.dashboard').fadeOut(500);
         }
 
         console.log(clickedText + ' clicked');
@@ -45,17 +45,17 @@ $(document).ready(function() {
 
         // Show and hide sections based on the clicked text
         if (clickedText === 'Manage Child Accounts') {
-            $('.singular').fadeIn(300);
-            $('.payments').fadeOut(300);
-            $('.dashboard').fadeOut(300);
+            $('.singular').fadeIn(500);
+            $('.payments').fadeOut(500);
+            $('.dashboard').fadeOut(500);
         } else if (clickedText === 'Dashboard') {
-            $('.dashboard').fadeIn(300);
-            $('.payments').fadeOut(300);
-            $('.singular').fadeOut(300);
+            $('.dashboard').fadeIn(500);
+            $('.payments').fadeOut(500);
+            $('.singular').fadeOut(500);
         } else if (clickedText === 'Payment History') {
-            $('.payments').fadeIn(300);
-            $('.singular').fadeOut(300);
-            $('.dashboard').fadeOut(300);
+            $('.payments').fadeIn(500);
+            $('.singular').fadeOut(500);
+            $('.dashboard').fadeOut(500);
         }
 
         console.log(clickedText + ' clicked');
