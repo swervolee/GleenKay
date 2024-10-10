@@ -397,6 +397,96 @@
 
 
 
+
+
+		<!--assignment handling-->
+		<div class="assignments container my-4">
+		  <h3 class="mb-4">Your Assignments</h3>
+
+		  <!-- In Progress Assignments -->
+		  <div class="card mb-3">
+		    <div class="card-header bg-warning text-white">
+		      In Progress
+		    </div>
+		    <ul class="list-group list-group-flush">
+		      <li class="list-group-item d-flex justify-content-between align-items-center">
+			Geometry Basics <span class="badge bg-primary">Due in 3 Days</span>
+			<button class="btn btn-outline-primary btn-sm" data-title="Geometry Basics">View Details</button>
+		      </li>
+		    </ul>
+		  </div>
+
+		  <!-- Due Soon Assignments -->
+		  <div class="card mb-3">
+		    <div class="card-header bg-danger text-white">
+		      Due Soon
+		    </div>
+		    <ul class="list-group list-group-flush">
+		      <li class="list-group-item d-flex justify-content-between align-items-center">
+			Fractions and Decimals <span class="badge bg-danger">Due Tomorrow</span>
+			<button class="btn btn-outline-primary btn-sm" data-title="Fractions and Decimals">View Details</button>
+		      </li>
+		    </ul>
+		  </div>
+
+		  <!-- Completed Assignments -->
+		  <div class="card mb-3">
+		    <div class="card-header bg-success text-white">
+		      Completed
+		    </div>
+		    <ul class="list-group list-group-flush">
+		      <li class="list-group-item d-flex justify-content-between align-items-center">
+			Algebra Basics <span class="badge bg-success">Reviewed</span>
+			<button class="btn btn-outline-primary btn-sm" data-title="Algebra Basics">View Feedback</button>
+		      </li>
+		    </ul>
+		  </div>
+		</div>
+
+		<!-- Assignment Details Modal -->
+		<div class="modal fade" id="assignmentDetailsModal" tabindex="-1" aria-labelledby="assignmentDetailsModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+			<h5 class="modal-title" id="assignmentDetailsModalLabel">Assignment Details</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+			<p><strong>Title:</strong> <span id="assignmentTitle"></span></p>
+			<p><strong>Description:</strong> <span id="assignmentDescription"></span></p>
+			<p><strong>Due Date:</strong> <span id="assignmentDueDate"></span></p>
+			<p><strong>Status:</strong> <span id="assignmentStatus"></span></p>
+			<button class="btn btn-airbnb mt-3" id="submitAssignmentBtn" style="display: none;">Submit Assignment</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<!-- Assignment Submission Modal -->
+		<div class="modal fade" id="assignmentSubmissionModal" tabindex="-1" aria-labelledby="assignmentSubmissionModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+			<h5 class="modal-title" id="assignmentSubmissionModalLabel">Submit Assignment</h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+			<form id="assignmentSubmissionForm" enctype="multipart/form-data">
+			  <div class="mb-3">
+			    <label for="assignmentFile" class="form-label">Upload Your Assignment</label>
+			    <input class="form-control" type="file" id="assignmentFile">
+			  </div>
+			  <button type="submit" class="btn btn-primary">Submit Assignment</button>
+			</form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+
+
+
                 <!-- Planning-->
                 <div class="container Planning mt-5">
                     <h1 class="text-center mb-4 header-title">Monthly Planning - October 2024</h1>

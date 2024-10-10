@@ -12,10 +12,16 @@ $(document).ready(function() {
         if (clickedText === 'Planning') {
             $('.dashboard').fadeOut(500);
             $('.planning').fadeIn(500);
+	    $('.assignments').fadeOut(500);
         } else if (clickedText === 'Dashboard') {
             $('.dashboard').fadeIn(500);
             $('.planning').fadeOut(500);
-        }
+	    $('.assignments').fadeOut(500);
+        } else if (clickedText === 'Assignments') {
+	    $('.dashboard').fadeOut(500);
+	    $('.planning').fadeOut(500);
+	    $('.assignments').fadeIn(500);
+	}
 
         console.log(clickedText + ' clicked');
     });
@@ -112,5 +118,66 @@ $(document).ready(function() {
                 $('#customAlert').modal('show');
             }
         });
+
+
+
     };
+
+
+    //Handling of assignments
+    const assignments = {
+	'Geometry Basics': {
+	    title: 'Geometry Basics',
+	    description: 'Complete exercises on angles and shapes.',
+	    dueDate: 'October 10, 2024',
+	    status: 'In Progress',
+	},
+	'Fractions and Decimals': {
+	    title: 'Fractions and Decimals',
+	    description: 'Solve fraction addition and subtraction problems.',
+	    dueDate: 'October 12, 2024',
+	    status: 'Due Soon',
+	},
+	'Algebra Basics': {
+	    title: 'Algebra Basics',
+	    description: 'Solve basic algebra equations.',
+	    dueDate: 'October 15, 2024',
+	    status: 'Completed',
+	    feedback: 'Great job on solving the equations!',
+	},
+    };
+
+    // Handle View Details button clicks
+    $('button[data-title]').on('click', function () {
+	const title = $(this).data('title');
+	viewAssignmentDetails(title);
+    });
+
+    function viewAssignmentDetails(title) {
+	const assignment = assignments[title];
+	$('#assignmentTitle').text(assignment.title);
+	$('#assignmentDescription').text(assignment.description);
+	$('#assignmentDueDate').text(assignment.dueDate);
+	$('#assignmentStatus').text(assignment.status);
+
+	// Show or hide the "Submit Assignment" button based on status
+	if (assignment.status === 'In Progress') {
+	    $('#submitAssignmentBtn').show();
+	} else {
+	    $('#submitAssignmentBtn').hide();
+	}
+
+	$('#assignmentDetailsModal').modal('show');
+    }
+
+    // Handle Assignment Submission
+    $('#submitAssignmentBtn').on('click', function () {
+	$('#assignmentSubmissionModal').modal('show');
+    });
+
+    $('#assignmentSubmissionForm').on('submit', function (event) {
+	event.preventDefault();
+	alert('Assignment submitted successfully!');
+	$('#assignmentSubmissionModal').modal('hide');
+    });
 });
