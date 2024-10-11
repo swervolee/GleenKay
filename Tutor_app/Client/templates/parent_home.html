@@ -109,29 +109,68 @@
                             <div class="card-body">
                                 <h3 class="card-title">Your Child Accounts</h3>
 
-                                <ul class="list-group mb-3">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                      John Doe
-				      <div>
-                                        <button class="btn btn-primary btn-sm" onclick="window.location.href='/child/john'">Open Account</button>
-					<button class='btn btn-secondary btn-sm' onclick='window.location.href="/child/john/book"'>Book a lesson</button>
+
+				<ul class="list-group mb-3">
+				  <li class="list-group-item d-flex justify-content-between align-items-center">
+				    John Doe
+				    <div>
+				      <button class="btn btn-primary btn-sm" onclick="window.location.href='/child/john'">Open Account</button>
+				      <button class="btn btn-success btn-sm" onclick="openBookingModal('John Doe')">Book Lesson</button>
+				    </div>
+				  </li>
+				  <li class="list-group-item d-flex justify-content-between align-items-center">
+				    Jane Doe
+				    <div>
+				      <button class="btn btn-primary btn-sm" onclick="window.location.href='/child/jane'">Open Account</button>
+				      <button class="btn btn-success btn-sm" onclick="openBookingModal('Jane Doe')">Book Lesson</button>
+				    </div>
+				  </li>
+				  <li class="list-group-item d-flex justify-content-between align-items-center">
+				    Peter Parker
+				    <div>
+				      <button class="btn btn-primary btn-sm" onclick="window.location.href='/child/peter'">Open Account</button>
+				      <button class="btn btn-success btn-sm" onclick="openBookingModal('Peter Parker')">Book Lesson</button>
+				    </div>
+				  </li>
+				</ul>
+
+				<!-- Custom Booking Modal -->
+				<!-- Modal -->
+				<div id="bookingModal" class="modal fade" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered">
+				    <div class="modal-content">
+				      <div class="modal-header">
+					<h5 class="modal-title" id="bookingModalLabel">Book Math Lesson for <span id="childNameDisplay"></span></h5>
+					<button type="button" class="btn-close" aria-label="Close" onclick="closeBookingModal()"></button>
 				      </div>
-				    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                      Jane Doe
-				      <div>
-                                        <button class="btn btn-primary btn-sm" onclick="window.location.href='/child/jane'">Open Account</button>
-					<button class='btn btn-secondary btn-sm' onclick='window.location.href="/child/john/book"'>Book a lesson</button>
+				      <div class="modal-body">
+					<form id="bookLessonForm" onsubmit="bookLesson(event)">
+					  <input type="hidden" id="childName">
+					  <div class="mb-3">
+					    <label for="date" class="form-label">Date</label>
+					    <input type="date" id="date" class="form-control" required>
+					  </div>
+					  <div class="mb-3">
+					    <label for="time" class="form-label">Time</label>
+					    <input type="time" id="time" class="form-control" required>
+					  </div>
+					  <button type="submit" class="btn btn-primary w-100" onclick='flashy()'>Book Lesson</button>
+					</form>
 				      </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                      Peter Parker
-				      <div>
-                                        <button class="btn btn-primary btn-sm" onclick="window.location.href='/child/peter'">Open Account</button>
-					<button class='btn btn-secondary btn-sm' onclick='window.location.href="/child/john/book"'>Book a lesson</button>
-				      </div>
-                                    </li>
-                                </ul>
+				    </div>
+				  </div>
+				</div>
+
+				<!-- Confirmation Message -->
+				<!-- Flash Message Placeholder -->
+				<div id="flashMessage" class="alert alert-dark d-none position-fixed top-0 end-0 m-3" role="alert" style="z-index: 1050;">
+				  Lesson booked successfully! An email will be sent shortly with the schedule.
+				</div>
+
+
+
+
+
 
                                 <button class="btn btn-primary mb-3" data-bs-toggle="collapse" data-bs-target="#childAccountFormCollapse">Add New Child</button>
                                 <div class="collapse" id="childAccountFormCollapse">
@@ -198,6 +237,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>

@@ -73,4 +73,56 @@ $(document).ready(function() {
 
         console.log(clickedText + ' clicked');
     });
+
+
+    function openBookingModal(childName) {
+        $('#childName').val(childName);  // Set the hidden input value
+        $('#childNameDisplay').text(childName);  // Display the child name in the modal
+        $('#bookingModal').modal('show');  // Use Bootstrap to show the modal
+    }
+
+    // Function to close the booking modal
+    function closeBookingModal() {
+        $('#bookingModal').modal('hide');  // Use Bootstrap to hide the modal
+    }
+
+    //Function to flash message after booking lesson
+    function flashy() {
+	$('#flashMessage').removeClass('d-none').hide().fadeIn(300); // Show and fade in the message
+
+	// Optional: Hide the flash message after a few seconds
+	setTimeout(() => {
+            $('#flashMessage').fadeOut(300, function() {
+		$(this).addClass('d-none'); // Re-hide the alert after fading out
+            });
+	}, 5000);
+    }
+
+    flashy();
+    // Function to handle lesson booking submission
+    function bookLesson(event) {
+        event.preventDefault();
+
+        const childName = $('#childName').val();
+        const subject = 'Math';  // Set subject to Math directly
+        const date = $('#date').val();
+        const time = $('#time').val();
+
+        // Log the booking details or perform booking logic here
+        console.log({
+            childName,
+            subject,
+            date,
+            time
+        });
+
+        // Close the modal after booking
+        closeBookingModal();
+
+    }
+
+
+    // Expose functions globally (if needed)
+    window.openBookingModal = openBookingModal;
+    window.closeBookingModal = closeBookingModal;
 });
