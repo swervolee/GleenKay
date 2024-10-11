@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="{% static 'styles/parent_home.css'%}">
     <script src="{% static 'scripts/parent_home.js' %}"></script>
@@ -112,16 +111,25 @@
 
                                 <ul class="list-group mb-3">
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        John Doe
+                                      John Doe
+				      <div>
                                         <button class="btn btn-primary btn-sm" onclick="window.location.href='/child/john'">Open Account</button>
-                                    </li>
+					<button class='btn btn-secondary btn-sm' onclick='window.location.href="/child/john/book"'>Book a lesson</button>
+				      </div>
+				    </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Jane Doe
+                                      Jane Doe
+				      <div>
                                         <button class="btn btn-primary btn-sm" onclick="window.location.href='/child/jane'">Open Account</button>
+					<button class='btn btn-secondary btn-sm' onclick='window.location.href="/child/john/book"'>Book a lesson</button>
+				      </div>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Peter Parker
+                                      Peter Parker
+				      <div>
                                         <button class="btn btn-primary btn-sm" onclick="window.location.href='/child/peter'">Open Account</button>
+					<button class='btn btn-secondary btn-sm' onclick='window.location.href="/child/john/book"'>Book a lesson</button>
+				      </div>
                                     </li>
                                 </ul>
 
