@@ -6,6 +6,6 @@ app_name = 'Tutor'
 
 urlpatterns = [
 
-        path('',views.index, name='tutor_dashboard'),
+        path('tutor',views.tutor, name='tutor_dashboard'),
 
         ]

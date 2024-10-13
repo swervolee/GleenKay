@@ -121,13 +121,25 @@ WSGI_APPLICATION = 'Tutor_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+############### postgress ################
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres.soeerdosuigzfpgvhhdr',
+        'PASSWORD': os.getenv('SUPABASEPASSWORD'),
+        'HOST': 'aws-0-eu-central-1.pooler.supabase.com',   # Or the hostname where your MySQL server is running
+        'PORT': '6543',        # Default MySQL port
     }
 }
-
+#####################end postgress###################
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

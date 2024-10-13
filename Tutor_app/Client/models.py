@@ -44,3 +44,6 @@ class ChildAccount(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+class Booking(models.Model):
+    user = models.OneToOneField(ChildAccount, on_delete=models.CASCADE, related_name='childbooking'),
+    name = models.CharField(max_length=100)

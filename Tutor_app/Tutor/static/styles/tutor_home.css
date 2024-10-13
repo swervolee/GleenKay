@@ -1,0 +1,286 @@
+
+
+/* Gleenkay and Airbnb color theme */
+:root {
+    --gleenkay-green: #00b894;
+    --airbnb-coral: #FF5A5F;
+    --airbnb-gray: #f8f9fa;
+    --airbnb-light-gray: #E5E5E5;
+}
+
+
+/*PLANNING STYLING*/
+.day-box {
+    border: 1px solid var(--gleenkay-green);
+    border-radius: 8px;
+    padding: 10px;
+    min-height: 120px;
+    background-color: var(--airbnb-gray);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.day-box:hover {
+    background-color: var(--airbnb-light-gray);
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.day-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--gleenkay-green);
+}
+
+.lesson-info {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--gleenkay-green);
+}
+
+.lesson-title {
+    font-weight: bold;
+    color: var(--gleenkay-green);
+}
+
+.active-day {
+    background-color: var(--gleenkay-green);
+    color: white;
+}
+
+.active-day .day-title {
+    color: white;
+}
+
+.week-row {
+    margin-bottom: 15px;
+}
+
+.container {
+    max-width: 800px;
+}
+/*End of planning styling*/
+
+
+
+body {
+    background-color: #F7F7F7;
+}
+
+header {
+    background-color: #FFFFFF;
+    z-index: 1500;
+}
+
+.navbar-brand {
+    color: #FF5A5F;
+}
+
+.nav-link {
+    color: #FF5A5F;
+}
+
+.nav-link:hover {
+    color: #FF5A5F;
+}
+
+.card {
+    background-color: #FFFFFF;
+}
+
+.card-title {
+    color: #FF5A5F;
+}
+
+.btn-primary {
+    background-color: #FF5A5F;
+    border-color: #FF5A5F;
+}
+
+.btn-outline-primary {
+    color: #FF5A5F;
+    border-color: #FF5A5F;
+}
+
+.btn-outline-primary:hover {
+    background-color: #FF5A5F;
+    color: white;
+}
+
+
+#childform {
+    background: #FF5A5F
+}
+
+
+
+.sidebar h5 {
+    font-weight: bold;
+}
+
+
+.student-card {
+    width: 250px;
+    margin: 20px;
+}
+.photo {
+    width: 100%;
+    height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.photo img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5px;
+}
+
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.sticky-header nav {
+            background: #FF5A5F;
+}
+
+/* Sidebar Styles */
+#sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 250px;
+    background: #FF5A5F;
+    z-index: 1001;
+    padding-top: 3rem;
+    transition: all 0.3s ease;
+}
+
+#sidebar .nav-link {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+}
+
+#sidebar .nav-link .bi {
+    font-size: 1.5rem;
+    margin-right: 8px;
+}
+
+#sidebar .nav-item {
+    margin-bottom: 5px;
+}
+
+#sidebar .nav-link.active {
+    font-weight: bold;
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+#sidebar h5 {
+    font-size: 1rem;
+    padding: 0.5rem 0;
+}
+
+.card-container {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    margin-bottom: 20px;
+}
+#footer {
+    position: fixed;
+    bottom: 0;
+    margin-top: auto;
+    background: #ff5a5f;
+    width: 100%;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 992px) {
+    #sidebar, #sidebar-toggle {
+        display: none;
+    }
+    #footer {
+        position: fixed;
+        bottom: 0;
+        margin-top: auto;
+        background: #ff5a5f;
+        width: 100%;
+    }
+    .navbar {
+        background-color: #FF5A5F; /* Airbnb red */
+    }
+    .navbar-brand {
+        font-weight: 600; /* Bold brand name */
+        font-size: 1.5rem; /* Larger font size */
+    }
+    .navbar-nav .nav-link {
+        color: white !important; /* White text */
+        font-weight: 500;
+        padding: 0.75rem 1rem; /* More padding for buttons */
+    }
+    .navbar-nav .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.2); /* Hover effect */
+        border-radius: 5px; /* Rounded corners on hover */
+    }
+    .navbar-toggler {
+        border: none; /* Remove default border */
+    }
+    .navbar-toggler-icon {
+        background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="white"%3E%3Cpath stroke="white" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E'); /* Custom icon */
+    }
+
+    .navbar {
+        transition: background-color 0.3s ease; /* Smooth transition */
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+    }
+    .navbar.scrolled {
+        background-color: #FF5A5F; /* Change this color */
+    }
+
+}
+
+
+
+/*Lesson booking css*/
+.custom-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+}
+
+.close-btn {
+    float: right;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: red;
+}

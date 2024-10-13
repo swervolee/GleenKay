@@ -1,6 +1,6 @@
 # Tutor App - <Your Project Name>
 
-![Logo](path/to/logo.png) <!-- Optional: Include a logo if you have one -->
+![Logo](logo.png) <!-- Optional: Include a logo if you have one -->
 
 ## Table of Contents
 
@@ -35,7 +35,7 @@ The app supports multiple roles, including **parents** and **tutors**, with feat
   - Add, edit, and manage child accounts.
   - Book tutoring lessons.
   - Track child’s progress.
-  
+
 - **Tutor Features**:
   - Manage tutoring schedules.
   - View and manage student profiles.
