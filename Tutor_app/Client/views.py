@@ -10,13 +10,34 @@ from django.contrib import messages
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 
+from .forms import ChildAccountForm
+from .models import *
+
 # Create your views here.
 @login_required(login_url='Authentication:login_user')
 def parent(request):
     """
     Renders the landng page
     """
-    return render(request, 'parent_home.html')
+    parent = request.user
+    # render form 
+    form = ChildAccountForm()
+    # create child logic
+    if request.method == 'POST':
+        form = ChildAccountForm(request.POST, request.FILES)
+        if form.is_valid():
+            child = form.save(commit=False)
+            child.parent = request.user
+            child.save()
+            return redirect('Client:parent_dashboard')
+    else:
+        form = ChildAccountForm()
+
+    # list all children children
+        children = ChildAccount.objects.filter(parent=request.user)  # Get all children associated with the logged-in user
+
+    context = { "form":form, "children":children, "parent":parent }
+    return render(request, 'parent_home.html', context)
 
 @login_required(login_url='Authentication:login_user')
 def tutor(request):

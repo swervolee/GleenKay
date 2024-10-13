@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load widget_tweaks %}
+
 {% load static %}
 <html lang="en">
 <head>
@@ -99,7 +101,7 @@
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Welcome, Parent!</h1>
+					<h1 class="h2">Welcome, {{parent}}</h1>
                 </div>
 
 
@@ -110,29 +112,20 @@
                                 <h3 class="card-title">Your Child Accounts</h3>
 
 
-				<ul class="list-group mb-3">
-				  <li class="list-group-item d-flex justify-content-between align-items-center">
-				    John Doe
-				    <div>
-				      <button class="btn btn-primary btn-sm" onclick="window.location.href='/child/john'">Open Account</button>
-				      <button class="btn btn-success btn-sm" onclick="openBookingModal('John Doe')">Book Lesson</button>
-				    </div>
-				  </li>
-				  <li class="list-group-item d-flex justify-content-between align-items-center">
-				    Jane Doe
-				    <div>
-				      <button class="btn btn-primary btn-sm" onclick="window.location.href='/child/jane'">Open Account</button>
-				      <button class="btn btn-success btn-sm" onclick="openBookingModal('Jane Doe')">Book Lesson</button>
-				    </div>
-				  </li>
-				  <li class="list-group-item d-flex justify-content-between align-items-center">
-				    Peter Parker
-				    <div>
-				      <button class="btn btn-primary btn-sm" onclick="window.location.href='/child/peter'">Open Account</button>
-				      <button class="btn btn-success btn-sm" onclick="openBookingModal('Peter Parker')">Book Lesson</button>
-				    </div>
-				  </li>
-				</ul>
+								<ul class="list-group mb-3">
+									{% for child in children %}
+
+									<li class="list-group-item d-flex justify-content-between align-items-center">
+										{{ child.first_name }} {{ child.last_name }} - Grade {{ child.grade_level }}
+										<div>
+											<button class="btn btn-primary btn-sm" onclick="window.location.href='/child/jane'">Open Account</button>
+											<button class="btn btn-success btn-sm" onclick="openBookingModal('Jane Doe')">Book Lesson</button>
+										</div>
+									</li>
+									{% empty %}
+									<li>No Child Accounts Found.</li>
+									{% endfor %}
+								</ul>
 
 				<!-- Custom Booking Modal -->
 				<!-- Modal -->
@@ -154,7 +147,7 @@
 					    <label for="time" class="form-label">Time</label>
 					    <input type="time" id="time" class="form-control" required>
 					  </div>
-					  <button type="submit" class="btn btn-primary w-100" onclick='flashy()'>Book Lesson</button>
+					  <button type="submit" class="btn btn-primary w-100">Book Lesson</button>
 					</form>
 				      </div>
 				    </div>
@@ -178,55 +171,64 @@
                                         <div class="card-body">
                                             <h5 class="card-title">Create Child Account</h5>
                                             <!-- Changed form ID here -->
-                                            <form id="createChildForm" onsubmit="createChildAccount(event)">
+                                            <form id="createChildForm" method="post"  onsubmit="createChildAccount(event)">
+												{% csrf_token %}
                                                 <div class="row">
                                                     <div class="col-lg-3 mb-4">
                                                         <label for="firstName" class="form-label text-white p-2 rounded">First Name</label>
-                                                        <input type="text" class="form-control border border-dark" id="firstName" required>
+                                                        <!-- <input type="text" class="form-control border border-dark" id="firstName" required> -->
+														{% render_field form.first_name class="form-control rounded-left" placeholder="First Name" %}
                                                     </div>
                                                     <div class="col-lg-3 mb-4">
                                                         <label for="lastName" class="form-label text-white p-2 rounded">Last Name</label>
-                                                        <input type="text" class="form-control border border-dark" id="lastName" required>
+                                                        <!-- <input type="text" class="form-control border border-dark" id="lastName" required> -->
+														{% render_field form.last_name class="form-control rounded-left" placeholder="Last Name" %}
                                                     </div>
                                                     <div class="col-lg-2 mb-4">
                                                         <label for="age" class="form-label text-white p-2 rounded">Age</label>
-                                                        <input type="number" class="form-control border border-dark" id="age" min="0" required>
+                                                        <!-- <input type="number" class="form-control border border-dark" id="age" min="0" required> -->
+														{% render_field form.age class="form-control rounded-left" placeholder="Age" %}
                                                     </div>
-                                                    <div class="col-lg-2 mb-4">
-                                                        <label for="gender" class="form-label text-white p-2 rounded">Gender</label>
-                                                        <select class="form-select border border-dark" id="gender" required>
-                                                            <option value="" disabled selected>Select Gender</option>
-                                                            <option value="male">Male</option>
-                                                            <option value="female">Female</option>
-                                                            <option value="other">Other</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-lg-2 mb-4">
-                                                        <label for="gradeLevel" class="form-label text-white p-2 rounded">Grade Level</label>
-                                                        <select class="form-select border border-dark" id="gradeLevel" required>
-                                                            <option value="" disabled selected>Select Grade</option>
-                                                            <option value="1">1st Grade</option>
-                                                            <option value="2">2nd Grade</option>
-                                                            <option value="3">3rd Grade</option>
-                                                            <option value="4">4th Grade</option>
-                                                            <option value="5">5th Grade</option>
-                                                            <option value="6">6th Grade</option>
-                                                            <option value="7">7th Grade</option>
-                                                            <option value="8">8th Grade</option>
-                                                            <option value="9">9th Grade</option>
-                                                            <option value="10">10th Grade</option>
-                                                            <option value="11">11th Grade</option>
-                                                            <option value="12">12th Grade</option>
-                                                        </select>
-                                                    </div>
+													<div class="col-lg-2 mb-4">
+														<label for="gender" class="form-label text-white p-2 rounded">Gender</label>
+		<select name="{{ form.gender.name }}" id="{{ form.gender.auto_id }}" class="form-control rounded-left">
+														<option value="" selected disabled hidden>Select Gender</option>
+														{% for value, label in form.gender.field.choices %}
+														{% if value %}
+														<option value="{{ value }}">{{ label }}</option>
+														{% endif %}
+														{% endfor %}
+													</select>
+													</div>	
+											
+
+													<div class="col-lg-2 mb-4">
+														<label for="gradeLevel" class="form-label text-white p-2 rounded">Grade Level</label>
+   									<select name="{{ form.grade_level.name }}" id="{{ form.grade_level.auto_id }}" class="form-control rounded-left">
+										<option value="" selected disabled hidden>Select Grade</option>
+										{% for value, label in form.grade_level.field.choices %}
+										{% if value %}
+										<option value="{{ value }}">{{ label }}</option>
+										{% endif %}
+										{% endfor %}
+									</select>
+                                                 </div>
                                                 </div>
                                                 <div class="mb-4">
                                                     <label for="learningAreas" class="form-label text-white p-2 rounded">Learning Areas</label>
-                                                    <textarea type="text" class="form-control border border-dark" id="learningAreas" placeholder="Maths topics to focus"></textarea>
-                                                </div>
+													<select name="{{ form.learning_areas.name }}" id="{{ form.learning_areas.auto_id }}" class="form-control rounded-left">
+														<option value="" selected disabled hidden>Select Learning Areas</option>
+														{% for value, label in form.learning_areas.field.choices %}
+														{% if value %}
+														<option value="{{ value }}">{{ label }}</option>
+														{% endif %}
+														{% endfor %}
+													</select>
+                                                                                                    </div>
                                                 <div class="mb-4">
                                                     <label for="profileAvatar" class="form-label text-white p-2 rounded">Profile Avatar</label>
-                                                    <input type="file" class="form-control border border-dark" id="profileAvatar">
+                                                    <!-- <input type="file" class="form-control border border-dark" id="profileAvatar"> -->
+													{% render_field form.profile_avatar class="form-control rounded-left" %}
                                                 </div>
                                                 <div class="mb-4">
                                                     <label for="notes" class="form-label text-white p-2 rounded">Notes (Optional)</label>
@@ -249,15 +251,16 @@
                 <div class="container singular">
                     <div class="row justify-content-center">
                         <!-- Student Card 1 -->
+						{% for child in children %}
                         <div class="col-md-4 col-sm-12 mb-4">
                             <div class="card student-card rounded shadow-lg border-0">
                                 <div class="photo text-center mt-3">
                                     <img src="{% static 'images/1-student.png' %}" alt="Student Photo" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover; border: 5px solid #f8f9fa;">
                                 </div>
                                 <div class="card-body text-center">
-                                    <h5 class="card-title font-weight-bold">John Doe</h5>
-                                    <p class="card-text text-muted mb-1"><strong>Grade:</strong> 5</p>
-                                    <p class="card-text text-muted mb-1"><strong>Age:</strong> 10</p>
+									<h5 class="card-title font-weight-bold">{{ child.first_name}} {{child.last_name}}</h5>
+									<p class="card-text text-muted mb-1"><strong>Grade:</strong> {{child.grade_level}}</p>
+									<p class="card-text text-muted mb-1"><strong>Age:</strong> {{child.age}}</p>
                                     <p class="card-text text-muted mb-1"><strong>Contact:</strong> 123-456-7890</p>
                                     <p class="card-text text-muted mb-3"><strong>Next Lesson:</strong> Math (Due: Oct 10, 2024)</p>
 
@@ -268,31 +271,10 @@
                                 </div>
                             </div>
                         </div>
+						{% endfor %}
 
-                        <!-- Student Card 2 -->
-                        <div class="col-md-4 col-sm-12 mb-4">
-                            <div class="card student-card rounded shadow-lg border-0">
-                                <div class="photo text-center mt-3">
-                                    <img src="{% static 'images/2-student.png' %}" alt="Student Photo" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover; border: 5px solid #f8f9fa;">
-                                </div>
-                                <div class="card-body text-center">
-                                    <h5 class="card-title font-weight-bold">Jane Smith</h5>
-                                    <p class="card-text text-muted mb-1"><strong>Grade:</strong> 4</p>
-                                    <p class="card-text text-muted mb-1"><strong>Age:</strong> 9</p>
-                                    <p class="card-text text-muted mb-1"><strong>Contact:</strong> 098-765-4321</p>
-                                    <p class="card-text text-muted mb-3"><strong>Next Lesson:</strong> Science (Due: Oct 12, 2024)</p>
-
-                                    <!-- Open Account Button -->
-                                    <a href='#' class="btn btn-primary mt-2">
-                                        Open Account
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-
-
 
                 <!-- Payment History Section -->
                 <section class="container-fluid payments">

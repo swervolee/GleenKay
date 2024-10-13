@@ -23,7 +23,7 @@ urlpatterns = [
 
     # apps
     path('auth/', include('Authentication.urls'), name='Authentication'),
-    path('parent/', include('Client.urls'), name='Client'),
+    path('', include('Client.urls'), name='Client'),
     path('meet/', include('Meet.urls'), name='Meet'),
     path('payment/', include('Payment.urls'), name='Payment'),
     path('tutor/', include('Tutor.urls'), name='Tutor'),
