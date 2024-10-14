@@ -216,3 +216,53 @@ header {
 .close-btn:hover {
     color: red;
 }
+
+
+/*sidebar styling*/
+    #sidebar {
+        background-color: #343a40; /* Dark background */
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    }
+
+    .nav-item {
+        transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    }
+
+    .nav-item:hover {
+        background-color: #495057; /* Darker background on hover */
+        color: #fff; /* Change text color on hover */
+    }
+
+    .nav-link {
+        color: #cfd8dc; /* Light text color */
+    }
+
+    .nav-link.active {
+        background-color: #007bff; /* Highlight active link */
+        color: #fff; /* Ensure active link text is readable */
+    }
+
+    .btn-light {
+        border-radius: 20px; /* Rounded button */
+        transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    }
+
+    .btn-light:hover {
+        background-color: #ffc107; /* Yellow background on hover */
+        color: #fff; /* Ensure text color is readable on hover */
+    }
+
+    @media (max-width: 768px) {
+        #sidebar {
+            width: 250px; /* Adjust width for mobile */
+        }
+    }
+
+    .nav-link i {
+        font-size: 1.5rem; /* Larger icons */
+        color: #adb5bd; /* Light icon color */
+    }
+
+    .nav-link:hover i {
+        color: #ffc107; /* Change icon color on hover */
+    }

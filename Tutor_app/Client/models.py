@@ -61,7 +61,7 @@ class Booking(models.Model):
     user = models.ForeignKey(ChildAccount, on_delete=models.CASCADE, related_name='childbooking')
     name = models.CharField(max_length=100)
     tutor = models.CharField(max_length=100)
-    topic = models.CharField(max_length=200, choices=TOPICS)
+    topic = models.CharField(max_length=200, choices=TOPICS, blank=True, null=True)
     other_topic = models.CharField(max_length=100, blank=True, null=True)
     duration = models.DurationField()  # Duration is stored as a timedelta
     date = models.DateField(auto_now_add=False, blank=False, null=False)
