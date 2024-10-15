@@ -1,5 +1,7 @@
 body {
     background-color: #F7F7F7;
+		font-family: 'Lato', sans-serif;
+
 }
 
 header {
@@ -178,8 +180,7 @@ header {
         z-index: 1000;
     }
     .navbar.scrolled {
-        background-color: #FF5A5F; /* Change this color */
-    }
+        background-color: #FF5A5F; /* Change this color */ }
 
 }
 
@@ -266,3 +267,45 @@ header {
     .nav-link:hover i {
         color: #ffc107; /* Change icon color on hover */
     }
+		/* End of sidebar styling */
+#childAction {
+    background-color: #ffffff; /* Off-white background */
+    border-radius: 8px; /* Soft rounded corners */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    border: none; /* Remove border */
+    padding: 0;
+    overflow: hidden;
+}
+
+#childAction .dropdown-item {
+    padding: 12px 20px; /* Spacing for a clean look */
+    font-size: 14px;
+    color: #333333; /* Airbnb's subtle text color */
+    transition: background-color 0.3s ease;
+}
+
+#childAction .dropdown-item:hover {
+    background-color: #f7f7f7; /* Light gray hover effect */
+    color: #333333;
+}
+
+#childAction .dropdown-item.text-danger {
+    color: #d9534f; /* Airbnb-style red for dangerous actions */
+}
+
+#childAction .dropdown-item.text-danger:hover {
+    background-color: #faeaea; /* Light red background on hover for dangerous actions */
+    color: #d9534f;
+}
+
+/* Dropdown arrow positioning */
+.dropdown-menu-end::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 10px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent white transparent; /* Creating a white arrow */
+}
+

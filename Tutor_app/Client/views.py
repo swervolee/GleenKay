@@ -89,7 +89,9 @@ def child(request, id):
     child = ChildAccount.objects.get(id=id)
     print(child.first_name)
     booking = Booking.objects.filter(user=id)
-
-
+    
+    # for booking in booking:
+    #     if booking.isApproved == True:
+    #         print("Approved")
 
     return render(request, 'child_home.html', {"booking":booking, "child":child})

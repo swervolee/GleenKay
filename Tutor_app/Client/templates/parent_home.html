@@ -3,397 +3,407 @@
 
 {% load static %}
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parent's Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta2/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="{% static 'styles/parent_home.css'%}">
-    <script src="{% static 'scripts/parent_home.js' %}"></script>
-  </head>
-  <body>
-      <div class="container-fluid">
-	  <div class="row">
-	      <!-- Sidebar (visible by default with 'show' class) -->
-	      <!-- Sidebar (visible by default with 'show' class) -->
-	      <nav id="sidebar" class="col-md-3 col-lg-2 text-dark vh-100 collapse show d-lg-flex flex-column justify-content-between">
-		  <ul class="nav flex-column mt-3 rounded">
-		      <li class="nav-item bg-dark rounded">
-			  <a class="nav-link active" href="#">
-			      <i class="bi bi-house-door"></i> Dashboard
-			  </a>
-		      </li>
-		      <li class="nav-item bg-dark rounded">
-			  <a class="nav-link" href="#">
-			      <i class="bi bi-person-lines-fill"></i> Manage Child Accounts
-			  </a>
-		      </li>
-		      <li class="nav-item bg-dark rounded">
-			  <a class="nav-link" href="#">
-			      <i class="bi bi-wallet2"></i> Payment History
-			  </a>
-		      </li>
-		  </ul>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Parent's Dashboard</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+		<link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta2/css/bootstrap.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="{% static 'styles/parent_home.css'%}">
+		<script src="{% static 'scripts/parent_home.js' %}"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- Sidebar (visible by default with 'show' class) -->
+				<!-- Sidebar (visible by default with 'show' class) -->
+				<nav id="sidebar" class="col-md-3 col-lg-2 text-dark vh-100 collapse show d-lg-flex flex-column justify-content-between">
+					<ul class="nav flex-column mt-3 rounded">
+						<li class="nav-item bg-dark rounded">
+							<a class="nav-link active" href="#">
+								<i class="bi bi-house-door"></i> Dashboard
+							</a>
+						</li>
+						<li class="nav-item bg-dark rounded">
+							<a class="nav-link" href="#">
+								<i class="bi bi-person-lines-fill"></i> Manage Child Accounts
+							</a>
+						</li>
+						<li class="nav-item bg-dark rounded">
+							<a class="nav-link" href="#">
+								<i class="bi bi-wallet2"></i> Payment History
+							</a>
+						</li>
+					</ul>
 
-		  <!-- Logout Button -->
-		  <div class="d-flex justify-content-end mt-auto" style="padding: 1rem;">
-		      <a href="{% url 'Authentication:logout_user' %}" class="btn btn-light d-flex align-items-center text-danger mx-2" style="transition: background-color 0.3s; padding: 8px 12px;">
-			  <i class="bi bi-box-arrow-right me-2"></i> Logout
-		      </a>
-		  </div>
-	      </nav>
-
-
-
-
-
-
-              <!-- Header (taking up the remaining space beside the sidebar) -->
-	      <header class="col-md-9 col-lg-10 animate__animated animate__fadeInDown sticky-header rounded">
-		  <nav class="navbar navbar-expand-lg navbar-dark bg-gradient shadow-lg py-3 rounded">
-		      <a class="navbar-brand text-center font-weight-bold d-none d-lg-block text-light" href="#" style="font-size: 2rem; letter-spacing: 2px;">
-			  <i class="bi bi-book-fill me-2"></i> GLEENKAY ACADEMY
-		      </a>
-		  </nav>
-	      </header>
-
-
-
-
-              <!-- nav for small devices -->
-	      <nav class="navbar navbar-expand-lg navbar-dark d-lg-none d-sm-none rounded p-1" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
-		  <div class="container-fluid">
-		      <a class="navbar-brand text-left" href="#">GLEENKAY</a>
-		      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavbar" aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle navigation">
-			  <span class="navbar-toggler-icon"></span>
-		      </button>
-		      <div class="collapse navbar-collapse" id="mobileNavbar">
-			  <!-- X button for closing the menu -->
-			  <button class="btn btn-close text-white float-end mb-2" id="closeMenu" aria-label="Close" style="font-size: 1.2rem; background: black">&times;</button>
-			  <div class="w-75 mx-auto">
-			      <ul class="navbar-nav">
-				  <li class="nav-item">
-				      <a class="nav-link" href="#">
-					  <i class="bi bi-house-door"></i> Dashboard
-				      </a>
-				  </li>
-				  <li class="nav-item">
-				      <a class="nav-link" href="#">
-					  <i class="bi bi-person-lines-fill"></i> Manage Child Accounts
-				      </a>
-				  </li>
-				  <li class="nav-item">
-				      <a class="nav-link" href="#">
-					  <i class="bi bi-wallet2"></i> Payment History
-				      </a>
-				  </li>
-			      </ul>
-			  </div>
-		      </div>
-		  </div>
-	      </nav>
+					<!-- Logout Button -->
+					<div class="d-flex justify-content-end mt-auto" style="padding: 1rem;">
+						<a href="{% url 'Authentication:logout_user' %}" class="btn btn-light d-flex align-items-center text-danger mx-2" style="transition: background-color 0.3s; padding: 8px 12px;">
+							<i class="bi bi-box-arrow-right me-2"></i> Logout
+						</a>
+					</div>
+				</nav>
 
 
 
 
 
 
-              <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-		  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		      <h1 class="h2">Welcome, {{parent}}</h1>
-		  </div>
-
-
-		  <section>
-		      <div class="card-container dashboard">
-			  <div class="card">
-			      <div class="card-body">
-				  <h3 class="card-title">Your Child Accounts</h3>
-
-
-				  <ul class="list-group mb-3">
-				      {% for child in children %}
-
-				      <li class="list-group-item d-flex justify-content-between align-items-center">
-					  {{ child.first_name }} {{ child.last_name }} - Grade {{ child.grade_level }}
-					  <div>
-					      <button class="btn btn-primary btn-sm m-1" onclick="window.location.href='child/{{child.id}}'">Open Account</button>
-					      <button class="btn btn-success btn-sm m-1" onclick="openBookingModal('{{child.first_name}} {{child.last_name}}', {{ child.id }})">Book Lesson</button>
-					  </div>
-				      </li>
-				      {% empty %}
-				      <li>No Child Accounts Found.</li>
-				      {% endfor %}
-				  </ul>
-
-				  <!-- Custom Booking Modal -->
-				  <!-- Modal -->
-				  <div id="bookingModal" class="modal fade" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
-				      <div class="modal-dialog modal-dialog-centered">
-					  <div class="modal-content">
-					      <div class="modal-header">
-						  <h5 class="modal-title" id="bookingModalLabel">
-						      Book Math Lesson for <span id="childNameDisplay"></span>
-						  </h5>
-						  <button type="button" class="btn-close" aria-label="Close" onclick="closeBookingModal()"></button>
-					      </div>
-					      <div class="modal-body">
-
-						  <form id="bookLessonForm" onsubmit="bookLesson(event)" method='POST'>
-						      {% csrf_token %}
-						      <input type="hidden" id="childName" name="user_id"> <!-- Add the name attribute to send with the form -->
-						      <div class="mb-3">
-							  <label for="date" class="form-label">Date</label>
-							  {% render_field booking_form.date type="date" class="form-control" placeholder="YYYY-MM-DD" %}
-						      </div>
-						      <div class="mb-3">
-							  <label for="time" class="form-label">Time</label>
-							  {% render_field booking_form.time type="time" class="form-control" placeholder="HH:MM" %}
-						      </div>
-						      <div class="mb-3">
-							  <label for="mathArea" class="form-label">Math Area</label>
-							  <select id="mathArea" class="form-select" required onchange="flashy()" name="{{ booking_form.topic.name }}">
-							      <option value="" selected disabled hidden>Math Topics</option>
-							      {% for value, label in booking_form.topic.field.choices %}
-							      {% if value %}
-							      <option value="{{ value }}">{{ label }}</option>
-							      {% endif %}
-							      {% endfor %}
-							  </select>
-						      </div>
-						      <div class="mb-3" id="otherMathAreaContainer" style="display: none;">
-							  <label for="otherMathArea" class="form-label">Please specify:</label>
-							  {% render_field booking_form.other_topic id="otherMathArea" class="form-control"%}
-						      </div>
-						      <button type="submit" class="btn btn-primary w-100">Book Lesson</button>
-						  </form>
-
-					      </div>
-					  </div>
-				      </div>
-				  </div>
+				<!-- Header (taking up the remaining space beside the sidebar) -->
+				<header class="col-md-9 col-lg-10 animate__animated animate__fadeInDown sticky-header rounded">
+					<nav class="navbar navbar-expand-lg navbar-dark bg-gradient shadow-lg py-3 rounded">
+						<a class="navbar-brand text-center font-weight-bold d-none d-lg-block text-light" href="#" style="font-size: 2rem; letter-spacing: 2px;">
+							<i class="bi bi-book-fill me-2"></i> GLEENKAY ACADEMY
+						</a>
+					</nav>
+				</header>
 
 
 
-				  <!-- Confirmation Message -->
-				  <!-- Flash Message Placeholder -->
-				  <div id="flashMessage" class="alert alert-dark d-none position-fixed top-0 end-0 m-3" role="alert" style="z-index: 1050;">
-				      Lesson booked successfully! An email will be sent shortly with the schedule.
-				  </div>
 
-				  <button class="btn btn-primary mb-3" data-bs-toggle="collapse" data-bs-target="#childAccountFormCollapse">Add New Child</button>
-				  <div class="collapse" id="childAccountFormCollapse">
-				      <div class="card" id='childform'>
-					  <div class="card-body">
-					      <h5 class="card-title">Create Child Account</h5>
-					      <!-- Changed form ID here -->
-					      <form id="createChildForm" method="post"  onsubmit="createChildAccount(event)">
-						  {% csrf_token %}
-						  <div class="row">
-						      <div class="col-lg-3 mb-4">
-							  <label for="firstName" class="form-label text-white p-2 rounded">First Name</label>
-							  <!-- <input type="text" class="form-control border border-dark" id="firstName" required> -->
-							  {% render_field form.first_name class="form-control rounded-left" placeholder="First Name" %}
-						      </div>
-						      <div class="col-lg-3 mb-4">
-							  <label for="lastName" class="form-label text-white p-2 rounded">Last Name</label>
-							  <!-- <input type="text" class="form-control border border-dark" id="lastName" required> -->
-							  {% render_field form.last_name class="form-control rounded-left" placeholder="Last Name" %}
-						      </div>
-						      <div class="col-lg-2 mb-4">
-							  <label for="age" class="form-label text-white p-2 rounded">Age</label>
-							  <!-- <input type="number" class="form-control border border-dark" id="age" min="0" required> -->
-							  {% render_field form.age class="form-control rounded-left" placeholder="Age" %}
-						      </div>
-						      <div class="col-lg-2 mb-4">
-							  <label for="gender" class="form-label text-white p-2 rounded">Gender</label>
-							  <select name="{{ form.gender.name }}" id="{{ form.gender.auto_id }}" class="form-control rounded-left">
-							      <option value="" selected disabled hidden>Select Gender</option>
-							      {% for value, label in form.gender.field.choices %}
-							      {% if value %}
-							      <option value="{{ value }}">{{ label }}</option>
-							      {% endif %}
-							      {% endfor %}
-							  </select>
-						      </div>
-
-
-						      <div class="col-lg-2 mb-4">
-							  <label for="gradeLevel" class="form-label text-white p-2 rounded">Grade Level</label>
-   							  <select name="{{ form.grade_level.name }}" id="{{ form.grade_level.auto_id }}" class="form-control rounded-left">
-							      <option value="" selected disabled hidden>Select Grade</option>
-							      {% for value, label in form.grade_level.field.choices %}
-							      {% if value %}
-							      <option value="{{ value }}">{{ label }}</option>
-							      {% endif %}
-							      {% endfor %}
-							  </select>
-						      </div>
-						  </div>
-						  <div class="mb-4">
-						      <label for="learningAreas" class="form-label text-white p-2 rounded">Learning Areas</label>
-						      <select name="{{ form.learning_areas.name }}" id="{{ form.learning_areas.auto_id }}" class="form-control rounded-left">
-							  <option value="" selected disabled hidden>Select Learning Areas</option>
-							  {% for value, label in form.learning_areas.field.choices %}
-							  {% if value %}
-							  <option value="{{ value }}">{{ label }}</option>
-							  {% endif %}
-							  {% endfor %}
-						      </select>
-						  </div>
-						  <div class="mb-4">
-						      <label for="profileAvatar" class="form-label text-white p-2 rounded">Profile Avatar</label>
-						      <!-- <input type="file" class="form-control border border-dark" id="profileAvatar"> -->
-						      {% render_field form.profile_avatar class="form-control rounded-left" %}
-						  </div>
-						  <div class="mb-4">
-						      <label for="notes" class="form-label text-white p-2 rounded">Notes</label>
-						      <textarea class="form-control border border-dark" id="notes" rows="3"  placeholder='Tell us something we should know about your child'></textarea>
-						  </div>
-						  <button type="submit" class="btn btn-primary bg-dark">Create Account</button>
-					      </form>
-					  </div>
-				      </div>
-				  </div>
-
-			      </div>
-			  </div>
-		      </div>
-		  </section>
-
-
-
-		  <!-- Student info-->
-		  <div class="container singular">
-		      <div class="row justify-content-center">
-			  <!-- Student Card 1 -->
-			  {% for child in children %}
-			  <div class="col-md-4 col-sm-12 mb-4">
-			      <div class="card student-card rounded shadow-lg border-0">
-				  <div class="photo text-center mt-3">
-				      <img src="{% static 'images/1-student.png' %}" alt="Student Photo" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover; border: 5px solid #f8f9fa;">
-				  </div>
-				  <div class="card-body text-center">
-				      <h5 class="card-title font-weight-bold">{{ child.first_name}} {{child.last_name}}</h5>
-				      <p class="card-text text-muted mb-1"><strong>Grade:</strong> {{child.grade_level}}</p>
-				      <p class="card-text text-muted mb-1"><strong>Age:</strong> {{child.age}}</p>
-				      <p class="card-text text-muted mb-1"><strong>Contact:</strong> 123-456-7890</p>
-				      <p class="card-text text-muted mb-3"><strong>Next Lesson:</strong> Math (Due: Oct 10, 2024)</p>
-
-				      <!-- Open Account Button -->
-				      <a href='child/{{child.id}}' class="btn btn-primary mt-2">
-					  Open Account
-				      </a>
-				  </div>
-			      </div>
-			  </div>
-			  {% endfor %}
-
-		      </div>
-		  </div>
-
-		  <!-- Payment History Section -->
-		  <section class="container-fluid payments">
-		      <div class="row justify-content-center">
-			  <div class="col-12">
-			      <div class="card-container shadow-lg">
-				  <div class="card">
-				      <div class="card-header bg-danger text-light text-center">
-					  <h4 class="mb-0">Payment History</h4>
-				      </div>
-				      <div class="card-body">
-					  <ul class="list-group mb-3">
-					      <li class="list-group-item d-flex justify-content-between align-items-center">
-						  <span><i class="bi bi-calendar-check me-2 text-success"></i> Payment on 01 Jan 2024</span>
-						  <span class="badge bg-success">$50</span>
-					      </li>
-					      <li class="list-group-item d-flex justify-content-between align-items-center">
-						  <span><i class="bi bi-calendar-check me-2 text-warning"></i> Payment on 15 Feb 2024</span>
-						  <span class="badge bg-warning">$75</span>
-					      </li>
-					      <li class="list-group-item d-flex justify-content-between align-items-center">
-						  <span><i class="bi bi-calendar-check me-2 text-danger"></i> Payment on 10 Mar 2024</span>
-						  <span class="badge bg-danger">$100</span>
-					      </li>
-					      <li class="list-group-item d-flex justify-content-between align-items-center">
-						  <span><i class="bi bi-calendar-check me-2 text-info"></i> Payment on 20 Mar 2024</span>
-						  <span class="badge bg-info">$125</span>
-					      </li>
-					      <li class="list-group-item d-flex justify-content-between align-items-center">
-						  <span><i class="bi bi-calendar-check me-2 text-success"></i> Payment on 05 Apr 2024</span>
-						  <span class="badge bg-success">$150</span>
-					      </li>
-					  </ul>
-					  <button class="btn btn-outline-dark w-100" id="loadMorePayments">
-					      <i class="bi bi-plus-circle me-2"></i> View More Payments
-					  </button>
-				      </div>
-				  </div>
-			      </div>
-			  </div>
-		      </div>
-		  </section>
+				<!-- nav for small devices -->
+				<nav class="navbar navbar-expand-lg navbar-dark d-lg-none d-sm-none rounded p-1" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
+					<div class="container-fluid">
+						<a class="navbar-brand text-left" href="#">GLEENKAY</a>
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavbar" aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="mobileNavbar">
+							<!-- X button for closing the menu -->
+							<button class="btn btn-close text-white float-end mb-2" id="closeMenu" aria-label="Close" style="font-size: 1.2rem; background: black">&times;</button>
+							<div class="w-75 mx-auto">
+								<ul class="navbar-nav">
+									<li class="nav-item">
+										<a class="nav-link" href="#">
+											<i class="bi bi-house-door"></i> Dashboard
+										</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#">
+											<i class="bi bi-person-lines-fill"></i> Manage Child Accounts
+										</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#">
+											<i class="bi bi-wallet2"></i> Payment History
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</nav>
 
 
 
 
 
-              </main>
-	  </div>
-      </div>
 
-      <footer class="mb-0 text-center text-light p-2" id='footer' >
-	  <span class='text-center'>&copy; 2024 GLEENKAY All rights reserved.</span>
-      </footer>
-      <script>
-       function openBookingModal(childName, childId) {
-	   document.getElementById('childNameDisplay').innerText = childName;
-	   document.getElementById('childName').value = childId; // Set the hidden input field
-	   const bookingModal = new bootstrap.Modal(document.getElementById('bookingModal'));
-	   bookingModal.show();
-       }
+				<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+						<h1 class="h2">Welcome, {{parent}}</h1>
+					</div>
 
-       function closeBookingModal() {
-	   const bookingModal = bootstrap.Modal.getInstance(document.getElementById('bookingModal'));
-	   bookingModal.hide();
-       }
 
-       // Modify the bookLesson function to handle form submission
-       function bookLesson(event) {
-	   event.preventDefault(); // Prevent the default form submission
-	   const form = document.getElementById('bookLessonForm');
-	   const formData = new FormData(form);
+					<section>
+						<div class="card-container dashboard">
+							<div class="card">
+								<div class="card-body">
+									<h3 class="card-title">Your Child Accounts</h3>
 
-	   // Send the form data via fetch
-	   fetch(form.action, {
-               method: 'POST',
-               body: formData,
-               headers: {
-		   'X-CSRFToken': '{{ csrf_token }}', // Make sure to include the CSRF token
-               },
-	   })
-	       .then(response => {
-		   if (response.ok) {
-		       // Handle success (e.g., show a success message, refresh the page)
-		       closeBookingModal(); // Close the modal after successful booking
-		       location.reload(); // Reload to see changes, or handle it differently
-		   } else {
-		       // Handle error (e.g., show an error message)
-		       alert('Error booking lesson. Please try again.');
-		   }
-	       });
-       }
-      </script>
 
-  </body>
+									<ul class="list-group mb-3">
+										{% for child in children %}
+										<li class="list-group-item d-flex justify-content-between align-items-center">
+											{{ child.first_name }} {{ child.last_name }} - Grade {{ child.grade_level }}
+
+											<!-- Dropdown button for actions -->
+											<div class="dropdown">
+												<button class="btn btn-secondary bg-dark dropdown-toggle btn-sm" type="button" id="dropdownMenuButton{{ child.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+													Actions
+												</button>
+												<ul class="dropdown-menu dropdown-menu-end" id='childAction' aria-labelledby="dropdownMenuButton{{ child.id }}" style='z-index: 3000;;'>
+													<li><a class="dropdown-item" href="child/{{child.id}}">Open Account</a></li>
+													<li><a class="dropdown-item" href="#" onclick="openBookingModal('{{child.first_name}} {{child.last_name}}', {{ child.id }})">Book Lesson</a></li>
+													<li><a class="dropdown-item text-danger" href="#" onclick="confirmDelete('{{child.id}}')">Delete Account</a></li>
+												</ul>
+											</div>
+										</li>
+										{% empty %}
+										<li>No Child Accounts Found.</li>
+										{% endfor %}
+									</ul>
+
+
+
+									<!-- Custom Booking Modal -->
+									<!-- Modal -->
+									<div id="bookingModal" class="modal fade" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="bookingModalLabel">
+														Book Math Lesson for <span id="childNameDisplay"></span>
+													</h5>
+													<button type="button" class="btn-close" aria-label="Close" onclick="closeBookingModal()"></button>
+												</div>
+												<div class="modal-body">
+
+													<form id="bookLessonForm" onsubmit="bookLesson(event)" method='POST'>
+														{% csrf_token %}
+														<input type="hidden" id="childName" name="user_id"> <!-- Add the name attribute to send with the form -->
+														<div class="mb-3">
+															<label for="date" class="form-label">Date</label>
+															{% render_field booking_form.date type="date" class="form-control" placeholder="YYYY-MM-DD" %}
+														</div>
+														<div class="mb-3">
+															<label for="time" class="form-label">Time</label>
+															{% render_field booking_form.time type="time" class="form-control" placeholder="HH:MM" %}
+														</div>
+														<div class="mb-3">
+															<label for="mathArea" class="form-label">Math Area</label>
+															<select id="mathArea" class="form-select" required onchange="flashy()" name="{{ booking_form.topic.name }}">
+																<option value="" selected disabled hidden>Math Topics</option>
+																{% for value, label in booking_form.topic.field.choices %}
+																{% if value %}
+																<option value="{{ value }}">{{ label }}</option>
+																{% endif %}
+																{% endfor %}
+															</select>
+														</div>
+														<div class="mb-3" id="otherMathAreaContainer" style="display: none;">
+															<label for="otherMathArea" class="form-label">Please specify:</label>
+															{% render_field booking_form.other_topic id="otherMathArea" class="form-control"%}
+														</div>
+														<button type="submit" class="btn btn-primary w-100">Book Lesson</button>
+													</form>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+
+									<!-- Confirmation Message -->
+									<!-- Flash Message Placeholder -->
+									<div id="flashMessage" class="alert alert-dark d-none position-fixed top-0 end-0 m-3" role="alert" style="z-index: 1050;">
+										Lesson booked successfully! An email will be sent shortly with the schedule.
+									</div>
+
+									<button class="btn btn-primary mb-3" data-bs-toggle="collapse" data-bs-target="#childAccountFormCollapse">Add New Child</button>
+									<div class="collapse" id="childAccountFormCollapse">
+										<div class="card" id='childform'>
+											<div class="card-body">
+												<h5 class="card-title">Create Child Account</h5>
+												<!-- Changed form ID here -->
+												<form id="createChildForm" method="post"  onsubmit="createChildAccount(event)">
+													{% csrf_token %}
+													<div class="row">
+														<div class="col-lg-3 mb-4">
+															<label for="firstName" class="form-label text-white p-2 rounded">First Name</label>
+															<!-- <input type="text" class="form-control border border-dark" id="firstName" required> -->
+															{% render_field form.first_name class="form-control rounded-left" placeholder="First Name" %}
+														</div>
+														<div class="col-lg-3 mb-4">
+															<label for="lastName" class="form-label text-white p-2 rounded">Last Name</label>
+															<!-- <input type="text" class="form-control border border-dark" id="lastName" required> -->
+															{% render_field form.last_name class="form-control rounded-left" placeholder="Last Name" %}
+														</div>
+														<div class="col-lg-2 mb-4">
+															<label for="age" class="form-label text-white p-2 rounded">Age</label>
+															<!-- <input type="number" class="form-control border border-dark" id="age" min="0" required> -->
+															{% render_field form.age class="form-control rounded-left" placeholder="Age" %}
+														</div>
+														<div class="col-lg-2 mb-4">
+															<label for="gender" class="form-label text-white p-2 rounded">Gender</label>
+															<select name="{{ form.gender.name }}" id="{{ form.gender.auto_id }}" class="form-control rounded-left">
+																<option value="" selected disabled hidden>Select Gender</option>
+																{% for value, label in form.gender.field.choices %}
+																{% if value %}
+																<option value="{{ value }}">{{ label }}</option>
+																{% endif %}
+																{% endfor %}
+															</select>
+														</div>
+
+
+														<div class="col-lg-2 mb-4">
+															<label for="gradeLevel" class="form-label text-white p-2 rounded">Grade Level</label>
+															<select name="{{ form.grade_level.name }}" id="{{ form.grade_level.auto_id }}" class="form-control rounded-left">
+																<option value="" selected disabled hidden>Select Grade</option>
+																{% for value, label in form.grade_level.field.choices %}
+																{% if value %}
+																<option value="{{ value }}">{{ label }}</option>
+																{% endif %}
+																{% endfor %}
+															</select>
+														</div>
+													</div>
+													<div class="mb-4">
+														<label for="learningAreas" class="form-label text-white p-2 rounded">Learning Areas</label>
+														<select name="{{ form.learning_areas.name }}" id="{{ form.learning_areas.auto_id }}" class="form-control rounded-left">
+															<option value="" selected disabled hidden>Select Learning Areas</option>
+															{% for value, label in form.learning_areas.field.choices %}
+															{% if value %}
+															<option value="{{ value }}">{{ label }}</option>
+															{% endif %}
+															{% endfor %}
+														</select>
+													</div>
+													<div class="mb-4">
+														<label for="profileAvatar" class="form-label text-white p-2 rounded">Profile Avatar</label>
+														<!-- <input type="file" class="form-control border border-dark" id="profileAvatar"> -->
+														{% render_field form.profile_avatar class="form-control rounded-left" %}
+													</div>
+													<div class="mb-4">
+														<label for="notes" class="form-label text-white p-2 rounded">Notes</label>
+														<textarea class="form-control border border-dark" id="notes" rows="3"  placeholder='Tell us something we should know about your child'></textarea>
+													</div>
+													<button type="submit" class="btn btn-primary bg-dark">Create Account</button>
+												</form>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</section>
+
+
+
+					<!-- Student info-->
+					<div class="container singular">
+						<div class="row justify-content-center">
+							<!-- Student Card 1 -->
+							{% for child in children %}
+							<div class="col-md-4 col-sm-12 mb-4">
+								<div class="card student-card rounded shadow-lg border-0">
+									<div class="photo text-center mt-3">
+										<img src="{% static 'images/1-student.png' %}" alt="Student Photo" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover; border: 5px solid #f8f9fa;">
+									</div>
+									<div class="card-body text-center">
+										<h5 class="card-title font-weight-bold">{{ child.first_name}} {{child.last_name}}</h5>
+										<p class="card-text text-muted mb-1"><strong>Grade:</strong> {{child.grade_level}}</p>
+										<p class="card-text text-muted mb-1"><strong>Age:</strong> {{child.age}}</p>
+										<p class="card-text text-muted mb-1"><strong>Contact:</strong> 123-456-7890</p>
+										<p class="card-text text-muted mb-3"><strong>Next Lesson:</strong> Math (Due: Oct 10, 2024)</p>
+
+										<!-- Open Account Button -->
+										<a href='child/{{child.id}}' class="btn btn-primary mt-2">
+											Open Account
+										</a>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+
+						</div>
+					</div>
+
+					<!-- Payment History Section -->
+					<section class="container-fluid payments">
+						<div class="row justify-content-center">
+							<div class="col-12">
+								<div class="card-container shadow-lg">
+									<div class="card">
+										<div class="card-header bg-danger text-light text-center">
+											<h4 class="mb-0">Payment History</h4>
+										</div>
+										<div class="card-body">
+											<ul class="list-group mb-3">
+												<li class="list-group-item d-flex justify-content-between align-items-center">
+													<span><i class="bi bi-calendar-check me-2 text-success"></i> Payment on 01 Jan 2024</span>
+													<span class="badge bg-success">$50</span>
+												</li>
+												<li class="list-group-item d-flex justify-content-between align-items-center">
+													<span><i class="bi bi-calendar-check me-2 text-warning"></i> Payment on 15 Feb 2024</span>
+													<span class="badge bg-warning">$75</span>
+												</li>
+												<li class="list-group-item d-flex justify-content-between align-items-center">
+													<span><i class="bi bi-calendar-check me-2 text-danger"></i> Payment on 10 Mar 2024</span>
+													<span class="badge bg-danger">$100</span>
+												</li>
+												<li class="list-group-item d-flex justify-content-between align-items-center">
+													<span><i class="bi bi-calendar-check me-2 text-info"></i> Payment on 20 Mar 2024</span>
+													<span class="badge bg-info">$125</span>
+												</li>
+												<li class="list-group-item d-flex justify-content-between align-items-center">
+													<span><i class="bi bi-calendar-check me-2 text-success"></i> Payment on 05 Apr 2024</span>
+													<span class="badge bg-success">$150</span>
+												</li>
+											</ul>
+											<button class="btn btn-outline-dark w-100" id="loadMorePayments">
+												<i class="bi bi-plus-circle me-2"></i> View More Payments
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+
+
+
+
+				</main>
+			</div>
+		</div>
+
+		<footer class="mb-0 text-center text-light p-2" id='footer' >
+			<span class='text-center'>&copy; 2024 GLEENKAY All rights reserved.</span>
+		</footer>
+		<script>
+			function openBookingModal(childName, childId) {
+				document.getElementById('childNameDisplay').innerText = childName;
+				document.getElementById('childName').value = childId; // Set the hidden input field
+				const bookingModal = new bootstrap.Modal(document.getElementById('bookingModal'));
+				bookingModal.show();
+			}
+
+			function closeBookingModal() {
+				const bookingModal = bootstrap.Modal.getInstance(document.getElementById('bookingModal'));
+				bookingModal.hide();
+			}
+
+			// Modify the bookLesson function to handle form submission
+			function bookLesson(event) {
+				event.preventDefault(); // Prevent the default form submission
+				const form = document.getElementById('bookLessonForm');
+				const formData = new FormData(form);
+
+				// Send the form data via fetch
+				fetch(form.action, {
+					method: 'POST',
+					body: formData,
+					headers: {
+						'X-CSRFToken': '{{ csrf_token }}', // Make sure to include the CSRF token
+					},
+				})
+					.then(response => {
+						if (response.ok) {
+							// Handle success (e.g., show a success message, refresh the page)
+							closeBookingModal(); // Close the modal after successful booking
+							location.reload(); // Reload to see changes, or handle it differently
+						} else {
+							// Handle error (e.g., show an error message)
+							alert('Error booking lesson. Please try again.');
+						}
+					});
+			}
+		</script>
+
+	</body>
 </html>

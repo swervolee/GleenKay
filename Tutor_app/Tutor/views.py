@@ -10,6 +10,8 @@ from django.contrib import messages
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 
+# models
+from Client.models import Booking
 
 # Create your views here.
 
@@ -22,7 +24,8 @@ def tutor(request):
     """
     Renders the landng page
     """
-    return render(request, 'tutor_home.html')
+    booking = Booking.objects.all()
+    return render(request, 'tutor_home.html', {"booking":booking})
 
 
 def landingPage(request):

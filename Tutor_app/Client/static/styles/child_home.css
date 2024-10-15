@@ -63,6 +63,7 @@
     color: var(--airbnb-coral);
 }
 body {
+	 font-family: 'Lato', sans-serif;
     overflow-x: hidden; /* Prevent horizontal scroll */
 }
 

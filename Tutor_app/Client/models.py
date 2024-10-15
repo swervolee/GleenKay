@@ -66,3 +66,5 @@ class Booking(models.Model):
     duration = models.DurationField()  # Duration is stored as a timedelta
     date = models.DateField(auto_now_add=False, blank=False, null=False)
     time = models.TimeField()
+    isApproved = models.BooleanField(default=False)
+    meetLink = models.CharField(max_length=200,blank=True, null=True)
