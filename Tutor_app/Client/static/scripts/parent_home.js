@@ -11,9 +11,10 @@ $(document).ready(function() {
 
     // Initially hide all sections
     const hideSections = () => {
-        $('.singular, .payments').hide();
-    };
+        $('.singular, .payments, .dashboard').hide();
+		};	
     hideSections();
+		$('.dashboard').show();
 
     // Helper function to toggle sections
     const toggleSections = (sectionToShow) => {

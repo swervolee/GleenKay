@@ -62,9 +62,10 @@ def booking(request, id):
             booking.user = child  # Assign the ChildAccount instance to the user field
             booking.tutor = "permo"  # Example tutor name
             booking.duration = timezone.timedelta(hours=1)  # Example duration of 1 hour
-            booking.topic = other_topic
+            if other_topic:
+                booking.topic = other_topic
+            
             booking.save()  # Save the booking instance
-            # Booking.save()
             booking.save()
             return JsonResponse({'message': 'Booking created successfully'}, status=201)  # Return a JSON response
 

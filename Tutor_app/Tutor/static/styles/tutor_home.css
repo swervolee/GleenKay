@@ -285,3 +285,80 @@ header {
 .close-btn:hover {
     color: red;
 }
+
+/* Side bar styling */
+#sidebar {
+    background-color: #ffffff; /* Clean white background */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow for a subtle, elevated look */
+    border-right: 1px solid #ebebeb; /* Soft gray border on the right */
+}
+
+.nav-item {
+    transition: background-color 0.2s, color 0.2s; /* Quick, smooth transition */
+    margin-bottom: 8px; /* Spacing between nav items */
+}
+
+.nav-item:hover {
+    background-color:  #ff5a5f; /* Light gray background on hover */
+    color: #333333; /* Slightly darker text color */
+}
+
+.nav-link {
+    color: #717171; /* Subtle gray text color */
+    font-size: 1rem; /* Clean and readable font size */
+    padding: 12px 16px; /* Spacious padding for a modern feel */
+    font-weight: 500; /* Semi-bold text */
+    text-decoration: none; /* No underlines */
+}
+
+.nav-link.active {
+    background-color: #ff385c; /* Airbnb's signature coral/pink for active link */
+    color: #ffffff; /* Ensure active link text is readable */
+    border-radius: 8px; /* Rounded corners for active state */
+}
+
+.btn-light {
+    background-color: #ffffff; /* Clean, white button background */
+    border: 1px solid #ff385c; /* Subtle border with coral color */
+    border-radius: 50px; /* More rounded button (pill-shaped) */
+    color: #ff385c; /* Airbnb's coral color for text */
+    font-weight: 600; /* Slightly bolder text */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.btn-light:hover {
+    background-color: #ff385c; /* Coral background on hover */
+    color: #ffffff; /* White text on hover for readability */
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        width: 220px; /* Adjust width for mobile */
+    }
+}
+
+.nav-link i {
+    font-size: 1.3rem; /* Larger icons, but less prominent */
+    color: #b0b0b0; /* Subtle gray color for icons */
+}
+
+.nav-link:hover i {
+    color: #ff385c; /* Change icon color to coral on hover */
+}
+
+/* End of side bar Styling */
+
+
+/* Styling the notification */
+#notification {
+    display: none; /* Initially hidden */
+    position: fixed; /* Fixed position to stay on screen */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Offset the element's width and height */
+    z-index: 1000; /* Ensure it's on top of other elements */
+    border-radius: 5px; /* Rounded corners */
+    padding: 15px; /* Padding for the alert */
+    transition: all 0.5s ease; /* Smooth transition */
+}
+
