@@ -22,6 +22,7 @@
 		<script src="{% static 'scripts/tutor_home.js' %}"></script>
 	</head>
 	<body>
+		{% if request.user.user_type == "tutor" %}
 		<div class="container-fluid">
 			<div class="row">
 				<!-- Sidebar (visible by default with 'show' class) -->
@@ -129,7 +130,7 @@
 									</div>
 									<div class="card-body">
 										<ul class="list-group">
-											{% if tutor_jobs%}
+											{% if tutor_jobs %}
 											{% for bks in tutor_jobs|slice:":3" %}
 											<li class="list-group-item d-flex justify-content-between align-items-center">
 												<span>{{ bks.topic }} ({{ bks.user.first_name }} {{ bks.user.last_name }}) <br><small>{{ bks.date }} - {{ bks.time }}</small></span>
@@ -287,7 +288,7 @@
 										<!-- List of Available Lessons -->
 										<ul class="list-group mb-3">
 
-											{% if bookings %}
+											{% if booking %}
 											{% for bks in booking %}
 											{% if bks.isApproved == False %}
 											<li class="list-group-item d-flex justify-content-between align-items-center">
@@ -643,6 +644,10 @@
 		<footer class="mb-0 text-center text-light p-2" id='footer' >
 			<span class='text-center'>&copy; 2024 GLEENKAY All rights reserved.</span>
 		</footer>
+
+		{% else %}
+		Oops, Unauthorized Access
+		{% endif %}
 
 	</body>
 </html>

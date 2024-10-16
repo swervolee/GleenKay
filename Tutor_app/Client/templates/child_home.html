@@ -21,6 +21,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">		
   </head>
   <body>
+	  {% if request.user.user_type == "parent" %}
     <div class="container-fluid">
       <div class="row">
 	<!-- Sidebar (hidden on small devices) -->
@@ -122,13 +123,15 @@
 				<div class="d-flex justify-content-between align-items-center">
 					
 				{% if booking.isApproved == True %}
+				<a href="{{booking.meetLink}}" target="_blank">
 				    <button class="btn btn-primary btn-lg lesson-button">
 					<i class="bi bi-camera-video"></i> Launch Class
 				    </button>
+				</a>
 				{% else %}
 
 				    <button class="btn btn-primary btn-lg lesson-button">
-					<i class="bi"></i> pending approval
+					<i class="bi"></i> <img style="background-color: None;" src="{% static 'images/three-dots.svg' %}" class="htmx-indicator" width="20px" height="20px"> pending approval
 				    </button>
 				{% endif %}
 
@@ -479,5 +482,8 @@
       <footer id="footer" class="text-white text-center py-1">
 	<p>© 2024 GleenKay Academy</p>
       </footer>
+	  {% else %}
+	  Unauthorized Access
+	  {% endif %}
   </body>
 </html>

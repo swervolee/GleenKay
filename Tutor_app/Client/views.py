@@ -60,7 +60,7 @@ def booking(request, id):
             child = ChildAccount.objects.get(id=id)
 
             booking.user = child  # Assign the ChildAccount instance to the user field
-            booking.tutor = "permo"  # Example tutor name
+            booking.tutor = "Pending"  # Example tutor name
             booking.duration = timezone.timedelta(hours=1)  # Example duration of 1 hour
             if other_topic:
                 booking.topic = other_topic
@@ -73,12 +73,6 @@ def booking(request, id):
 
 
 
-@login_required(login_url='Authentication:login_user')
-def tutor(request):
-    """
-    Renders the landng page
-    """
-    return HttpResponse("Welcome tutor")
 
 # @login_required
 def landingPage(request):
@@ -86,13 +80,8 @@ def landingPage(request):
 
 @login_required(login_url='Authentication:login_user')
 def child(request, id):
-    
+    parent = request.user   
     child = ChildAccount.objects.get(id=id)
-    print(child.first_name)
     booking = Booking.objects.filter(user=id)
     
-    # for booking in booking:
-    #     if booking.isApproved == True:
-    #         print("Approved")
-
-    return render(request, 'child_home.html', {"booking":booking, "child":child})
+    return render(request, 'child_home.html', {"booking":booking, "child":child, "parent":parent})

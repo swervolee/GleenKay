@@ -23,6 +23,7 @@
 		<script src="{% static 'scripts/parent_home.js' %}"></script>
 	</head>
 	<body>
+		{% if request.user.user_type == "parent" %}
 		<div class="container-fluid">
 			<div class="row">
 				<!-- Sidebar (visible by default with 'show' class) -->
@@ -405,5 +406,8 @@
 			}
 		</script>
 
+		{% else %}
+		Oops, Unauthorized Access
+		{% endif %}
 	</body>
 </html>

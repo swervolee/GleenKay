@@ -15,10 +15,6 @@ from Client.models import Booking
 
 # Create your views here.
 
-def index(request):
-    return HttpResponse("welcome tutor to tutor app")
-
-
 @login_required(login_url='Authentication:login_user')
 def tutor(request):
     """
@@ -28,11 +24,15 @@ def tutor(request):
     booking = Booking.objects.all()
     tutor_jobs = Booking.objects.filter(tutor=tutor)
 
+#     print(tutor)
+#     for jbs in tutor_jobs:
+#         print(jbs.topic)
+
     return render(request, 'tutor_home.html', {"booking":booking, "tutor_jobs":tutor_jobs})
 
 def addMeetLink(request, id):
 
-    tutor = request.user
+    tutor = request.user.username
 
     booking = Booking.objects.get(id=id)
 
@@ -48,8 +48,6 @@ def addMeetLink(request, id):
     else:
         return HttpResponse('An error occurred')
 
-def landingPage(request):
-    return render(request, 'landing_page.html')
 
 
 
