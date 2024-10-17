@@ -146,27 +146,5 @@ $(document).ready(function() {
 
 
 	//Deleting child account code
-	function confirmDelete(childId, childName) {
-		// Set the child name in the modal
-		const childNameToDelete = document.getElementById('childNameToDelete');
-		childNameToDelete.textContent = childName;
-
-		// Show the modal
-		const deleteModal = new bootstrap.Modal(document.getElementById('deleteChildModal'));
-		deleteModal.show();
-
-		// Optionally set the form action dynamically or handle via AJAX
-	}
-
-	function submitDelete() {
-		const password = document.getElementById('confirmPassword').value;
-		if (password) {
-			// You can submit the form here or handle deletion via AJAX
-			document.getElementById('deleteChildForm').submit();
-		} else {
-			alert('Please enter your password.');
-		}
-	}
-
 
 });
