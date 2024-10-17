@@ -1,489 +1,486 @@
 {% load static %}
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Child's Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta2/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="{% static 'styles/parent_home.css'%}">
-    <link rel="stylesheet" href="{% static 'styles/child_home.css'%}">
-    <script src="{% static 'scripts/child_home.js' %}"></script>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Child's Dashboard</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+		<link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta2/css/bootstrap.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<link rel="stylesheet" href="{% static 'styles/parent_home.css'%}">
+		<link rel="stylesheet" href="{% static 'styles/child_home.css'%}">
+		<script src="{% static 'scripts/child_home.js' %}"></script>
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">		
-  </head>
-  <body>
-	  {% if request.user.user_type == "parent" %}
-    <div class="container-fluid">
-      <div class="row">
-	<!-- Sidebar (hidden on small devices) -->
-	<nav id="sidebar" class="col-md-3 col-lg-2 text-dark vh-100 collapse d-lg-block">
-	  <ul class="nav flex-column mt-3 rounded">
-	    <li class="nav-item rounded">
-	      <a class="nav-link active text-dark" href="#">
-		<i class="bi bi-house-door text-dark"></i> Dashboard
-	      </a>
-	    </li>
-	    <li class="nav-item rounded">
-	      <a class="nav-link text-dark" href="#">
-		<i class="bi bi-person-lines-fill text-dark"></i> Planning
-	      </a>
-	    </li>
-	    <li class="nav-item rounded">
-	      <a class="nav-link text-dark" href="#">
-		<i class="bi bi-wallet2 text-dark"></i> Assignments
-	      </a>
-	    </li>
-	  </ul>
-	</nav>
-
-	<!-- Header (taking up the remaining space beside the sidebar) -->
-	<header class="col-md-9 col-lg-10 animate__animated animate__fadeInDown sticky-header rounded">
-	  <nav class="navbar navbar-expand-lg navbar-light shadow-lg py-3 rounded">
-	    <a class="navbar-brand text-md-center font-weight-bold d-none d-lg-block text-light" href="{% url 'Client:parent_dashboard' %}" style="font-size: 1.4rem; letter-spacing: 1px;">GLEENKAY ACADEMY</a>
-	  </nav>
-
-	</header>
-
-	<!-- nav for small devices -->
-	<nav class="navbar navbar-expand-lg navbar-dark d-lg-none rounded p-1" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
-	  <div class="container-fluid">
-	    <a class="navbar-brand text-left" href="#">GLEENKAY</a>
-	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavbar" aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle navigation">
-	      <span class="navbar-toggler-icon"></span>
-	    </button>
-	    <div class="collapse navbar-collapse" id="mobileNavbar">
-	      <!-- X button to close dropdown -->
-	      <button class="btn btn-close text-white float-end mb-2" id="closeDropdown" aria-label="Close" style=" font-size: 1.2rem; background: black">&times;</button>
-	      <div class="w-75 mx-auto">
-		<ul class="navbar-nav">
-		  <li class="nav-item">
-		    <a class="nav-link" href="#">
-		      <i class="bi bi-house-door"></i> Dashboard
-		    </a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="#">
-		      <i class="bi bi-person-lines-fill"></i> Planning
-		    </a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="#">
-		      <i class="bi bi-wallet2"></i> Assignments
-		    </a>
-		  </li>
-		</ul>
-	      </div>
-	    </div>
-	  </div>
-	</nav>
-
-
-
-	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-	  <div class="container-fluid">
-	    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-		<h1 class="h2">Welcome, {{child.first_name}}!</h1>
-	    </div>
-
-	    <!-- Detailed and Aesthetic Upcoming Lessons -->
-		{% if booking %}
-	    {% for booking in booking %}
-	    <div class="dashboard card shadow-lg mb-5 bg-white rounded lesson-card">
-		<div class="row no-gutters">
-		    <div class="col-12 d-md-none text-center mb-3">
-			<img src="{% static 'images/maths.png' %}" alt="Math Lesson" class="img-fluid" style="width: 100%; height: auto; object-fit: cover;">
-		    </div>
-
-		    <div class="col-md-3 d-none d-md-flex">
-			<img src="{% static 'images/maths.png' %}" alt="Math Lesson" class="img-fluid h-100" style="object-fit: cover;">
-		    </div>
-
-		    <div class="col-md-9 col-12">
-			<div class="card-body">
-			    <div class="lesson-details">
-				<h3 class="card-title text-info font-weight-bold">
-				    <i class="bi bi-book-fill"></i> Math Lesson: {{ booking.topic }}
-				</h3>
-				<p class="card-text text-muted">
-				    <i class="bi bi-calendar-event"></i> <strong>{{ booking.date }}</strong><br>
-				    <i class="bi bi-clock"></i> <strong>{{ booking.time }}</strong><br>
-				    <i class="bi bi-person"></i> Tutor: <strong>{{ booking.tutor }}</strong>
-				</p>
-			    </div>
-			    <div class="lesson-actions text-center mt-4">
-				<div class="d-flex justify-content-between align-items-center">
-					
-				{% if booking.isApproved == True %}
-				<a href="{{booking.meetLink}}" target="_blank">
-				    <button class="btn btn-primary btn-lg lesson-button">
-					<i class="bi bi-camera-video"></i> Launch Class
-				    </button>
-				</a>
-				{% else %}
-
-				    <button class="btn btn-primary btn-lg lesson-button">
-					<i class="bi"></i> <img style="background-color: None;" src="{% static 'images/three-dots.svg' %}" class="htmx-indicator" width="20px" height="20px"> pending approval
-				    </button>
-				{% endif %}
-
-				    <div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-					    Options
-					</button>
-					<!-- Dropdown Menu for Lessons -->
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-					    <li>
-						<a class="dropdown-item view-details" href="#" data-bs-toggle="modal"
-						   data-bs-target="#lessonModal"
-						   data-topic="{{ booking.topic }}"
-						   data-date="{{ booking.date }}"
-						   data-time="{{ booking.time }}"
-						   data-tutor="{{ booking.tutor }}"
-						   data-topics="{{ booking.topic }}">
-						    View Lesson Details
-						</a>
-					    </li>
+	</head>
+	<body>
+		{% if request.user.user_type == "parent" %}
+		<div class="container-fluid">
+			<div class="row">
+				<!-- Sidebar (hidden on small devices) -->
+				<nav id="sidebar" class="col-md-3 col-lg-2 text-dark vh-100 collapse d-lg-block">
+					<ul class="nav flex-column mt-3 rounded">
+						<li class="nav-item rounded">
+							<a class="nav-link active text-dark" href="#">
+								<i class="bi bi-house-door text-dark"></i> Dashboard
+							</a>
+						</li>
+						<li class="nav-item rounded">
+							<a class="nav-link text-dark" href="#">
+								<i class="bi bi-person-lines-fill text-dark"></i> Planning
+							</a>
+						</li>
+						<li class="nav-item rounded">
+							<a class="nav-link text-dark" href="#">
+								<i class="bi bi-wallet2 text-dark"></i> Assignments
+							</a>
+						</li>
 					</ul>
-				    </div>
-				</div>
-			    </div>
+				</nav>
+
+				<!-- Header (taking up the remaining space beside the sidebar) -->
+				<header class="col-md-9 col-lg-10 animate__animated animate__fadeInDown sticky-header rounded">
+					<nav class="navbar navbar-expand-lg navbar-light shadow-lg py-3 rounded">
+						<a class="navbar-brand text-md-center font-weight-bold d-none d-lg-block text-light" href="{% url 'Client:parent_dashboard' %}" style="font-size: 1.4rem; letter-spacing: 1px;">GLEENKAY ACADEMY</a>
+					</nav>
+
+				</header>
+
+				<!-- nav for small devices -->
+				<nav class="navbar navbar-expand-lg navbar-dark d-lg-none rounded p-1" style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
+					<div class="container-fluid">
+						<a class="navbar-brand text-left" href="#">GLEENKAY</a>
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNavbar" aria-controls="mobileNavbar" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="mobileNavbar">
+							<!-- X button to close dropdown -->
+							<button class="btn btn-close text-white float-end mb-2" id="closeDropdown" aria-label="Close" style=" font-size: 1.2rem; background: black">&times;</button>
+							<div class="w-75 mx-auto">
+								<ul class="navbar-nav">
+									<li class="nav-item">
+										<a class="nav-link" href="#">
+											<i class="bi bi-house-door"></i> Dashboard
+										</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#">
+											<i class="bi bi-person-lines-fill"></i> Planning
+										</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="#">
+											<i class="bi bi-wallet2"></i> Assignments
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</nav>
+
+
+
+				<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+					<div class="container-fluid">
+						<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+							<h1 class="h2">Welcome, {{child.first_name}}!</h1>
+						</div>
+
+						<!-- Detailed and Aesthetic Upcoming Lessons -->
+						{% if booking %}
+						{% for booking in booking %}
+						<div class="dashboard card shadow-lg mb-5 bg-white rounded lesson-card">
+							<div class="row no-gutters">
+								<div class="col-12 d-md-none text-center mb-3">
+									<img src="{% static 'images/maths.png' %}" alt="Math Lesson" class="img-fluid" style="width: 100%; height: auto; object-fit: cover;">
+								</div>
+
+								<div class="col-md-3 d-none d-md-flex">
+									<img src="{% static 'images/maths.png' %}" alt="Math Lesson" class="img-fluid h-100" style="object-fit: cover;">
+								</div>
+
+								<div class="col-md-9 col-12">
+									<div class="card-body">
+										<div class="lesson-details">
+											<h3 class="card-title text-info font-weight-bold">
+												<i class="bi bi-book-fill"></i> Math Lesson: {{ booking.topic }}
+											</h3>
+											<p class="card-text text-muted">
+											<i class="bi bi-calendar-event"></i> <strong>{{ booking.date }}</strong><br>
+											<i class="bi bi-clock"></i> <strong>{{ booking.time }}</strong><br>
+											<i class="bi bi-person"></i> Tutor: <strong>{{ booking.tutor }}</strong>
+											</p>
+										</div>
+										<div class="lesson-actions text-center mt-4">
+											<div class="d-flex justify-content-between align-items-center">
+
+												{% if booking.isApproved == True %}
+												<a href="{{booking.meetLink}}" target="_blank">
+													<button class="btn btn-primary btn-lg lesson-button">
+														<i class="bi bi-camera-video"></i> Launch Class
+													</button>
+												</a>
+												{% else %}
+
+												<button class="btn btn-primary btn-lg lesson-button">
+													<i class="bi"></i> <img style="background-color: None;" src="{% static 'images/three-dots.svg' %}" class="htmx-indicator" width="20px" height="20px"> pending approval
+												</button>
+												{% endif %}
+
+												<div class="dropdown">
+													<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+														Options
+													</button>
+													<!-- Dropdown Menu for Lessons -->
+													<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+														<li>
+															<a class="dropdown-item view-details" href="#" data-bs-toggle="modal"
+																																						 data-bs-target="#lessonModal"
+																																						 data-topic="{{ booking.topic }}"
+																																						 data-date="{{ booking.date }}"
+																																						 data-time="{{ booking.time }}"
+																																						 data-tutor="{{ booking.tutor }}"
+																																						 data-topics="{{ booking.topic }}">
+																View Lesson Details
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						{% else %}
+						Ooops, no booked lesson yet
+						{% endif %}
+
+						<!-- Lesson Details Modal -->
+						<div class="modal fade" id="lessonModal" tabindex="-1" aria-labelledby="lessonModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header airbnb-modal-header">
+										<h5 class="modal-title airbnb-modal-title" id="lessonModalLabel">Lesson Details</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body airbnb-modal-body">
+										<p><strong>Date:</strong> <span id="modalDate"></span></p>
+										<p><strong>Time:</strong> <span id="modalTime"></span></p>
+										<p><strong>Tutor:</strong> <span id="modalTutor"></span></p>
+										<p><strong>Topics:</strong> <span id="modalTopics"></span></p>
+										<p><strong>Duration:</strong> 1 Hour</p>
+										<!-- Postpone Option -->
+										<div class="mt-4">
+											<h6>Postpone Class</h6>
+											<label for="postponeDate" class="form-label">Select New Date:</label>
+											<input type="date" id="postponeDate" class="form-control airbnb-input">
+											<label for="postponeTime" class="form-label mt-3">Select New Time:</label>
+											<input type="time" id="postponeTime" class="form-control airbnb-input">
+											<button class="btn btn-airbnb mt-3" id="postponeBtn">Postpone Class</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Custom Alert Modal -->
+						<div class="modal fade" id="customAlert" tabindex="-1" aria-labelledby="customAlertLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-body">
+										<p id="customAlertMessage"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Script to handle modal population and postponing -->
+						<script>
+							$(document).ready(function() {
+								// Populate modal with data from the clicked lesson
+								$('.view-details').on('click', function() {
+									const topic = $(this).data('topic');
+									const date = $(this).data('date');
+									const time = $(this).data('time');
+									const tutor = $(this).data('tutor');
+									const topics = $(this).data('topics');
+
+									$('#lessonModalLabel').text(topic);
+									$('#modalDate').text(date);
+									$('#modalTime').text(time);
+									$('#modalTutor').text(tutor);
+									$('#modalTopics').text(topics);
+								});
+
+								// Handle postponing the class
+								$('#postponeBtn').on('click', function() {
+									const newDate = $('#postponeDate').val();
+									const newTime = $('#postponeTime').val();
+									const alertMessage = $('#customAlertMessage');
+
+									if (newDate && newTime) {
+										alertMessage.text(`Class postponed to: ${newDate} at ${newTime}`);
+									} else {
+										alertMessage.text('Please select both a new date and time to postpone the class.');
+									}
+
+									$('#customAlert').modal('show');
+								});
+							});
+						</script>
+
+
+
+
+
+
+
+						<!--assignment handling-->
+						<div class="assignments container my-4">
+							<h3 class="mb-4">Your Assignments</h3>
+
+							<!-- In Progress Assignments -->
+							<div class="card mb-3">
+								<div class="card-header bg-warning text-white">
+									In Progress
+								</div>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item d-flex justify-content-between align-items-center">
+										Geometry Basics <span class="badge bg-primary">Due in 3 Days</span>
+										<button class="btn btn-outline-primary btn-sm" data-title="Geometry Basics">View Details</button>
+									</li>
+								</ul>
+							</div>
+
+							<!-- Due Soon Assignments -->
+							<div class="card mb-3">
+								<div class="card-header bg-danger text-white">
+									Due Soon
+								</div>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item d-flex justify-content-between align-items-center">
+										Fractions and Decimals <span class="badge bg-danger">Due Tomorrow</span>
+										<button class="btn btn-outline-primary btn-sm" data-title="Fractions and Decimals">View Details</button>
+									</li>
+								</ul>
+							</div>
+
+							<!-- Completed Assignments -->
+							<div class="card mb-3">
+								<div class="card-header bg-success text-white">
+									Completed
+								</div>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item d-flex justify-content-between align-items-center">
+										Algebra Basics <span class="badge bg-success">Reviewed</span>
+										<button class="btn btn-outline-primary btn-sm" data-title="Algebra Basics">View Feedback</button>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- Assignment Details Modal -->
+						<div class="modal fade" id="assignmentDetailsModal" tabindex="-1" aria-labelledby="assignmentDetailsModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="assignmentDetailsModalLabel">Assignment Details</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<p><strong>Title:</strong> <span id="assignmentTitle"></span></p>
+										<p><strong>Description:</strong> <span id="assignmentDescription"></span></p>
+										<p><strong>Due Date:</strong> <span id="assignmentDueDate"></span></p>
+										<p><strong>Status:</strong> <span id="assignmentStatus"></span></p>
+										<button class="btn btn-airbnb mt-3" id="submitAssignmentBtn" style="display: none;">Submit Assignment</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Assignment Submission Modal -->
+						<div class="modal fade" id="assignmentSubmissionModal" tabindex="-1" aria-labelledby="assignmentSubmissionModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="assignmentSubmissionModalLabel">Submit Assignment</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<form id="assignmentSubmissionForm" enctype="multipart/form-data">
+											<div class="mb-3">
+												<label for="assignmentFile" class="form-label">Upload Your Assignment</label>
+												<input class="form-control" type="file" id="assignmentFile">
+											</div>
+											<button type="submit" class="btn btn-primary">Submit Assignment</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+						<!-- Planning-->
+						<div class="container Planning mt-5">
+							<h1 class="text-center mb-4 header-title">Monthly Planning - October 2024</h1>
+
+							<!-- Row for Week 1 -->
+							<div class="row week-row">
+								<div class="col day-box">
+									<div class="day-title">1</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">2</div>
+								</div>
+								<div class="col day-box active-day">
+									<div class="day-title">3</div>
+									<div class="lesson-info">
+										<div class="lesson-title">Geometry Basics</div>
+										<div><strong>Time:</strong> 10:00 AM - 11:00 AM</div>
+										<div><strong>Tutor:</strong> Mr. John Doe</div>
+									</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">4</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">5</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">6</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">7</div>
+								</div>
+							</div>
+
+							<!-- Row for Week 2 -->
+							<div class="row week-row">
+								<div class="col day-box">
+									<div class="day-title">8</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">9</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">10</div>
+									<div class="lesson-info">
+										<div class="lesson-title">Fractions and Decimals</div>
+										<div><strong>Time:</strong> 1:00 PM - 2:00 PM</div>
+										<div><strong>Tutor:</strong> Ms. Sarah Lee</div>
+									</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">11</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">12</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">13</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">14</div>
+								</div>
+							</div>
+
+							<!-- Row for Week 3 -->
+							<div class="row week-row">
+								<div class="col day-box">
+									<div class="day-title">15</div>
+								</div>
+								<div class="col day-box active-day">
+									<div class="day-title">16</div>
+									<div class="lesson-info">
+										<div class="lesson-title">Algebra Basics</div>
+										<div><strong>Time:</strong> 11:00 AM - 12:00 PM</div>
+										<div><strong>Tutor:</strong> Mr. Alex Brown</div>
+									</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">17</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">18</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">19</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">20</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">21</div>
+								</div>
+							</div>
+
+							<!-- Row for Week 4 -->
+							<div class="row week-row">
+								<div class="col day-box">
+									<div class="day-title">22</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">23</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">24</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">25</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">26</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">27</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">28</div>
+								</div>
+							</div>
+
+							<!-- Row for Week 5 -->
+							<div class="row week-row">
+								<div class="col day-box">
+									<div class="day-title">29</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">30</div>
+								</div>
+								<div class="col day-box">
+									<div class="day-title">31</div>
+								</div>
+								<!-- Optional: Empty placeholders for remaining days to complete the row -->
+								<div class="col"></div>
+								<div class="col"></div>
+								<div class="col"></div>
+								<div class="col"></div>
+							</div>
+
+						</div>
+
+				</main>
+
+
+
+
+					</div>
 			</div>
-		    </div>
-		</div>
-	    </div>
-	    {% endfor %}
-		{% else %}
-		Ooops, no booked lesson yet
-		{% endif %}
-
-	    <!-- Lesson Details Modal -->
-	    <div class="modal fade" id="lessonModal" tabindex="-1" aria-labelledby="lessonModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-		    <div class="modal-content">
-			<div class="modal-header airbnb-modal-header">
-			    <h5 class="modal-title airbnb-modal-title" id="lessonModalLabel">Lesson Details</h5>
-			    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body airbnb-modal-body">
-			    <p><strong>Date:</strong> <span id="modalDate"></span></p>
-			    <p><strong>Time:</strong> <span id="modalTime"></span></p>
-			    <p><strong>Tutor:</strong> <span id="modalTutor"></span></p>
-			    <p><strong>Topics:</strong> <span id="modalTopics"></span></p>
-			    <p><strong>Duration:</strong> 1 Hour</p>
-			    <!-- Postpone Option -->
-			    <div class="mt-4">
-				<h6>Postpone Class</h6>
-				<label for="postponeDate" class="form-label">Select New Date:</label>
-				<input type="date" id="postponeDate" class="form-control airbnb-input">
-				<label for="postponeTime" class="form-label mt-3">Select New Time:</label>
-				<input type="time" id="postponeTime" class="form-control airbnb-input">
-				<button class="btn btn-airbnb mt-3" id="postponeBtn">Postpone Class</button>
-			    </div>
-			</div>
-		    </div>
-		</div>
-	    </div>
-
-	    <!-- Custom Alert Modal -->
-	    <div class="modal fade" id="customAlert" tabindex="-1" aria-labelledby="customAlertLabel" aria-hidden="true">
-		<div class="modal-dialog">
-		    <div class="modal-content">
-			<div class="modal-body">
-			    <p id="customAlertMessage"></p>
-			</div>
-		    </div>
-		</div>
-	    </div>
-
-	    <!-- Script to handle modal population and postponing -->
-	    <script>
-	     $(document).ready(function() {
-		 // Populate modal with data from the clicked lesson
-		 $('.view-details').on('click', function() {
-		     const topic = $(this).data('topic');
-		     const date = $(this).data('date');
-		     const time = $(this).data('time');
-		     const tutor = $(this).data('tutor');
-		     const topics = $(this).data('topics');
-
-		     $('#lessonModalLabel').text(topic);
-		     $('#modalDate').text(date);
-		     $('#modalTime').text(time);
-		     $('#modalTutor').text(tutor);
-		     $('#modalTopics').text(topics);
-		 });
-
-		 // Handle postponing the class
-		 $('#postponeBtn').on('click', function() {
-		     const newDate = $('#postponeDate').val();
-		     const newTime = $('#postponeTime').val();
-		     const alertMessage = $('#customAlertMessage');
-
-		     if (newDate && newTime) {
-			 alertMessage.text(`Class postponed to: ${newDate} at ${newTime}`);
-		     } else {
-			 alertMessage.text('Please select both a new date and time to postpone the class.');
-		     }
-
-		     $('#customAlert').modal('show');
-		 });
-	     });
-	    </script>
-
-
-
-
-
-
-
-	    <!--assignment handling-->
-	    <div class="assignments container my-4">
-	      <h3 class="mb-4">Your Assignments</h3>
-
-	      <!-- In Progress Assignments -->
-	      <div class="card mb-3">
-		<div class="card-header bg-warning text-white">
-		  In Progress
-		</div>
-		<ul class="list-group list-group-flush">
-		  <li class="list-group-item d-flex justify-content-between align-items-center">
-		    Geometry Basics <span class="badge bg-primary">Due in 3 Days</span>
-		    <button class="btn btn-outline-primary btn-sm" data-title="Geometry Basics">View Details</button>
-		  </li>
-		</ul>
-	      </div>
-
-	      <!-- Due Soon Assignments -->
-	      <div class="card mb-3">
-		<div class="card-header bg-danger text-white">
-		  Due Soon
-		</div>
-		<ul class="list-group list-group-flush">
-		  <li class="list-group-item d-flex justify-content-between align-items-center">
-		    Fractions and Decimals <span class="badge bg-danger">Due Tomorrow</span>
-		    <button class="btn btn-outline-primary btn-sm" data-title="Fractions and Decimals">View Details</button>
-		  </li>
-		</ul>
-	      </div>
-
-	      <!-- Completed Assignments -->
-	      <div class="card mb-3">
-		<div class="card-header bg-success text-white">
-		  Completed
-		</div>
-		<ul class="list-group list-group-flush">
-		  <li class="list-group-item d-flex justify-content-between align-items-center">
-		    Algebra Basics <span class="badge bg-success">Reviewed</span>
-		    <button class="btn btn-outline-primary btn-sm" data-title="Algebra Basics">View Feedback</button>
-		  </li>
-		</ul>
-	      </div>
-	    </div>
-
-	    <!-- Assignment Details Modal -->
-	    <div class="modal fade" id="assignmentDetailsModal" tabindex="-1" aria-labelledby="assignmentDetailsModalLabel" aria-hidden="true">
-	      <div class="modal-dialog">
-		<div class="modal-content">
-		  <div class="modal-header">
-		    <h5 class="modal-title" id="assignmentDetailsModalLabel">Assignment Details</h5>
-		    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		  </div>
-		  <div class="modal-body">
-		    <p><strong>Title:</strong> <span id="assignmentTitle"></span></p>
-		    <p><strong>Description:</strong> <span id="assignmentDescription"></span></p>
-		    <p><strong>Due Date:</strong> <span id="assignmentDueDate"></span></p>
-		    <p><strong>Status:</strong> <span id="assignmentStatus"></span></p>
-		    <button class="btn btn-airbnb mt-3" id="submitAssignmentBtn" style="display: none;">Submit Assignment</button>
-		  </div>
-		</div>
-	      </div>
-	    </div>
-
-	    <!-- Assignment Submission Modal -->
-	    <div class="modal fade" id="assignmentSubmissionModal" tabindex="-1" aria-labelledby="assignmentSubmissionModalLabel" aria-hidden="true">
-	      <div class="modal-dialog">
-		<div class="modal-content">
-		  <div class="modal-header">
-		    <h5 class="modal-title" id="assignmentSubmissionModalLabel">Submit Assignment</h5>
-		    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		  </div>
-		  <div class="modal-body">
-		    <form id="assignmentSubmissionForm" enctype="multipart/form-data">
-		      <div class="mb-3">
-			<label for="assignmentFile" class="form-label">Upload Your Assignment</label>
-			<input class="form-control" type="file" id="assignmentFile">
-		      </div>
-		      <button type="submit" class="btn btn-primary">Submit Assignment</button>
-		    </form>
-		  </div>
-		</div>
-	      </div>
-	    </div>
-
-
-
-
-
-	    <!-- Planning-->
-	    <div class="container Planning mt-5">
-	      <h1 class="text-center mb-4 header-title">Monthly Planning - October 2024</h1>
-
-	      <!-- Row for Week 1 -->
-	      <div class="row week-row">
-		<div class="col day-box">
-		  <div class="day-title">1</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">2</div>
-		</div>
-		<div class="col day-box active-day">
-		  <div class="day-title">3</div>
-		  <div class="lesson-info">
-		    <div class="lesson-title">Geometry Basics</div>
-		    <div><strong>Time:</strong> 10:00 AM - 11:00 AM</div>
-		    <div><strong>Tutor:</strong> Mr. John Doe</div>
-		  </div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">4</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">5</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">6</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">7</div>
-		</div>
-	      </div>
-
-	      <!-- Row for Week 2 -->
-	      <div class="row week-row">
-		<div class="col day-box">
-		  <div class="day-title">8</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">9</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">10</div>
-		  <div class="lesson-info">
-		    <div class="lesson-title">Fractions and Decimals</div>
-		    <div><strong>Time:</strong> 1:00 PM - 2:00 PM</div>
-		    <div><strong>Tutor:</strong> Ms. Sarah Lee</div>
-		  </div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">11</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">12</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">13</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">14</div>
-		</div>
-	      </div>
-
-	      <!-- Row for Week 3 -->
-	      <div class="row week-row">
-		<div class="col day-box">
-		  <div class="day-title">15</div>
-		</div>
-		<div class="col day-box active-day">
-		  <div class="day-title">16</div>
-		  <div class="lesson-info">
-		    <div class="lesson-title">Algebra Basics</div>
-		    <div><strong>Time:</strong> 11:00 AM - 12:00 PM</div>
-		    <div><strong>Tutor:</strong> Mr. Alex Brown</div>
-		  </div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">17</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">18</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">19</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">20</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">21</div>
-		</div>
-	      </div>
-
-	      <!-- Row for Week 4 -->
-	      <div class="row week-row">
-		<div class="col day-box">
-		  <div class="day-title">22</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">23</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">24</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">25</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">26</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">27</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">28</div>
-		</div>
-	      </div>
-
-	      <!-- Row for Week 5 -->
-	      <div class="row week-row">
-		<div class="col day-box">
-		  <div class="day-title">29</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">30</div>
-		</div>
-		<div class="col day-box">
-		  <div class="day-title">31</div>
-		</div>
-		<!-- Optional: Empty placeholders for remaining days to complete the row -->
-		<div class="col"></div>
-		<div class="col"></div>
-		<div class="col"></div>
-		<div class="col"></div>
-	      </div>
-
-	    </div>
-
-	</main>
-
-
-
-
-	</div>
-      </div>
-      <footer id="footer" class="text-white text-center py-1">
-	<p>© 2024 GleenKay Academy</p>
-      </footer>
-	  {% else %}
-	  Unauthorized Access
-	  {% endif %}
-  </body>
+			{% else %}
+			Unauthorized Access
+			{% endif %}
+	</body>
 </html>

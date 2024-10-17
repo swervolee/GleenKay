@@ -198,9 +198,8 @@ header {
     margin-bottom: 20px;
 }
 #footer {
-    position: fixed;
-    bottom: 0;
-    margin-top: auto;
+		position: sticky;
+		bottom: 0;
     background: #ff5a5f;
     width: 100%;
 }
@@ -211,8 +210,8 @@ header {
         display: none;
     }
     #footer {
-        position: fixed;
-        bottom: 0;
+				position: fixed;
+				bottom: 0;
         margin-top: auto;
         background: #ff5a5f;
         width: 100%;

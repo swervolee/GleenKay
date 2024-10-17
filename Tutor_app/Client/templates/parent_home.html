@@ -27,29 +27,30 @@
 		<div class="container-fluid">
 			<div class="row">
 				<!-- Sidebar (visible by default with 'show' class) -->
-				<!-- Sidebar (visible by default with 'show' class) -->
-				<nav id="sidebar" class="col-md-3 col-lg-2 text-dark vh-100 collapse show d-lg-flex flex-column justify-content-between">
-					<ul class="nav flex-column mt-3 rounded">
-						<li class="nav-item rounded">
-							<a class="nav-link active text-dark" href="#">
-								<i class="bi bi-house-door text-dark"></i> Dashboard
+
+				<nav id="sidebar" class="col-md-3 col-lg-2 bg-light text-dark vh-100 collapse show d-lg-flex flex-column justify-content-between shadow-lg">
+					<!-- Navigation Links -->
+					<ul class="nav flex-column mt-4 rounded">
+						<li class="nav-item mb-2 rounded">
+							<a class="nav-link active text-primary fw-bold py-3 px-4 d-flex align-items-center" href="#" style="transition: background-color 0.3s;">
+								<i class="bi bi-house-door me-3"></i> Dashboard
 							</a>
 						</li>
-						<li class="nav-item  rounded">
-							<a class="nav-link text-dark" href="#">
-								<i class="bi bi-person-lines-fill text-dark"></i> Manage Child Accounts
+						<li class="nav-item mb-2 rounded">
+							<a class="nav-link text-dark py-3 px-4 d-flex align-items-center" href="#" style="transition: background-color 0.3s;">
+								<i class="bi bi-person-lines-fill me-3"></i> Manage Child Accounts
 							</a>
 						</li>
-						<li class="nav-item rounded">
-							<a class="nav-link text-dark" href="#">
-								<i class="bi bi-wallet2 text-dark"></i> Payment History
+						<li class="nav-item mb-2 rounded">
+							<a class="nav-link text-dark py-3 px-4 d-flex align-items-center" href="#" style="transition: background-color 0.3s;">
+								<i class="bi bi-wallet2 me-3"></i> Payment History
 							</a>
 						</li>
 					</ul>
 
 					<!-- Logout Button -->
-					<div class="d-flex justify-content-end mt-auto" style="padding: 1rem;">
-						<a href="{% url 'Authentication:logout_user' %}" class="btn btn-light d-flex align-items-center text-danger mx-2" style="transition: background-color 0.3s; padding: 8px 12px;">
+					<div class="d-flex justify-content-center mt-auto mb-4">
+						<a href="{% url 'Authentication:logout_user' %}" class="btn btn-outline-danger d-flex align-items-center px-4 py-2" style="transition: background-color 0.3s;">
 							<i class="bi bi-box-arrow-right me-2"></i> Logout
 						</a>
 					</div>
@@ -125,23 +126,32 @@
 
 									<ul class="list-group mb-3">
 										{% for child in children %}
-										<li class="list-group-item d-flex justify-content-between align-items-center">
-											{{ child.first_name }} {{ child.last_name }} - Grade {{ child.grade_level }}
+										<li class="list-group-item d-flex justify-content-between align-items-center shadow-sm py-3">
+											<!-- Child Information -->
+											<div class="d-flex align-items-center">
+												<div class="avatar avatar-sm me-3">
+													<img src="{% static 'images/1-student.png'%}" alt="{{ child.first_name }}" class="rounded-circle" width="40" height="40">
+												</div>
+												<div>
+													<h6 class="mb-0">{{ child.first_name }} {{ child.last_name }}</h6>
+													<small class="text-muted">Grade {{ child.grade_level }}</small>
+												</div>
+											</div>
 
 											<!-- Dropdown button for actions -->
 											<div class="dropdown">
-												<button class="btn btn-primary bg-light text-dark dropdown-toggle btn-sm" type="button" id="dropdownMenuButton{{ child.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-													Actions
+												<button class="btn btn-outline-primary dropdown-toggle btn-sm px-3" type="button" id="dropdownMenuButton{{ child.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+													<i class="bi bi-gear"></i> Actions
 												</button>
-												<ul class="dropdown-menu dropdown-menu-end" id='childAction' aria-labelledby="dropdownMenuButton{{ child.id }}" style='z-index: 3000;;'>
-													<li><a class="dropdown-item" href="child/{{child.id}}">Open Account</a></li>
-													<li><a class="dropdown-item" href="#" onclick="openBookingModal('{{child.first_name}} {{child.last_name}}', {{ child.id }})">Book Lesson</a></li>
-													<li><a class="dropdown-item text-danger" href="#" onclick="confirmDelete('{{child.id}}')">Delete Account</a></li>
+												<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton{{ child.id }}">
+													<li><a class="dropdown-item" href="child/{{child.id}}"><i class="bi bi-person"></i> Open Account</a></li>
+													<li><a class="dropdown-item" href="#" onclick="openBookingModal('{{child.first_name}} {{child.last_name}}', {{ child.id }})"><i class="bi bi-calendar-check"></i> Book Lesson</a></li>
+													<li><a class="dropdown-item text-danger" href="#" onclick="confirmDelete('{{child.id}}')"><i class="bi bi-trash"></i> Delete Account</a></li>
 												</ul>
 											</div>
 										</li>
 										{% empty %}
-										<li>No Child Accounts Found.</li>
+										<li class="list-group-item text-center">No Child Accounts Found.</li>
 										{% endfor %}
 									</ul>
 
@@ -363,9 +373,6 @@
 			</div>
 		</div>
 
-		<footer class="mb-0 text-center text-light p-2" id='footer' >
-			<span class='text-center'>&copy; 2024 GLEENKAY All rights reserved.</span>
-		</footer>
 		<script>
 			function openBookingModal(childName, childId) {
 				document.getElementById('childNameDisplay').innerText = childName;
