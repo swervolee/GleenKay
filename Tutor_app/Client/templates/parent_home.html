@@ -83,6 +83,8 @@
 						<div class="collapse navbar-collapse" id="mobileNavbar">
 							<!-- X button for closing the menu -->
 							<button class="btn btn-close text-white float-end mb-2" id="closeMenu" aria-label="Close" style="font-size: 1.2rem; background: black">&times;</button>
+
+							<!-- Navigation links (same as desktop) -->
 							<div class="w-75 mx-auto">
 								<ul class="navbar-nav">
 									<li class="nav-item">
@@ -102,10 +104,16 @@
 									</li>
 								</ul>
 							</div>
+
+							<!-- Logout Button for mobile screens -->
+							<div class="w-75 mx-auto mt-1">
+								<a href="{% url 'Authentication:logout_user' %}" class="btn d-flex text-light align-items-center px-4 py-2 w-100" style="transition: background-color 0.3s;">
+									<i class="bi bi-box-arrow-right me-2 text-light"></i> Logout
+								</a>
+							</div>
 						</div>
 					</div>
-				</nav>
-
+				</nav>	
 
 
 
@@ -146,7 +154,7 @@
 												<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton{{ child.id }}">
 													<li><a class="dropdown-item" href="child/{{child.id}}"><i class="bi bi-person"></i> Open Account</a></li>
 													<li><a class="dropdown-item" href="#" onclick="openBookingModal('{{child.first_name}} {{child.last_name}}', {{ child.id }})"><i class="bi bi-calendar-check"></i> Book Lesson</a></li>
-													<li><a class="dropdown-item text-danger" href="#" onclick="confirmDelete('{{child.id}}')"><i class="bi bi-trash"></i> Delete Account</a></li>
+													<li><a class="dropdown-item text-danger" href="#" onclick="confirmDelete('{{child.id}}', '{{child.first_name}} {{child.last_name}}')"><i class="bi bi-trash"></i> Delete Account</a></li>
 												</ul>
 											</div>
 										</li>
@@ -154,6 +162,64 @@
 										<li class="list-group-item text-center">No Child Accounts Found.</li>
 										{% endfor %}
 									</ul>
+
+									<!-- Delete Confirmation Modal -->
+									<div class="modal fade" id="deleteChildModal" tabindex="-1" aria-labelledby="deleteChildModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content shadow-lg border-0 rounded">
+												<div class="modal-header bg-danger text-white">
+													<h5 class="modal-title" id="deleteChildModalLabel">
+														<i class="bi bi-trash3-fill"></i> Confirm Deletion
+													</h5>
+													<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<p class="text-center mb-4">Are you sure you want to delete the account for <strong id="childNameToDelete"></strong>? This action is permanent and cannot be undone.</p>
+													<!-- Form for password confirmation -->
+													<form id="deleteChildForm" method="post">
+														{% csrf_token %}
+														<div class="mb-3">
+															<label for="confirmPassword" class="form-label fw-bold">Enter your password to confirm:</label>
+															<input type="password" class="form-control rounded border-dark" id="confirmPassword" name="confirmPassword" placeholder="Enter your password" required>
+														</div>
+														<div class="d-flex justify-content-center mt-4">
+															<button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">
+																<i class="bi bi-x-circle"></i> Cancel
+															</button>
+															<button type="submit" class="btn btn-danger mx-2" onclick="submitDelete()">
+																<i class="bi bi-trash-fill"></i> Confirm Delete
+															</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+									<script>
+										function confirmDelete(childId, childName) {
+											// Set the child name in the modal
+											const childNameToDelete = document.getElementById('childNameToDelete');
+											childNameToDelete.textContent = childName;
+
+											// Show the modal
+											const deleteModal = new bootstrap.Modal(document.getElementById('deleteChildModal'));
+											deleteModal.show();
+
+											// Optionally set the form action dynamically or handle via AJAX
+										}
+
+										function submitDelete() {
+											const password = document.getElementById('confirmPassword').value;
+											if (password) {
+												// You can submit the form here or handle deletion via AJAX
+												document.getElementById('deleteChildForm').submit();
+											} else {
+												alert('Please enter your password.');
+											}
+										}
+
+
+									</script>
 
 
 
@@ -214,31 +280,28 @@
 
 									<button class="btn btn-primary mb-3" data-bs-toggle="collapse" data-bs-target="#childAccountFormCollapse">Add New Child</button>
 									<div class="collapse" id="childAccountFormCollapse">
-										<div class="card" id='childform'>
+										<div class="card border-0 shadow-lg" id='childform' style="background-color: #f8f9fa;">
 											<div class="card-body">
-												<h5 class="card-title">Create Child Account</h5>
+												<h5 class="card-title text-center text-uppercase fw-bold text-primary mb-4">Create Child Account</h5>
 												<!-- Changed form ID here -->
-												<form id="createChildForm" method="post"  onsubmit="createChildAccount(event)">
+												<form id="createChildForm" method="post" onsubmit="createChildAccount(event)">
 													{% csrf_token %}
 													<div class="row">
 														<div class="col-lg-3 mb-4">
-															<label for="firstName" class="form-label text-white p-2 rounded">First Name</label>
-															<!-- <input type="text" class="form-control border border-dark" id="firstName" required> -->
-															{% render_field form.first_name class="form-control rounded-left" placeholder="First Name" %}
+															<label for="firstName" class="form-label fw-bold text-dark">First Name</label>
+															{% render_field form.first_name class="form-control form-control-lg rounded-pill shadow-sm" placeholder="First Name" %}
 														</div>
 														<div class="col-lg-3 mb-4">
-															<label for="lastName" class="form-label text-white p-2 rounded">Last Name</label>
-															<!-- <input type="text" class="form-control border border-dark" id="lastName" required> -->
-															{% render_field form.last_name class="form-control rounded-left" placeholder="Last Name" %}
+															<label for="lastName" class="form-label fw-bold text-dark">Last Name</label>
+															{% render_field form.last_name class="form-control form-control-lg rounded-pill shadow-sm" placeholder="Last Name" %}
 														</div>
 														<div class="col-lg-2 mb-4">
-															<label for="age" class="form-label text-white p-2 rounded">Age</label>
-															<!-- <input type="number" class="form-control border border-dark" id="age" min="0" required> -->
-															{% render_field form.age class="form-control rounded-left" placeholder="Age" %}
+															<label for="age" class="form-label fw-bold text-dark">Age</label>
+															{% render_field form.age class="form-control form-control-lg rounded-pill shadow-sm" placeholder="Age" %}
 														</div>
 														<div class="col-lg-2 mb-4">
-															<label for="gender" class="form-label text-white p-2 rounded">Gender</label>
-															<select name="{{ form.gender.name }}" id="{{ form.gender.auto_id }}" class="form-control rounded-left">
+															<label for="gender" class="form-label fw-bold text-dark">Gender</label>
+															<select name="{{ form.gender.name }}" id="{{ form.gender.auto_id }}" class="form-control form-control-lg rounded-pill shadow-sm">
 																<option value="" selected disabled hidden>Select Gender</option>
 																{% for value, label in form.gender.field.choices %}
 																{% if value %}
@@ -248,10 +311,9 @@
 															</select>
 														</div>
 
-
 														<div class="col-lg-2 mb-4">
-															<label for="gradeLevel" class="form-label text-white p-2 rounded">Grade Level</label>
-															<select name="{{ form.grade_level.name }}" id="{{ form.grade_level.auto_id }}" class="form-control rounded-left">
+															<label for="gradeLevel" class="form-label fw-bold text-dark">Grade Level</label>
+															<select name="{{ form.grade_level.name }}" id="{{ form.grade_level.auto_id }}" class="form-control form-control-lg rounded-pill shadow-sm">
 																<option value="" selected disabled hidden>Select Grade</option>
 																{% for value, label in form.grade_level.field.choices %}
 																{% if value %}
@@ -261,9 +323,10 @@
 															</select>
 														</div>
 													</div>
+
 													<div class="mb-4">
-														<label for="learningAreas" class="form-label text-white p-2 rounded">Learning Areas</label>
-														<select name="{{ form.learning_areas.name }}" id="{{ form.learning_areas.auto_id }}" class="form-control rounded-left">
+														<label for="learningAreas" class="form-label fw-bold text-dark">Learning Areas</label>
+														<select name="{{ form.learning_areas.name }}" id="{{ form.learning_areas.auto_id }}" class="form-control form-control-lg rounded-pill shadow-sm">
 															<option value="" selected disabled hidden>Select Learning Areas</option>
 															{% for value, label in form.learning_areas.field.choices %}
 															{% if value %}
@@ -272,19 +335,24 @@
 															{% endfor %}
 														</select>
 													</div>
+
 													<div class="mb-4">
-														<label for="profileAvatar" class="form-label text-white p-2 rounded">Profile Avatar</label>
-														<!-- <input type="file" class="form-control border border-dark" id="profileAvatar"> -->
-														{% render_field form.profile_avatar class="form-control rounded-left" %}
+														<label for="profileAvatar" class="form-label fw-bold text-dark">Profile Avatar</label>
+														{% render_field form.profile_avatar class="form-control form-control-lg rounded-pill shadow-sm" %}
 													</div>
+
 													<div class="mb-4">
-														<label for="notes" class="form-label text-white p-2 rounded">Notes</label>
-														<textarea class="form-control border border-dark" id="notes" rows="3"  placeholder='Tell us something we should know about your child'></textarea>
+														<label for="notes" class="form-label fw-bold text-dark">Notes</label>
+														<textarea class="form-control form-control-lg rounded shadow-sm" id="notes" rows="3" placeholder='Tell us something we should know about your child'></textarea>
 													</div>
-													<button type="submit" class="btn btn-primary bg-dark">Create Account</button>
+
+													<div class="text-center">
+														<button type="submit" class="btn btn-primary px-5 py-2 rounded-pill shadow-sm fw-bold">Create Account</button>
+													</div>
 												</form>
 											</div>
 										</div>
+									
 									</div>
 
 								</div>
@@ -295,34 +363,33 @@
 
 
 					<!-- Student info-->
-					<div class="container singular">
+					<div class="container singular mt-5">
 						<div class="row justify-content-center">
-							<!-- Student Card 1 -->
+							<!-- Student Card -->
 							{% for child in children %}
 							<div class="col-md-4 col-sm-12 mb-4">
-								<div class="card student-card rounded shadow-lg border-0">
-									<div class="photo text-center mt-3">
-										<img src="{% static 'images/1-student.png' %}" alt="Student Photo" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover; border: 5px solid #f8f9fa;">
+								<div class="card student-card rounded shadow-lg border-0 h-100" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+									<div class="photo text-center mt-4">
+										<img src="{% static 'images/1-student.png' %}" alt="Student Photo" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover; border: 5px solid #ffffff;">
 									</div>
 									<div class="card-body text-center">
-										<h5 class="card-title font-weight-bold">{{ child.first_name}} {{child.last_name}}</h5>
+										<h5 class="card-title fw-bold text-primary">{{ child.first_name}} {{child.last_name}}</h5>
 										<p class="card-text text-muted mb-1"><strong>Grade:</strong> {{child.grade_level}}</p>
 										<p class="card-text text-muted mb-1"><strong>Age:</strong> {{child.age}}</p>
 										<p class="card-text text-muted mb-1"><strong>Contact:</strong> 123-456-7890</p>
 										<p class="card-text text-muted mb-3"><strong>Next Lesson:</strong> Math (Due: Oct 10, 2024)</p>
 
 										<!-- Open Account Button -->
-										<a href='child/{{child.id}}' class="btn btn-primary mt-2">
+										<a href='child/{{child.id}}' class="btn btn-primary mt-3 px-4 py-2 rounded-pill shadow-sm" style="transition: background-color 0.3s ease;">
 											Open Account
 										</a>
 									</div>
 								</div>
 							</div>
 							{% endfor %}
-
 						</div>
 					</div>
-
+				
 					<!-- Payment History Section -->
 					<section class="container-fluid payments">
 						<div class="row justify-content-center">

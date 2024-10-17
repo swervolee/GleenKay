@@ -1,4 +1,15 @@
-$(document).ready(function() {	
+$(document).ready(function() {
+	$('#closeMenu').on('click', () => $('#mobileNavbar').collapse('hide'));
+
+	// Close the mobile navbar when clicking outside or on scroll
+	$(document).on('click touchstart scroll', (e) => {
+		if (!$(e.target).closest('.navbar-collapse, .navbar-toggler').length) {
+			$('#mobileNavbar').collapse('hide');
+		}
+	});
+
+
+
 	// Define sections to toggle
 	const sections = ['.dashboard', '.planning', '.payments', '.work-dashboard'];
 
