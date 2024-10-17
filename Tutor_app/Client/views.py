@@ -87,18 +87,23 @@ def child(request, id):
     return render(request, 'child_home.html', {"booking":booking, "child":child, "parent":parent})
 
 
-
 def deleteChildAccount(request, id):
+    """
+    Deletes a child account
+    """
+    from django.contrib.auth.hashers import check_password
+
+
     child = ChildAccount.objects.get(id=id)
     parent_password = child.parent.password
+
     if request.method == "POST":
-        password = request.POST.get('confirmPassword')
-        if password == parent_password:
+        password = request.POST.get('confirmPassword').strip()
+
+        if check_password(password, parent_password):
             child.delete()
-            messages.success(request, "The user is deleted")
+            messages.success(request, "The child account has been deleted successfully.")
             return redirect('Client:parent_dashboard')
         else:
+            messages.error(request, "Incorrect password. The child account was not deleted.")
             return redirect('Client:parent_dashboard')
-
-    
-    

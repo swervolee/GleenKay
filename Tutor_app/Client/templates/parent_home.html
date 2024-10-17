@@ -189,6 +189,7 @@
 															<button type="submit" class="btn btn-danger mx-2" onclick="submitDelete()">
 																<i class="bi bi-trash-fill"></i> Confirm Delete
 															</button>
+															
 														</div>
 													</form>
 												</div>
@@ -472,6 +473,17 @@
 				</main>
 			</div>
 		</div>
+
+		{% if messages %}
+		{% for message in messages %}
+		{% if "success" in message.tags %}
+		<span class="alert alert-success text-center" style="color: green; position:inherit; display:block;" >{{ message }}</span>
+		{% else %}
+		<span class="alert alert-danger text-center" style="color: #721c24; position:inherit; display:block;"><strong>{{ message }}</strong> please try again</span>
+		{% endif %}
+		{% endfor %}
+		{% endif %}
+
 
 		<script>
 			function openBookingModal(childName, childId) {
