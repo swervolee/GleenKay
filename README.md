@@ -117,8 +117,12 @@ Once the app is running
 	- Manage you schedule and provide feedback after each lesson
 ***
 ### Screenshots
+
 * Parent dashboard
+![Parent Screenshots](parent_home.png)
+
 * Tutor profile
+![tutor_screenshots](tutor_home.png)
 ***
 ### Future improvements
 * Integration with payment gateways to allow parents to pay for lessons
