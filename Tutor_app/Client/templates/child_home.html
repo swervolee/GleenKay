@@ -125,6 +125,7 @@
 												{% if booking.isApproved == True %}
 												<a href="{{booking.meetLink}}" target="_blank">
 													<button class="btn btn-primary btn-lg lesson-button">
+														<img style="background-color: None;" src="{% static 'images/puff.svg' %}" class="htmx-indicator" width="20px" height="20px">
 														<i class="bi bi-camera-video"></i> Launch Class
 													</button>
 												</a>

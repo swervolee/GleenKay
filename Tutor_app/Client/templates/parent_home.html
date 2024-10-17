@@ -176,7 +176,7 @@
 												<div class="modal-body">
 													<p class="text-center mb-4">Are you sure you want to delete the account for <strong id="childNameToDelete"></strong>? This action is permanent and cannot be undone.</p>
 													<!-- Form for password confirmation -->
-													<form id="deleteChildForm" method="post">
+													<form id="deleteChildForm" method="post" action="delete/{{ child.id }}">
 														{% csrf_token %}
 														<div class="mb-3">
 															<label for="confirmPassword" class="form-label fw-bold">Enter your password to confirm:</label>
@@ -195,62 +195,92 @@
 											</div>
 										</div>
 									</div>
+
 									<script>
 										function confirmDelete(childId, childName) {
 											// Set the child name in the modal
-											const childNameToDelete = document.getElementById('childNameToDelete');
-											childNameToDelete.textContent = childName;
+											$('#childNameToDelete').text(childName);
+
+											// Update the form action to include the child ID
+											const deleteForm = $('#deleteChildForm');
+											deleteForm.attr('action', `/delete/${childId}`);
 
 											// Show the modal
 											const deleteModal = new bootstrap.Modal(document.getElementById('deleteChildModal'));
 											deleteModal.show();
-
-											// Optionally set the form action dynamically or handle via AJAX
 										}
 
-										function submitDelete() {
-											const password = document.getElementById('confirmPassword').value;
+										function submitDelete(event) {
+											event.preventDefault(); // Prevent default form submission
+
+											const password = $('#confirmPassword').val();
+											const deleteForm = $('#deleteChildForm');
+											const formData = new FormData(deleteForm[0]); // Get the form data
+
 											if (password) {
-												// You can submit the form here or handle deletion via AJAX
-												document.getElementById('deleteChildForm').submit();
+												// Send an AJAX request using fetch
+												fetch(deleteForm.attr('action'), {
+													method: 'POST',
+													body: formData,
+													headers: {
+														'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token for security
+													},
+												})
+													.then(response => {
+														if (response.ok) {
+															return response.json(); // Parse JSON response if needed
+														} else {
+															throw new Error('Error occurred while deleting the child account.');
+														}
+													})
+													.then(data => {
+														// Handle successful deletion (e.g., show success message, redirect)
+														alert('Child account deleted successfully!');
+														location.reload(); // Optionally reload or redirect
+													})
+													.catch(error => {
+														// Handle errors (e.g., show error message)
+														alert(error.message);
+													});
 											} else {
 												alert('Please enter your password.');
 											}
 										}
-
-
 									</script>
 
 
 
 									<!-- Custom Booking Modal -->
 									<!-- Modal -->
+									<!-- Custom Booking Modal -->
 									<div id="bookingModal" class="modal fade" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
 										<div class="modal-dialog modal-dialog-centered">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="bookingModalLabel">
-														Book Math Lesson for <span id="childNameDisplay"></span>
+											<div class="modal-content shadow-lg border-0 rounded-3 animate__animated animate__zoomIn">
+												<div class="modal-header bg-gradient bg-primary text-white rounded-top">
+													<h5 class="modal-title fw-bold" id="bookingModalLabel">
+														<i class="bi bi-calendar-check-fill me-2"></i> Book Math Lesson for <span id="childNameDisplay"></span>
 													</h5>
-													<button type="button" class="btn-close" aria-label="Close" onclick="closeBookingModal()"></button>
+													<button type="button" class="btn-close btn-close-white" aria-label="Close" onclick="closeBookingModal()"></button>
 												</div>
-												<div class="modal-body">
-
-													<form id="bookLessonForm" onsubmit="bookLesson(event)" method='POST'>
+												<div class="modal-body p-4 bg-light">
+													<form id="bookLessonForm" onsubmit="bookLesson(event)" method="POST">
 														{% csrf_token %}
 														<input type="hidden" id="childName" name="user_id"> <!-- Add the name attribute to send with the form -->
-														<div class="mb-3">
-															<label for="date" class="form-label">Date</label>
-															{% render_field booking_form.date type="date" class="form-control" placeholder="YYYY-MM-DD" %}
+
+														<div class="mb-4">
+															<label for="date" class="form-label fw-bold">Select Date</label>
+															{% render_field booking_form.date type="date" class="form-control shadow-sm border-primary rounded-3" placeholder="YYYY-MM-DD" %}
 														</div>
-														<div class="mb-3">
-															<label for="time" class="form-label">Time</label>
-															{% render_field booking_form.time type="time" class="form-control" placeholder="HH:MM" %}
+
+														<div class="mb-4">
+															<label for="time" class="form-label fw-bold">Select Time</label>
+															{% render_field booking_form.time type="time" class="form-control shadow-sm border-primary rounded-3" placeholder="HH:MM" %}
 														</div>
-														<div class="mb-3">
-															<label for="mathArea" class="form-label">Math Area</label>
-															<select id="mathArea" class="form-select" required onchange="flashy()" name="{{ booking_form.topic.name }}">
-																<option value="" selected disabled hidden>Math Topics</option>
+
+														<div class="mb-4">
+															<label for="mathArea" class="form-label fw-bold">Math Area</label>
+															<select id="mathArea" class="form-select shadow-sm border-primary rounded-3" required onchange="flashy()" name="{{ booking_form.topic.name }}">
+																<option value="" selected disabled hidden>Choose Math Topic</option>
 																{% for value, label in booking_form.topic.field.choices %}
 																{% if value %}
 																<option value="{{ value }}">{{ label }}</option>
@@ -258,13 +288,16 @@
 																{% endfor %}
 															</select>
 														</div>
-														<div class="mb-3" id="otherMathAreaContainer" style="display: none;">
-															<label for="otherMathArea" class="form-label">Please specify:</label>
-															{% render_field booking_form.other_topic id="otherMathArea" class="form-control"%}
-														</div>
-														<button type="submit" class="btn btn-primary w-100">Book Lesson</button>
-													</form>
 
+														<div class="mb-4" id="otherMathAreaContainer" style="display: none;">
+															<label for="otherMathArea" class="form-label fw-bold">Please specify:</label>
+															{% render_field booking_form.other_topic id="otherMathArea" class="form-control shadow-sm border-primary rounded-3" %}
+														</div>
+
+														<button type="submit" class="btn btn-primary w-100 py-2 shadow-lg rounded-3 fw-bold">
+															<i class="bi bi-check-circle-fill me-2"></i> Confirm Booking
+														</button>
+													</form>
 												</div>
 											</div>
 										</div>

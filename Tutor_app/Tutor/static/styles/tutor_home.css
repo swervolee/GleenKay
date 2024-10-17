@@ -361,3 +361,37 @@ header {
     transition: all 0.5s ease; /* Smooth transition */
 }
 
+
+
+
+/* Smooth font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+/* Add a glowing effect to the book icon */
+@keyframes glow {
+	from {
+		text-shadow: 0 0 10px #fff, 0 0 20px #007bff, 0 0 30px #007bff, 0 0 40px #6610f2, 0 0 50px #6610f2, 0 0 60px #6610f2, 0 0 70px #6610f2;
+	}
+	to {
+		text-shadow: 0 0 20px #fff, 0 0 30px #007bff, 0 0 40px #007bff, 0 0 50px #6610f2, 0 0 60px #6610f2, 0 0 70px #6610f2, 0 0 80px #6610f2;
+	}
+}
+
+/* Add a hover effect for brand name */
+.navbar-brand:hover {
+	color: #ffc107 !important;
+	transform: scale(1.05);
+	transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Add padding and margin adjustments for larger screens */
+.navbar {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+/* Add a shadow and a rounded look for the header */
+.sticky-header {
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	border-radius: 15px;
+}

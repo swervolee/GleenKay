@@ -1,13 +1,26 @@
 $(document).ready(function() {
-	$('#closeMenu').on('click', () => $('#mobileNavbar').collapse('hide'));
+	// Close button functionality
+	$('#closeMenu').on('click', function() {
+		$('#mobileNavbar').collapse('hide');
+	});
 
-	// Close the mobile navbar when clicking outside or on scroll
-	$(document).on('click touchstart scroll', (e) => {
-		if (!$(e.target).closest('.navbar-collapse, .navbar-toggler').length) {
+	// Close menu on scroll
+	$(window).on('scroll', function() {
+		$('#mobileNavbar').collapse('hide');
+	});
+
+	// Close menu when clicking/tapping outside the navbar
+	$(document).on('click touchstart', function(event) {
+		// Check if the click is outside the navbar and the navbar is open
+		if (!$(event.target).closest('.navbar').length && $('#mobileNavbar').hasClass('show')) {
 			$('#mobileNavbar').collapse('hide');
 		}
 	});
 
+	// Prevent menu from closing when clicking inside the navbar
+	$('.navbar').on('click touchstart', function(event) {
+		event.stopPropagation();
+	});
 
 
 	// Define sections to toggle

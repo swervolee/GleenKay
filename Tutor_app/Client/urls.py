@@ -12,6 +12,7 @@ urlpatterns = [
         path('', views.landingPage, name='landing_page'),
         path('child/<int:id>', views.child, name='child_dashboard'),
         path('booking/<int:id>', views.booking, name='booking'),
+        path('delete/<int:id>', views.deleteChildAccount,name='deleteChildAccount'),
         ]
 
 
