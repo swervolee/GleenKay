@@ -141,7 +141,11 @@
 													<img src="{% static 'images/1-student.png'%}" alt="{{ child.first_name }}" class="rounded-circle" width="40" height="40">
 												</div>
 												<div>
-													<h6 class="mb-0">{{ child.first_name }} {{ child.last_name }}</h6>
+													<h6 class="mb-0">
+														<a href="child/{{ child.id }}">
+															{{ child.first_name }} {{ child.last_name }}
+														</a>
+													</h6>	
 													<small class="text-muted">Grade {{ child.grade_level }}</small>
 												</div>
 											</div>
@@ -397,33 +401,116 @@
 
 
 					<!-- Student info-->
-					<div class="container singular mt-5">
+					<div class="container singular mt-5 mb-3">
 						<div class="row justify-content-center">
-							<!-- Student Card -->
+							<!-- Manage Child Accounts -->
 							{% for child in children %}
-							<div class="col-md-4 col-sm-12 mb-4">
-								<div class="card student-card rounded shadow-lg border-0 h-100" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+							<div class="col-12 col-md-8 mb-4">
+								<div class="rounded shadow-lg p-4 h-100" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
 									<div class="photo text-center mt-4">
 										<img src="{% static 'images/1-student.png' %}" alt="Student Photo" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover; border: 5px solid #ffffff;">
 									</div>
-									<div class="card-body text-center">
-										<h5 class="card-title fw-bold text-primary">{{ child.first_name}} {{child.last_name}}</h5>
-										<p class="card-text text-muted mb-1"><strong>Grade:</strong> {{child.grade_level}}</p>
-										<p class="card-text text-muted mb-1"><strong>Age:</strong> {{child.age}}</p>
-										<p class="card-text text-muted mb-1"><strong>Contact:</strong> 123-456-7890</p>
-										<p class="card-text text-muted mb-3"><strong>Next Lesson:</strong> Math (Due: Oct 10, 2024)</p>
+									<div class="text-center mt-4">
+										<h5 class="fw-bold text-primary">{{ child.first_name }} {{ child.last_name }}</h5>
+										<p class="text-muted mb-1"><strong>Grade:</strong> {{ child.grade_level }}</p>
+										<p class="text-muted mb-1"><strong>Age:</strong> {{ child.age }}</p>
+										<p class="text-muted mb-1"><strong>Contact:</strong> {{ child.contact_info }}</p>
+										<p class="text-muted mb-3"><strong>Next Lesson:</strong> Math (Due: Oct 10, 2024)</p>
 
-										<!-- Open Account Button -->
-										<a href='child/{{child.id}}' class="btn btn-primary mt-3 px-4 py-2 rounded-pill shadow-sm" style="transition: background-color 0.3s ease;">
-											Open Account
-										</a>
+										<!-- Dropdown for more options -->
+										<button class="btn btn-primary mt-3 px-4 py-2 rounded-pill shadow-sm stunning-btn" type="button" data-bs-toggle="collapse" data-bs-target="#options-{{ child.id }}" aria-expanded="false" aria-controls="options-{{ child.id }}">
+											More Options
+										</button>
+
+										<!-- Collapsible content for buttons -->
+										<div class="collapse mt-3" id="options-{{ child.id }}">
+											<!-- Open Account Button -->
+											<a href="child/{{ child.id }}" class="btn btn-primary mt-2 px-4 py-2 rounded-pill shadow-sm stunning-btn" style="background-color: #007bff; color: white;">
+												Open Account
+											</a>
+
+											<!-- Edit Child Info Button -->
+											<a href="child/{{ child.id }}/edit" class="btn btn-warning mt-2 px-4 py-2 rounded-pill shadow-sm stunning-btn" style="background-color: #ffc107; color: white;">
+												Edit Information
+											</a>
+
+											<!-- Delete Child Account -->
+											<button class="btn btn-danger mt-2 px-4 py-2 rounded-pill shadow-sm stunning-btn" onclick="confirmDelete('{{ child.id }}', '{{ child.first_name }} {{ child.last_name }}')" style="background-color: #dc3545; color: white;">
+												Delete Account
+											</button>
+
+											<!-- View Lesson History -->
+											<a href="child/{{ child.id }}/lessons" class="btn btn-secondary mt-2 px-4 py-2 rounded-pill shadow-sm stunning-btn" style="background-color: #6c757d; color: white;">
+												View Lesson History
+											</a>
+
+											<!-- Book New Lesson -->
+											<a href="#" onclick="openBookingModal('{{ child.first_name }} {{ child.last_name }}', {{ child.id }})" class="btn btn-success mt-2 px-4 py-2 rounded-pill shadow-sm stunning-btn" style="background-color: #28a745; color: white;">
+												Book New Lesson
+											</a>
+
+											<!-- Download Lesson Materials -->
+											<a href="child/{{ child.id }}/materials" class="btn btn-info mt-2 px-4 py-2 rounded-pill shadow-sm stunning-btn" style="background-color: #17a2b8; color: white;">
+												Download Materials
+											</a>
+										</div>
+
 									</div>
 								</div>
 							</div>
 							{% endfor %}
 						</div>
 					</div>
-				
+
+									<!-- Additional CSS for stunning buttons -->
+					<style>
+.stunning-btn {
+	border: none;
+	background: linear-gradient(135deg, #007bff, #0056b3);
+	color: #fff;
+	font-size: 16px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+}
+
+		.stunning-btn:hover {
+			background: linear-gradient(135deg, #0056b3, #003580);
+			box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+			transform: translateY(-2px);
+		}
+
+		.btn-primary:hover {
+			background-color: #0056b3 !important;
+		}
+
+		.btn-warning:hover {
+			background-color: #e0a800 !important;
+		}
+
+		.btn-danger:hover {
+			background-color: #c82333 !important;
+		}
+
+		.btn-secondary:hover {
+			background-color: #5a6268 !important;
+		}
+
+		.btn-success:hover {
+			background-color: #218838 !important;
+		}
+
+		.btn-info:hover {
+			background-color: #138496 !important;
+		}
+
+		.rounded-pill {
+			border-radius: 50px;
+		}
+					</style>
+
+
+
+
 					<!-- Payment History Section -->
 					<section class="container-fluid payments">
 						<div class="row justify-content-center">

@@ -45,6 +45,19 @@ def parent(request):
 
 # this is the booking lesson function
 def booking(request, id):
+    """
+    Handle booking creation for a child account.
+    This view handles both GET and POST requests. On a GET request, it initializes
+    an empty BookingForm. On a POST request, it binds the form with the provided data,
+    validates it, and creates a booking if the form is valid.
+    Args:
+        request (HttpRequest): The HTTP request object.
+        id (int): The ID of the ChildAccount for which the booking is being made.
+    Returns:
+        JsonResponse: A JSON response indicating the success or failure of the booking creation.
+                      - On success (status 201): {'message': 'Booking created successfully'}
+                      - On failure (status 400): {'errors': booking_form.errors}
+    """
     booking_form = BookingForm()
 
     if request.method == 'POST':
@@ -88,7 +101,25 @@ def child(request, id):
 
 
 def deleteChildAccount(request, id):
-    """
+    """ 
+    Deletes a child account.
+
+    Args:
+        request (HttpRequest): The HTTP request object containing metadata about the request.
+        id (int): The ID of the child account to be deleted.
+
+    Returns:
+        HttpResponse: A redirect to the parent dashboard with a success or error message.
+
+    The function performs the following steps:
+    1. Retrieves the child account using the provided ID.
+    2. Checks if the request method is POST.
+    3. Retrieves and strips the 'confirmPassword' from the POST data.
+    4. Verifies the provided password against the parent's password.
+    5. If the password is correct, deletes the child account and adds a success message.
+    6. If the password is incorrect, adds an error message.
+    7. Redirects to the parent dashboard.
+
     Deletes a child account
     """
     from django.contrib.auth.hashers import check_password
