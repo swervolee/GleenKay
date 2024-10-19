@@ -328,3 +328,41 @@ header {
     border-color: transparent transparent white transparent; /* Creating a white arrow */
 }
 
+
+
+
+.card {
+	background-color: #ffffff;
+	border: none;
+	transition: transform 0.3s ease;
+}
+
+	.card:hover {
+		transform: translateY(-10px);
+	}
+
+	.card-body img {
+		transition: border-color 0.3s ease;
+	}
+
+	.card-body img:hover {
+		border-color: #0056b3;
+	}
+
+	.dropdown-menu {
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	}
+
+	.dropdown-menu a {
+		font-size: 14px;
+		padding: 10px 15px;
+	}
+
+	.dropdown-item:hover {
+		background-color: #007bff;
+		color: white;
+	}
+
+	.dropdown-item.text-danger:hover {
+		background-color: #dc3545;
+	}

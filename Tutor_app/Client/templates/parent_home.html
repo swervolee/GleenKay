@@ -132,126 +132,34 @@
 									<h3 class="card-title">Your Child Accounts</h3>
 
 
+
 									<ul class="list-group mb-3">
 										{% for child in children %}
 										<li class="list-group-item d-flex justify-content-between align-items-center shadow-sm py-3">
 											<!-- Child Information -->
 											<div class="d-flex align-items-center">
 												<div class="avatar avatar-sm me-3">
-													<img src="{% static 'images/1-student.png'%}" alt="{{ child.first_name }}" class="rounded-circle" width="40" height="40">
+													{% if child.profile_avatar.url != " " %}
+													<img src="{{child.profile_avatar.url}}" alt="{{ child.first_name }}" class="rounded-circle" width="40" height="40">
+													{% else %}
+													<img src="{% static 'images/2-student.png' %}" alt="{{ child.first_name }}" class="rounded-circle" width="40" height="40">
+													{% endif %}
 												</div>
 												<div>
-													<h6 class="mb-0">
-														<a href="child/{{ child.id }}">
-															{{ child.first_name }} {{ child.last_name }}
-														</a>
-													</h6>	
+													<h6 class="mb-0">{{ child.first_name }} {{ child.last_name }}</h6>
 													<small class="text-muted">Grade {{ child.grade_level }}</small>
 												</div>
 											</div>
 
-											<!-- Dropdown button for actions -->
-											<div class="dropdown">
-												<button class="btn btn-outline-primary dropdown-toggle btn-sm px-3" type="button" id="dropdownMenuButton{{ child.id }}" data-bs-toggle="dropdown" aria-expanded="false">
-													<i class="bi bi-gear"></i> Actions
-												</button>
-												<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton{{ child.id }}">
-													<li><a class="dropdown-item" href="child/{{child.id}}"><i class="bi bi-person"></i> Open Account</a></li>
-													<li><a class="dropdown-item" href="#" onclick="openBookingModal('{{child.first_name}} {{child.last_name}}', {{ child.id }})"><i class="bi bi-calendar-check"></i> Book Lesson</a></li>
-													<li><a class="dropdown-item text-danger" href="#" onclick="confirmDelete('{{child.id}}', '{{child.first_name}} {{child.last_name}}')"><i class="bi bi-trash"></i> Delete Account</a></li>
-												</ul>
-											</div>
+											<!-- Open Account Button -->
+											<a href="/child/{{ child.id }}" class="btn btn-primary btn-sm">
+												Open Account
+											</a>
 										</li>
 										{% empty %}
-										<li class="list-group-item text-center">No Child Accounts Found.</li>
+										<li class="list-group-item text-center">No Child Accounts Found. Create a child accont by clicking on the button below to fill the form</li>
 										{% endfor %}
 									</ul>
-
-									<!-- Delete Confirmation Modal -->
-									<div class="modal fade" id="deleteChildModal" tabindex="-1" aria-labelledby="deleteChildModalLabel" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered">
-											<div class="modal-content shadow-lg border-0 rounded">
-												<div class="modal-header bg-danger text-white">
-													<h5 class="modal-title" id="deleteChildModalLabel">
-														<i class="bi bi-trash3-fill"></i> Confirm Deletion
-													</h5>
-													<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-												</div>
-												<div class="modal-body">
-													<p class="text-center mb-4">Are you sure you want to delete the account for <strong id="childNameToDelete"></strong>? This action is permanent and cannot be undone.</p>
-													<!-- Form for password confirmation -->
-													<form id="deleteChildForm" method="post" action="delete/{{ child.id }}">
-														{% csrf_token %}
-														<div class="mb-3">
-															<label for="confirmPassword" class="form-label fw-bold">Enter your password to confirm:</label>
-															<input type="password" class="form-control rounded border-dark" id="confirmPassword" name="confirmPassword" placeholder="Enter your password" required>
-														</div>
-														<div class="d-flex justify-content-center mt-4">
-															<button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">
-																<i class="bi bi-x-circle"></i> Cancel
-															</button>
-															<button type="submit" class="btn btn-danger mx-2" onclick="submitDelete()">
-																<i class="bi bi-trash-fill"></i> Confirm Delete
-															</button>
-															
-														</div>
-													</form>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<script>
-										function confirmDelete(childId, childName) {
-											// Set the child name in the modal
-											$('#childNameToDelete').text(childName);
-
-											// Update the form action to include the child ID
-											const deleteForm = $('#deleteChildForm');
-											deleteForm.attr('action', `/delete/${childId}`);
-
-											// Show the modal
-											const deleteModal = new bootstrap.Modal(document.getElementById('deleteChildModal'));
-											deleteModal.show();
-										}
-
-										function submitDelete(event) {
-											event.preventDefault(); // Prevent default form submission
-
-											const password = $('#confirmPassword').val();
-											const deleteForm = $('#deleteChildForm');
-											const formData = new FormData(deleteForm[0]); // Get the form data
-
-											if (password) {
-												// Send an AJAX request using fetch
-												fetch(deleteForm.attr('action'), {
-													method: 'POST',
-													body: formData,
-													headers: {
-														'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token for security
-													},
-												})
-													.then(response => {
-														if (response.ok) {
-															return response.json(); // Parse JSON response if needed
-														} else {
-															throw new Error('Error occurred while deleting the child account.');
-														}
-													})
-													.then(data => {
-														// Handle successful deletion (e.g., show success message, redirect)
-														alert('Child account deleted successfully!');
-														location.reload(); // Optionally reload or redirect
-													})
-													.catch(error => {
-														// Handle errors (e.g., show error message)
-														alert(error.message);
-													});
-											} else {
-												alert('Please enter your password.');
-											}
-										}
-									</script>
 
 
 
@@ -322,7 +230,7 @@
 											<div class="card-body">
 												<h5 class="card-title text-center text-uppercase fw-bold text-primary mb-4">Create Child Account</h5>
 												<!-- Changed form ID here -->
-												<form id="createChildForm" method="post" onsubmit="createChildAccount(event)">
+												<form id="createChildForm" method="post" enctype='multipart/form-data' onsubmit="createChildAccount(event)">
 													{% csrf_token %}
 													<div class="row">
 														<div class="col-lg-3 mb-4">
@@ -376,7 +284,7 @@
 
 													<div class="mb-4">
 														<label for="profileAvatar" class="form-label fw-bold text-dark">Profile Avatar</label>
-														{% render_field form.profile_avatar class="form-control form-control-lg rounded-pill shadow-sm" %}
+														{{ form.profile_avatar|attr:"class:form-control form-control-lg rounded-pill shadow-sm" }}
 													</div>
 
 													<div class="mb-4">
@@ -390,7 +298,7 @@
 												</form>
 											</div>
 										</div>
-									
+
 									</div>
 
 								</div>
@@ -402,112 +310,138 @@
 
 					<!-- Student info-->
 					<div class="container singular mt-5 mb-3">
-						<div class="row justify-content-center">
-							<!-- Manage Child Accounts -->
+						<div class="row row-cols-1 row-cols-md-2 g-4">
+							<!-- Iterate through the children -->
 							{% for child in children %}
-							<div class="col-12 col-md-8 mb-4">
-								<div class="rounded shadow-lg p-4 h-100" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
-									<div class="photo text-center mt-4">
-										<img src="{% static 'images/1-student.png' %}" alt="Student Photo" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover; border: 5px solid #ffffff;">
-									</div>
-									<div class="text-center mt-4">
-										<h5 class="fw-bold text-primary">{{ child.first_name }} {{ child.last_name }}</h5>
-										<p class="text-muted mb-1"><strong>Grade:</strong> {{ child.grade_level }}</p>
-										<p class="text-muted mb-1"><strong>Age:</strong> {{ child.age }}</p>
-										<p class="text-muted mb-1"><strong>Contact:</strong> {{ child.contact_info }}</p>
-										<p class="text-muted mb-3"><strong>Next Lesson:</strong> Math (Due: Oct 10, 2024)</p>
+							<div class="col">
+								<div class="card shadow-lg h-100">
+									<div class="card-body text-center p-4">
+										{% if child.profile_avatar.url != " " %}
+										<img src="{{ child.profile_avatar.url }}" class="rounded-circle img-fluid mb-3"
+																															style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #007bff;" alt="Student Photo">
+										{% else %}
+										<img src="{% static 'images/1-student.png' %}" class="rounded-circle img-fluid mb-3">
+										{% endif %}
 
-										<!-- Dropdown for more options -->
-										<button class="btn btn-primary mt-3 px-4 py-2 rounded-pill shadow-sm stunning-btn" type="button" data-bs-toggle="collapse" data-bs-target="#options-{{ child.id }}" aria-expanded="false" aria-controls="options-{{ child.id }}">
-											More Options
-										</button>
+										<h5 class="card-title fw-bold text-primary">{{ child.first_name }} {{ child.last_name }}</h5>
+										<p class="text-muted"><strong>Grade:</strong> {{ child.grade_level }}</p>
+										<p class="text-muted"><strong>Age:</strong> {{ child.age }}</p>
+										<p class="text-muted"><strong>Next Lesson:</strong> Math (Due: Oct 10, 2024)</p>
 
-										<!-- Collapsible content for buttons -->
-										<div class="collapse mt-3" id="options-{{ child.id }}">
-											<!-- Open Account Button -->
-											<a href="child/{{ child.id }}" class="btn btn-primary mt-2 px-4 py-2 rounded-pill shadow-sm stunning-btn" style="background-color: #007bff; color: white;">
-												Open Account
-											</a>
-
-											<!-- Edit Child Info Button -->
-											<a href="child/{{ child.id }}/edit" class="btn btn-warning mt-2 px-4 py-2 rounded-pill shadow-sm stunning-btn" style="background-color: #ffc107; color: white;">
-												Edit Information
-											</a>
-
-											<!-- Delete Child Account -->
-											<button class="btn btn-danger mt-2 px-4 py-2 rounded-pill shadow-sm stunning-btn" onclick="confirmDelete('{{ child.id }}', '{{ child.first_name }} {{ child.last_name }}')" style="background-color: #dc3545; color: white;">
-												Delete Account
+										<div class="btn-group mt-3">
+											<button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+												Actions
 											</button>
-
-											<!-- View Lesson History -->
-											<a href="child/{{ child.id }}/lessons" class="btn btn-secondary mt-2 px-4 py-2 rounded-pill shadow-sm stunning-btn" style="background-color: #6c757d; color: white;">
-												View Lesson History
-											</a>
-
-											<!-- Book New Lesson -->
-											<a href="#" onclick="openBookingModal('{{ child.first_name }} {{ child.last_name }}', {{ child.id }})" class="btn btn-success mt-2 px-4 py-2 rounded-pill shadow-sm stunning-btn" style="background-color: #28a745; color: white;">
-												Book New Lesson
-											</a>
-
-											<!-- Download Lesson Materials -->
-											<a href="child/{{ child.id }}/materials" class="btn btn-info mt-2 px-4 py-2 rounded-pill shadow-sm stunning-btn" style="background-color: #17a2b8; color: white;">
-												Download Materials
-											</a>
+											<ul class="dropdown-menu dropdown-menu-end">
+												<li><a class="dropdown-item" href="child/{{ child.id }}">Open Account</a></li>
+												<li><a class="dropdown-item" href="#" onclick='openEditModal("{{ child.id }}")'>Edit Information</a></li>
+												<li><a class="dropdown-item text-danger" href="#" onclick="confirmDelete('{{ child.id }}', '{{ child.first_name }} {{ child.last_name }}')">Delete Account</a></li>
+												<li><a class="dropdown-item" href="child/{{ child.id }}/lessons">View Lesson History</a></li>
+												<li><a class="dropdown-item" href="#" onclick="openBookingModal('{{ child.first_name }} {{ child.last_name }}', {{ child.id }})">Book New Lesson</a></li>
+												<li><a class="dropdown-item" href="child/{{ child.id }}/materials">Download Materials</a></li>
+											</ul>
 										</div>
-
 									</div>
+								</div>
+							</div>
+							{% empty %}
+							<!-- Message when no children are found -->
+							<div class="col-12 text-center mx-auto">
+								<div class="alert alert-info" role="alert">
+									No child accounts found.
 								</div>
 							</div>
 							{% endfor %}
 						</div>
 					</div>
+					
+					<!-- Delete Confirmation Modal -->
+					<div class="modal fade" id="deleteChildModal" tabindex="-1" aria-labelledby="deleteChildModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content shadow-lg border-0 rounded">
+								<div class="modal-header bg-danger text-white">
+									<h5 class="modal-title" id="deleteChildModalLabel">
+										<i class="bi bi-trash3-fill"></i> Confirm Deletion
+									</h5>
+									<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<p class="text-center mb-4">Are you sure you want to delete the account for <strong id="childNameToDelete"></strong>? This action is permanent and cannot be undone.</p>
+									<!-- Form for password confirmation -->
+									<form id="deleteChildForm" method="post" action="#">
+										{% csrf_token %}
+										<div class="mb-3">
+											<label for="confirmPassword" class="form-label fw-bold">Enter your password to confirm:</label>
+											<input type="password" class="form-control rounded border-dark" id="confirmPassword" name="confirmPassword" placeholder="Enter your password" required>
+											<div id="passwordError" class="text-danger mt-2" style="display: none;">Incorrect password. Please try again.</div>
+										</div>
+										<div class="d-flex justify-content-center mt-4">
+											<button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">
+												<i class="bi bi-x-circle"></i> Cancel
+											</button>
+											<button type="submit" class="btn btn-danger mx-2" id="confirmDeleteButton" onclick="submitDelete(event)">
+												<span id="loadingSpinner" class="spinner-border spinner-border-sm me-2" style="display: none;" role="status" aria-hidden="true"></span>
+												<i class="bi bi-trash-fill"></i> Confirm Delete
+											</button>						
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
 
-									<!-- Additional CSS for stunning buttons -->
-					<style>
-.stunning-btn {
-	border: none;
-	background: linear-gradient(135deg, #007bff, #0056b3);
-	color: #fff;
-	font-size: 16px;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-	transition: all 0.3s ease;
-}
+					<script>
+						function confirmDelete(childId, childName) {
+							$('#childNameToDelete').text(childName);
+							const deleteForm = $('#deleteChildForm');
+							deleteForm.attr('action', `/delete/${childId}`);
+							const deleteModal = new bootstrap.Modal(document.getElementById('deleteChildModal'));
+							deleteModal.show();
+						}
 
-		.stunning-btn:hover {
-			background: linear-gradient(135deg, #0056b3, #003580);
-			box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
-			transform: translateY(-2px);
-		}
+						function submitDelete(event) {
+							event.preventDefault();
+							const password = $('#confirmPassword').val();
+							const deleteForm = $('#deleteChildForm');
+							const formData = new FormData(deleteForm[0]);
+							const modal = bootstrap.Modal.getInstance(document.getElementById('deleteChildModal'));
+							const confirmDeleteButton = $('#confirmDeleteButton');
+							const loadingSpinner = $('#loadingSpinner');
 
-		.btn-primary:hover {
-			background-color: #0056b3 !important;
-		}
+							if (password) {
+								loadingSpinner.show();
+								confirmDeleteButton.prop('disabled', true);
 
-		.btn-warning:hover {
-			background-color: #e0a800 !important;
-		}
-
-		.btn-danger:hover {
-			background-color: #c82333 !important;
-		}
-
-		.btn-secondary:hover {
-			background-color: #5a6268 !important;
-		}
-
-		.btn-success:hover {
-			background-color: #218838 !important;
-		}
-
-		.btn-info:hover {
-			background-color: #138496 !important;
-		}
-
-		.rounded-pill {
-			border-radius: 50px;
-		}
-					</style>
-
+								fetch(deleteForm.attr('action'), {
+									method: 'POST',
+									body: formData,
+									headers: {
+										'X-CSRFToken': '{{ csrf_token }}',
+									},
+								})
+									.then(response => response.json())
+									.then(data => {
+										loadingSpinner.hide();
+										confirmDeleteButton.prop('disabled', false);
+										if (data['message'] === 'success') {
+											modal.hide();
+											location.reload();
+										} else {
+											$('#passwordError').show();
+											$('#confirmPassword').addClass('border-danger');
+											$('#confirmPassword').val('');
+										}
+									})
+									.catch(error => {
+										loadingSpinner.hide();
+										confirmDeleteButton.prop('disabled', false);
+										console.log(error.message);
+									});
+							} else {
+								console.log('Enter your password');
+							}
+						}
+					</script>
 
 
 
@@ -565,8 +499,6 @@
 		{% for message in messages %}
 		{% if "success" in message.tags %}
 		<span class="alert alert-success text-center" style="color: green; position:inherit; display:block;" >{{ message }}</span>
-		{% else %}
-		<span class="alert alert-danger text-center" style="color: #721c24; position:inherit; display:block;"><strong>{{ message }}</strong> please try again</span>
 		{% endif %}
 		{% endfor %}
 		{% endif %}

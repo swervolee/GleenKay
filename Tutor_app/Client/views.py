@@ -100,41 +100,51 @@ def child(request, id):
     return render(request, 'child_home.html', {"booking":booking, "child":child, "parent":parent})
 
 
+from django.contrib.auth.hashers import check_password
+from django.http import JsonResponse
+from django.contrib import messages
+
 def deleteChildAccount(request, id):
-    """ 
-    Deletes a child account.
-
-    Args:
-        request (HttpRequest): The HTTP request object containing metadata about the request.
-        id (int): The ID of the child account to be deleted.
-
-    Returns:
-        HttpResponse: A redirect to the parent dashboard with a success or error message.
-
-    The function performs the following steps:
-    1. Retrieves the child account using the provided ID.
-    2. Checks if the request method is POST.
-    3. Retrieves and strips the 'confirmPassword' from the POST data.
-    4. Verifies the provided password against the parent's password.
-    5. If the password is correct, deletes the child account and adds a success message.
-    6. If the password is incorrect, adds an error message.
-    7. Redirects to the parent dashboard.
-
-    Deletes a child account
     """
-    from django.contrib.auth.hashers import check_password
+    Deletes a child account.
+    """
+    try:
+        child = ChildAccount.objects.get(id=id)
+        parent_password = child.parent.password
 
+        if request.method == "POST":
+            password = request.POST.get('confirmPassword').strip()
 
-    child = ChildAccount.objects.get(id=id)
-    parent_password = child.parent.password
-
-    if request.method == "POST":
-        password = request.POST.get('confirmPassword').strip()
-
-        if check_password(password, parent_password):
-            child.delete()
-            messages.success(request, "The child account has been deleted successfully.")
-            return redirect('Client:parent_dashboard')
+            if check_password(password, parent_password):
+                child.delete()
+                data = {'message': 'success'}
+                messages.success(request, "The child account has been deleted successfully.")
+                return JsonResponse(data)
+            else:
+                data = {'message': 'failure'}
+                messages.error(request, "Incorrect password. The child account was not deleted.")
+                return JsonResponse(data)
         else:
-            messages.error(request, "Incorrect password. The child account was not deleted.")
-            return redirect('Client:parent_dashboard')
+            return JsonResponse({'message': 'Invalid request method'})
+    except ChildAccount.DoesNotExist:
+        return JsonResponse({'message': 'Child account not found'}, status=404)
+
+
+
+from django.shortcuts import render, get_object_or_404, redirect
+
+def edit_child(request, child_id):
+    child = ChildAccount.objects.get(id=child_id)
+    
+    if request.method == 'POST':
+        form = ChildAccountForm(request.POST, request.FILES, instance=child)
+        if form.is_valid():
+            form.save()
+            return redirect('Client:parent_dashboard', child_id=child.id)
+    else:
+        form = ChildAccountForm(instance=child)
+
+    return render(request, 'edit_child.html', {'form': form, 'child': child})
+
+
+
