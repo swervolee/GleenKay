@@ -4,9 +4,13 @@ body {
 
 }
 
-header {
+sticky-header {
     background-color: #FFFFFF;
-    z-index: 1500;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+;
 }
 
 .navbar-brand {
@@ -77,17 +81,7 @@ header {
 }
 
 
-.sticky-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.sticky-header nav {
-            background: #FF5A5F;
-}
-
-/* Sidebar Styles */
+/* Sidebar Styles*/
 #sidebar {
     position: fixed;
     right: 0;
@@ -130,6 +124,8 @@ header {
     border-radius: 0.25rem;
     margin-bottom: 20px;
 }
+
+
 #footer {
     position: fixed;
     bottom: 0;
@@ -137,6 +133,7 @@ header {
     background: #ff5a5f;
     width: 100%;
 }
+
 
 /* Mobile Responsiveness */
 @media (max-width: 992px) {
@@ -221,7 +218,7 @@ header {
 
 
 
-/* Sidebar styling - Airbnb-inspired theme */
+/* Sidebar styling - Airbnb-inspired theme */ 
 #sidebar {
     background-color: #ffffff; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -283,10 +280,6 @@ header {
 
 
 
-
-
-
-
 #childAction {
     background-color: #ffffff;
     border-radius: 8px;
@@ -334,16 +327,11 @@ header {
 .card {
 	background-color: #ffffff;
 	border: none;
-	transition: transform 0.3s ease;
 }
 
-	.card:hover {
-		transform: translateY(-10px);
-	}
-
-	.card-body img {
-		transition: border-color 0.3s ease;
-	}
+.card-body img {
+	transition: border-color 0.3s ease;
+}
 
 	.card-body img:hover {
 		border-color: #0056b3;
@@ -366,3 +354,31 @@ header {
 	.dropdown-item.text-danger:hover {
 		background-color: #dc3545;
 	}
+
+
+
+
+
+/* Style for the avatar toggle button */
+.avatar-toggle {
+    top: 20px;
+    left: 20px;
+    z-index: 1050;
+    cursor: pointer;
+}
+
+/* Sidebar transition */
+#sidebar {
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hidden sidebar */
+#sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+/* Shown sidebar */
+#sidebar.show {
+    transform: translateX(0);
+}
+

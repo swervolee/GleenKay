@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %}
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -27,16 +28,28 @@
 				<!-- Sidebar (hidden on small devices) -->
 				<nav id="sidebar" class="col-md-3 col-lg-2 text-dark vh-100 collapse d-lg-block">
 					<ul class="nav flex-column mt-3 rounded">
+						<!-- Dashboard Section -->
 						<li class="nav-item rounded">
 							<a class="nav-link active text-dark" href="#">
 								<i class="bi bi-house-door text-dark"></i> Dashboard
 							</a>
 						</li>
+
+						<!-- Book Lesson Section -->
+						<li class="nav-item rounded">
+							<a class="nav-link text-dark" href="#">
+								<i class="bi bi-calendar-check text-dark"></i> Book Lesson
+							</a>
+						</li>
+
+						<!-- Planning Section -->
 						<li class="nav-item rounded">
 							<a class="nav-link text-dark" href="#">
 								<i class="bi bi-person-lines-fill text-dark"></i> Planning
 							</a>
 						</li>
+
+						<!-- Assignments Section -->
 						<li class="nav-item rounded">
 							<a class="nav-link text-dark" href="#">
 								<i class="bi bi-wallet2 text-dark"></i> Assignments
@@ -44,11 +57,11 @@
 						</li>
 					</ul>
 				</nav>
-
+			
 				<!-- Header (taking up the remaining space beside the sidebar) -->
 				<header class="col-md-9 col-lg-10 animate__animated animate__fadeInDown sticky-header rounded">
 					<nav class="navbar navbar-expand-lg navbar-light shadow-lg py-3 rounded">
-						<a class="navbar-brand text-md-center font-weight-bold d-none d-lg-block text-light" href="{% url 'Client:parent_dashboard' %}" style="font-size: 1.4rem; letter-spacing: 1px;">GLEENKAY ACADEMY</a>
+						<a class="navbar-brand text-md-center font-weight-bold d-none d-lg-block" href="{% url 'Client:parent_dashboard' %}" style="font-size: 1.4rem; letter-spacing: 1px; color: red">GLEENKAY ACADEMY</a>
 					</nav>
 
 				</header>
@@ -70,6 +83,11 @@
 											<i class="bi bi-house-door"></i> Dashboard
 										</a>
 									</li>
+									<li class='nav-item'>
+										<a class='nav-link' href='#'>
+											<i class='bi bi-calender-checked'></i>Book lesson
+										</a>
+									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="#">
 											<i class="bi bi-person-lines-fill"></i> Planning
@@ -89,10 +107,83 @@
 
 
 				<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+					
 					<div class="container-fluid">
-						<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-							<h1 class="h2">Welcome, {{child.first_name}}!</h1>
+							<div class="greeting-container py-4 mb-4 border-bottom shadow-sm ms-auto">
+						<div class="d-flex justify-content-between align-items-center">
+							<div class='mx-auto'>
+								<!-- Display greeting with icon -->
+								<h5 class="fw-bold text-primary">
+									<!-- Morning icon -->
+									{% if 'Morning' in greeting %}
+									<i class="fas fa-sun me-2"></i> 
+									{% elif 'Afternoon' in greeting %}
+									<!-- Afternoon icon -->
+									<i class="fas fa-cloud-sun me-2"></i> 
+									{% elif 'Evening' in greeting %}
+									<!-- Evening icon -->
+									<i class="fas fa-moon me-2"></i> 
+									{% endif %}
+									{{ greeting }}
+								</h5>
+							</div>
 						</div>
+					</div>
+
+					<!-- Lesson Booking modal -->
+					<div id="bookingModal" class="modal fade" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content shadow-lg border-0 rounded-3 animate__animated animate__zoomIn">
+								<div class="modal-header bg-gradient bg-primary text-white rounded-top">
+									<h5 class="modal-title fw-bold" id="bookingModalLabel">
+										<i class="bi bi-calendar-check-fill me-2"></i> Book Math Lesson for <span id="childNameDisplay"></span>
+									</h5>
+									<button type="button" class="btn-close btn-close-white" aria-label="Close" onclick="closeBookingModal()"></button>
+								</div>
+								<div class="modal-body p-4 bg-light">
+									<form id="bookLessonForm" onsubmit="bookLesson(event)" method="POST">
+										{% csrf_token %}
+										<input type="hidden" id="childName" name="user_id"> <!-- Add the name attribute to send with the form -->
+
+										<div class="mb-4">
+											<label for="date" class="form-label fw-bold">Select Date</label>
+											{% render_field booking_form.date type="date" class="form-control shadow-sm border-primary rounded-3" placeholder="YYYY-MM-DD" %}
+										</div>
+
+										<div class="mb-4">
+											<label for="time" class="form-label fw-bold">Select Time</label>
+											{% render_field booking_form.time type="time" class="form-control shadow-sm border-primary rounded-3" placeholder="HH:MM" %}
+										</div>
+
+										<div class="mb-4">
+											<label for="mathArea" class="form-label fw-bold">Math Area</label>
+											<select id="mathArea" class="form-select shadow-sm border-primary rounded-3" required onchange="flashy()" name="{{ booking_form.topic.name }}">
+												<option value="" selected disabled hidden>Choose Math Topic</option>
+												{% for value, label in booking_form.topic.field.choices %}
+												{% if value %}
+												<option value="{{ value }}">{{ label }}</option>
+												{% endif %}
+												{% endfor %}
+											</select>
+										</div>
+
+										<div class="mb-4" id="otherMathAreaContainer" style="display: none;">
+											<label for="otherMathArea" class="form-label fw-bold">Please specify:</label>
+											{% render_field booking_form.other_topic id="otherMathArea" class="form-control shadow-sm border-primary rounded-3" %}
+										</div>
+
+										<button type="submit" class="btn btn-primary w-100 py-2 shadow-lg rounded-3 fw-bold">
+											<i class="bi bi-check-circle-fill me-2"></i> Confirm Booking
+										</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
 
 						<!-- Detailed and Aesthetic Upcoming Lessons -->
 						{% if booking %}

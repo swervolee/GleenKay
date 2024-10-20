@@ -1,31 +1,52 @@
+# Standard library imports
+from datetime import datetime
+
+# Django imports
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from django.contrib.auth.decorators import login_required
-
-from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import get_object_or_404
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.contrib.auth.hashers import check_password
 from django.contrib import messages
-
-from django.views.generic import CreateView
+from django.utils import timezone
 from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
+# Local app imports (forms, models)
 from .forms import ChildAccountForm, BookingForm
 from .models import *
 
-from django.utils import timezone
 
-# Create your views here.
+
+
 @login_required(login_url='Authentication:login_user')
 def parent(request):
     """
-    Renders the landng page
+    Renders the landing page for the parent with a dynamic greeting based on the time.
     """
+    current_hour = datetime.now().hour + 3
+    current_minute = datetime.now().minute
+
+
+    if 5 <= current_hour < 12:
+        greeting = "Good Morning"
+        additional_greeting = "Hope you're having a productive morning!"
+    elif 12 <= current_hour < 17:
+        greeting = "Good Afternoon"
+        additional_greeting = "Hope you're having a wonderful afternoon!"
+    else:
+        greeting = "Good Evening"
+        additional_greeting = "Relax and unwind, it's evening time!"
+
+    greeting_message = f"{greeting}, {request.user.first_name}"
+
     parent = request.user
-    # render form 
+
     form = ChildAccountForm()
     booking_form = BookingForm
-    # create child logic
+
     if request.method == 'POST':
         form = ChildAccountForm(request.POST, request.FILES)
         if form.is_valid():
@@ -33,17 +54,25 @@ def parent(request):
             child.parent = request.user
             child.save()
             return redirect('Client:parent_dashboard')
-        
     else:
         form = ChildAccountForm()
 
-    # list all children children
-    children = ChildAccount.objects.filter(parent=request.user)  # Get all children associated with the logged-in user
+    children = ChildAccount.objects.filter(parent=request.user)
 
-    context = { "form":form, "children":children, "parent":parent, "booking_form":booking_form }
+    context = {
+        "form": form,
+        "children": children,
+        "parent": parent,
+        "booking_form": booking_form,
+        'greeting': greeting_message 
+    }
     return render(request, 'parent_home.html', context)
 
-# this is the booking lesson function
+
+
+
+
+
 def booking(request, id):
     """
     Handle booking creation for a child account.
@@ -87,22 +116,83 @@ def booking(request, id):
 
 
 
-# @login_required
+
+
 def landingPage(request):
+    """
+    Renders the landing page.
+
+    This view serves the landing page of the application. It does not require authentication
+    and simply returns a rendered template for the landing page. This function could be used 
+    to display a welcoming screen, information about the app, or call-to-actions before login 
+    or registration.
+
+    Args:
+        request (HttpRequest): The HTTP request object that contains metadata about the request.
+
+    Returns:
+        HttpResponse: The rendered HTML page for the landing page.
+    """
     return render(request, 'landing_page.html')
+
+
+
+
+
+
 
 @login_required(login_url='Authentication:login_user')
 def child(request, id):
+    """
+    Renders the child account page with dynamic greeting and booking information.
+
+    The greeting is based on the adjusted time (current hour + 3) and tailored for 
+    morning, afternoon, or evening. It also includes a form for lesson booking.
+
+    Args:
+        request: The HTTP request object.
+        id: The ID of the child account.
+
+    Returns:
+        Renders the 'child_home.html' template with context including:
+        - booking: The booking information for the child.
+        - child: The ChildAccount object.
+        - parent: The logged-in parent user.
+        - greeting: The personalized greeting message.
+    """
+    adjusted_time = datetime.now().hour + 3
+    current_minute = datetime.now().minute
+    booking_form = BookingForm
+
+
+    if 5 <= adjusted_time < 12:
+        greeting = "Good Morning"
+        additional_greeting = "Hope you're having a productive morning!"
+    elif 12 <= adjusted_time < 17:
+        greeting = "Good Afternoon"
+        additional_greeting = "Hope you're having a wonderful afternoon!"
+    else:
+        greeting = "Good Evening"
+        additional_greeting = "Relax and unwind, it's evening time!"
+
+    greeting_message = f"{greeting}, {request.user.first_name}"
+
     parent = request.user   
-    child = ChildAccount.objects.get(id=id)
+    child = get_object_or_404(ChildAccount, id=id)
     booking = Booking.objects.filter(user=id)
-    
-    return render(request, 'child_home.html', {"booking":booking, "child":child, "parent":parent})
+
+    context = {
+        "booking": booking,
+        "child": child,
+        "parent": parent,
+        "greeting": greeting_message,
+        "booking_form": booking_form,
+    }
+
+    return render(request, 'child_home.html', context)
 
 
-from django.contrib.auth.hashers import check_password
-from django.http import JsonResponse
-from django.contrib import messages
+
 
 def deleteChildAccount(request, id):
     """
@@ -128,23 +218,6 @@ def deleteChildAccount(request, id):
             return JsonResponse({'message': 'Invalid request method'})
     except ChildAccount.DoesNotExist:
         return JsonResponse({'message': 'Child account not found'}, status=404)
-
-
-
-from django.shortcuts import render, get_object_or_404, redirect
-
-def edit_child(request, child_id):
-    child = ChildAccount.objects.get(id=child_id)
-    
-    if request.method == 'POST':
-        form = ChildAccountForm(request.POST, request.FILES, instance=child)
-        if form.is_valid():
-            form.save()
-            return redirect('Client:parent_dashboard', child_id=child.id)
-    else:
-        form = ChildAccountForm(instance=child)
-
-    return render(request, 'edit_child.html', {'form': form, 'child': child})
 
 
 
