@@ -121,7 +121,6 @@
 						<div class="row justify-content-start">
 
 							<!-- Upcoming Lessons Card -->
-							<!-- Upcoming Lessons Card -->
 							<div class="col-md-6 col-lg-4 mb-4">
 								<div class="card shadow-lg">
 									<div class="card-header bg-info text-light text-center">
@@ -141,11 +140,13 @@
 											</li>
 											{% endfor %}
 											{% else %}
-											<p>Oops, no jobs selected. Check in the work dashboard for jobs</p>
+											<li class="list-group-item text-center">
+												Oops, no jobs selected. Check in the work dashboard for jobs.
+											</li>
 											{% endif %}
 										</ul>
 
-										{% if booking|length > 3 %}
+										{% if tutor_jobs|length > 3 %}
 										<button class="btn btn-outline-info w-100 mt-3" data-bs-toggle="modal" data-bs-target="#viewAllLessonsModal">
 											<i class="bi bi-eye"></i> View All Lessons
 										</button>
@@ -153,6 +154,8 @@
 									</div>
 								</div>
 							</div>
+
+
 
 							<!-- Modal for Viewing All Lessons -->
 							<div class="modal fade" id="viewAllLessonsModal" tabindex="-1" aria-labelledby="viewAllLessonsLabel" aria-hidden="true">

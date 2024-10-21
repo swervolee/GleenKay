@@ -4,6 +4,7 @@ $(document).ready(function() {
     window.closeBookingModal = closeBookingModal;
     window.confirmDelete = confirmDelete;
     window.submitDelete = submitDelete;
+    window.bookLesson = bookLesson;
 
     // Set user timezone in cookies
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -20,9 +21,7 @@ $(document).ready(function() {
     });
 
     // Initially hide all sections and show the dashboard
-    const hideSections = () => {
-        $('.singular, .payments, .dashboard').hide();
-    };    
+    const hideSections = () => $('.singular, .payments, .dashboard').hide();
     hideSections();
     $('.dashboard').show();
 
@@ -125,6 +124,7 @@ $(document).ready(function() {
 
     // Booking modal handling
     $('#mathArea').on('change', toggleInput);
+    $('#bookLessonForm').on('submit', bookLesson);
 
     // Show or hide input field for custom math area
     function toggleInput() {
@@ -141,7 +141,8 @@ $(document).ready(function() {
     function openBookingModal(childName, childId) {
         $('#childNameDisplay').text(childName);
         $('#childName').val(childId); // Set the hidden input field
-        $('bookingModal').show();
+        const bookingModal = new bootstrap.Modal(document.getElementById('bookingModal'));
+        bookingModal.show();
         $("#bookLessonForm").attr('action', `/booking/${childId}`);
         console.log(childId);
     }
@@ -151,27 +152,38 @@ $(document).ready(function() {
         bookingModal.hide();
     }
 
-    // Modify the bookLesson function to handle form submission
-    $('#confirmBookingButton').on('click', function bookLesson(event) {
+    // Modify the bookLesson function to handle form submission using jQuery
+    function bookLesson(event) {
         event.preventDefault(); // Prevent the default form submission
-        const form = document.getElementById('bookLessonForm');
+        const form = $('#bookLessonForm');
+        const confirmButton = $('#confirmDeleteButton');
+        const spinner = $('#loadingSpinner');
 
-        fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
+        // Unbind any existing submit event to prevent multiple requests
+        form.off('submit');
+
+        spinner.show();
+        confirmButton.prop('disabled', true);
+
+        $.ajax({
+            url: form.attr('action'),
+            type: 'POST',
+            data: form.serialize(),
             headers: {
-                'X-CSRFToken': '{{ csrf_token }}', // Make sure to include the CSRF token
+                'X-CSRFToken': '{{ csrf_token }}'
             },
-        })
-        .then(response => {
-						console.log('Made a post');
-            if (response.ok) {
+            success: function(response) {
                 closeBookingModal(); // Close the modal after successful booking
                 location.reload(); // Reload to see changes
-            } else {
+            },
+            error: function() {
                 alert('Error booking lesson. Please try again.');
+            },
+            complete: function() {
+                spinner.hide();
+                confirmButton.prop('disabled', false);
             }
         });
-    });
+    }
 });
 

@@ -46,6 +46,12 @@
 							</a>
 						</li>
 					</ul>
+					<div class="d-flex justify-content-end mt-auto" style="padding: 1rem;">
+						<a href="{% url 'Authentication:logout_user' %}" class="btn btn-light d-flex align-items-center text-danger mx-2" style="transition: background-color 0.3s; padding: 8px 12px;">
+							<i class="bi bi-box-arrow-right me-2"></i> Logout
+						</a>
+					</div>
+
 				</nav>
 
 
@@ -160,9 +166,9 @@
 											<!-- Action Buttons -->
 											<div class="d-flex">
 
-											<a href='#' class='btn btn-outline-primary btn-sm mx-2' onclick='openBookingModal("{{ child.first_name }} {{ child.last_name }}", {{ child.id }})'>
+												<a href='#' class='btn btn-outline-primary btn-sm mx-2' onclick='openBookingModal("{{ child.first_name }} {{ child.last_name }}", {{ child.id }})'>
 													<i class="fas fa-calendar-alt me-2"></i> Book Lesson
-											</a>
+												</a>
 												<a href="/child/{{ child.id }}" class="btn btn-primary btn-sm">
 													<i class="fas fa-user me-2"></i> Open Account
 												</a>
@@ -326,7 +332,7 @@
 									<button type="button" class="btn-close btn-close-white" aria-label="Close" onclick="closeBookingModal()"></button>
 								</div>
 								<div class="modal-body p-4 bg-light">
-									<form id="bookLessonForm">
+									<form id="bookLessonForm" onsubmit="bookLesson(event)" method="POST">
 										{% csrf_token %}
 										<input type="hidden" id="childName" name="user_id"> <!-- Add the name attribute to send with the form -->
 
@@ -357,8 +363,7 @@
 											{% render_field booking_form.other_topic id="otherMathArea" class="form-control shadow-sm border-primary rounded-3" %}
 										</div>
 
-										<!-- Change button type to "button" -->
-										<button type="button" id="confirmBookingButton" class="btn btn-primary w-100 py-2 shadow-lg rounded-3 fw-bold">
+										<button type="submit" class="btn btn-primary w-100 py-2 shadow-lg rounded-3 fw-bold" >
 											<i class="bi bi-check-circle-fill me-2"></i> Confirm Booking
 										</button>
 									</form>
