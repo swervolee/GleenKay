@@ -221,3 +221,21 @@ def deleteChildAccount(request, id):
 
 
 
+def booking_status(request, id):
+    """
+    An API to get the status of a booking
+    """
+    if request.method == 'POST':
+        # Fetch the booking object, return 404 if not found
+        booking = get_object_or_404(Booking, id=id)
+
+        # Check if the booking is approved and return the appropriate response
+        if booking.isApproved:
+            return JsonResponse({'status': 'approved', 'message': 'Booking has been approved.'})
+        else:
+            return JsonResponse({'status': 'pending', 'message': 'Booking is still pending approval.'})
+
+    # If the request method is not POST, return a 405 Method Not Allowed response
+    return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+

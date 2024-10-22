@@ -13,6 +13,7 @@ urlpatterns = [
         path('child/<int:id>', views.child, name='child_dashboard'),
         path('booking/<int:id>', views.booking, name='booking'),
         path('delete/<int:id>', views.deleteChildAccount,name='deleteChildAccount'),
+        path('booking_status/<int:id>', views.booking_status, name='booking_status')
         ]
 
 

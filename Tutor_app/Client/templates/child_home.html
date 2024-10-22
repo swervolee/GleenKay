@@ -221,12 +221,12 @@
 													</button>
 												</a>
 												{% else %}
-
-												<button class="btn btn-primary btn-md lesson-button">
-													<i class="bi"></i> <img style="background-color: None;" src="{% static 'images/three-dots.svg' %}" class="htmx-indicator" width="20px" height="20px"> pending approval
+												<button class="btn btn-primary btn-md lesson-button" disabled>
+													<img style="background-color: None;" src="{% static 'images/three-dots.svg' %}" class="htmx-indicator" width="20px" height="20px">
+													<i class="bi"></i> Pending Approval
 												</button>
 												{% endif %}
-
+											
 												<div class="dropdown">
 													<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 														Options
